@@ -10,7 +10,7 @@
        data-show-toggle="true"
        data-show-columns="true"
        data-flat="true"
-       data-url="http://localhost:3000/players.json?"
+       data-url="<%= players_url(format: :json) %>"
        data-pagination="true"
        data-side-pagination="server"
        data-no-turbolink="true"
@@ -28,8 +28,7 @@
     <th data-field="lastName" data-sortable="true">Name</th>
     <th data-field="skill" data-sortable="true">Skill</th>
     <th data-field="activity" data-sortable="true">Activity</th>
-    <th data-field="kills" data-sortable="true">Kills</th>
-    <th data-field="deaths" data-sortable="true">Deaths</th>
+
     <th data-field="kpd" data-sortable="true">K/D</th>
     <th data-field="headshots" data-sortable="true">Headshots</th>
   </tr>

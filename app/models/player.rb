@@ -32,6 +32,6 @@ class Player < ActiveRecord::Base
   scope :name_search, ->(name) { where('lastName LIKE :query', query: "%#{name}%") }
   scope :country_search, ->(name) { where('country LIKE :query or flag LIKE :query', query: "%#{name}%") }
 
-  belongs_to :country, foreign_key: :flag
+  belongs_to :country, foreign_key: :country, primary_key: :name
 
 end
