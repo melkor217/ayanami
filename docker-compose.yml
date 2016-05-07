@@ -1,9 +1,15 @@
 version: '2'
 services:
-  ayanami:
+  ayanami-docker:
     build: .
     depends_on:
       - ayanami-mysql
+    ports:
+      - "127.0.0.1:3333:3000"
+    working_dir: /ayanami
+    command: bash -lc "./bin/rake RAILS_ENV=docker db:drop db:create db:structure:load db:seed && ./bin/rails server -b 0.0.0.0"
+  ayanami-production:
+    build: .
     ports:
       - "127.0.0.1:3333:3000"
     working_dir: /ayanami
