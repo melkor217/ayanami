@@ -30,6 +30,7 @@ gem 'rails_param' # Better param validators
 
 gem 'capistrano'
 gem 'capistrano-docker', github: 'netguru/capistrano-docker'
+gem 'capistrano-upload-config'
 
 
 
