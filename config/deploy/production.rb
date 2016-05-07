@@ -79,3 +79,5 @@ set :docker_compose_project_name, 'ayanami'
 
 
 set :docker_detach, false
+
+set :linked_files, %w{config/database.yml}
