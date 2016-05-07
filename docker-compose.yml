@@ -1,7 +1,8 @@
 version: '2'
 services:
   ayanami-docker:
-  # test stand fith fixture data
+  # test stand with fixture data
+  # please be careful with this, it drops db and recreates with seeds data
     build: .
     depends_on:
       - ayanami-mysql
@@ -11,9 +12,10 @@ services:
     command: bash -lc "./bin/rake RAILS_ENV=docker db:drop db:create db:structure:load db:seed && ./bin/rails server -b 0.0.0.0"
   ayanami-production:
   # production DB is still not dockerized for me :(
+  # service still requires you (or capistrano) to put proper database.yml
     build: .
     ports:
-      - "127.0.0.1:3333:3000"
+      - "127.0.0.1:3456:3000"
     working_dir: /ayanami
     command: ./bin/rails server -b 0.0.0.0
   ayanami-mysql:
