@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :weapons
+  root 'players#index'
   resources :countries
   resources :players
   resources :players

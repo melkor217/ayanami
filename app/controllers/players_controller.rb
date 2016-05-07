@@ -17,11 +17,7 @@ class PlayersController < ApplicationController
     if params[:search]
       query = query.name_search(params[:search]).limit(params[:limit])
     end
-
-
     @players = query.uniorder(params[:sort], params[:order]).limit(params[:limit]).offset params[:offset]
-
-
   end
 
   # GET /players/1

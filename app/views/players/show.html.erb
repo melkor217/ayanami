@@ -1,17 +1,43 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Lastname:</strong>
-  <%= @player.lastName %>
-</p>
 
-<p>
-  <strong>Kills:</strong>
-  <%= @player.kills %>
-</p>
+<div class="row">
 
-<p>
-  <strong>Activity:</strong>
-  <%= @player.activity %>
-</p>
+  <div class="col-md-4">
+    <table class="table table-bordered">
+      <tbody>
+      <tr>
+        <td>Name</td>
+        <td> <%= @player.lastName %> </td>
+      </tr>
+      <tr>
+        <td>Kills</td>
+        <td> <%= @player.kills %> </td>
+      </tr>
+      <tr>
+        <td>Deaths</td>
+        <td> <%= @player.deaths %> </td>
+      </tr>
+      <tr>
+        <td>Headshots</td>
+        <td> <%= @player.headshots %> </td>
+      </tr>
+      <tr>
+        <td>K/D</td>
+        <td> <%= (@player.kills.to_f / @player.deaths).round(2) %> </td>
+      </tr>
+      <tr>
+        <td>Activity</td>
+        <td>
+            <div class="progress-bar" role="progressbar" aria-valuenow="<%= @player.activity %>"
+                 aria-valuemin="0" aria-valuemax="100" style="width:<%= @player.activity %>%">
+              <%= @player.activity %>%
+          </div></td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
 <%= link_to 'Back', :back %>

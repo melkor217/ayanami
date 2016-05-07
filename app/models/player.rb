@@ -26,7 +26,7 @@ class Player < ActiveRecord::Base
   end
 
   scope :uniorder, -> (sort, order) {order("#{sort} #{order}")}
-  scope :with_kpd, -> { select('*, kills / deaths as kpd') }
+  scope :with_kpd, -> { select('*, round((kills / deaths),2) as kpd') }
   # Stewpid query, but i don't really wanna change legacy scheme
   scope :by_country, -> { select('flag, country, count(playerId) as players_total, avg(activity) as avg_activity').where(hideranking: 0).where.not(flag: "").group(:flag) }
   scope :name_search, ->(name) { where('lastName LIKE :query', query: "%#{name}%") }

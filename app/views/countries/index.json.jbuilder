@@ -1,6 +1,6 @@
 json.rows do
   json.array!(@countries) do |country|
-    json.extract! country, :id, :flag, :players_total, :avg_activity
+    json.extract! country, :flag, :players_total, :avg_activity
     json.country country.country.name
     json.url country_url(country.country, format: :json)
     json.path country_url(country.country)

@@ -1,16 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Players</h1>
-<div class="alert alert-success" id="eventsResult">
-  Here is the result of event.
-</div>
+<h1>Listing Weapons</h1>
+
 <table id="table" style="cursor: pointer;"
        data-toggle="table"
        data-show-refresh="true"
        data-show-toggle="true"
        data-show-columns="true"
        data-flat="true"
-       data-url="<%= players_url(format: :json) %>"
+       data-url="<%= weapons_url(format: :json) %>"
        data-pagination="true"
        data-side-pagination="server"
        data-no-turbolink="true"
@@ -24,15 +22,10 @@
   <thead>
   <tr>
     <th data-formatter="runningFormatter">Position</th>
-    <th data-field="playerId" data-sortable="true">ID</th>
-    <th data-field="lastName" data-sortable="true">Name</th>
-    <th data-field="skill" data-sortable="true">Skill</th>
-    <th data-field="activity" data-sortable="true">Activity</th>
-
+    <th data-field="name" data-sortable="true">Name</th>
+    <th data-field="modifier" data-sortable="true">Modifier</th>
     <th data-field="kills" data-sortable="true">Kills</th>
-    <th data-field="deaths" data-sortable="true">Deaths</th>
     <th data-field="headshots" data-sortable="true">Headshots</th>
-    <th data-field="kpd" data-sortable="true">K/D</th>
   </tr>
   </thead>
 </table>
