@@ -31,5 +31,4 @@ Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
 #
 #task 'docker' => [:docker_deploy]
 require 'capistrano/docker'
-require 'capistrano/locally'
 require 'capistrano/docker/assets'

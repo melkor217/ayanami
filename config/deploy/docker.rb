@@ -1,6 +1,8 @@
 # Config for capistrano
 
 server 'localhost', roles: %w{web app}
+set :deploy_to, '/var/tmp/ayanami'
+set :application, 'ayanami'
 set :repo_url, 'https://github.com/melkor217/ayanami.git'
 
 set :docker_compose, true
