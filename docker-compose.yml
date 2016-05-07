@@ -11,9 +11,7 @@ services:
     command: bash -lc "./bin/rake RAILS_ENV=docker db:drop db:create db:structure:load db:seed && ./bin/rails server -b 0.0.0.0"
   ayanami-production:
   # production DB is still not dockerized for me :(
-    build:
-      context: .
-      dockerfile: Dockerfile.production
+    build: .
     ports:
       - "127.0.0.1:3333:3000"
     working_dir: /ayanami
