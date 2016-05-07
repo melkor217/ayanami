@@ -80,4 +80,6 @@ set :docker_compose_project_name, 'ayanami'
 
 set :docker_detach, false
 
+set :config_files, %w{config/database.yml}
+
 before 'deploy:check:linked_files', 'config:push'
