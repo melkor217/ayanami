@@ -28,6 +28,12 @@ gem 'bootstrap-table-rails'
 gem 'rails_param' # Better param validators
 
 
+gem 'capistrano'
+gem 'capistrano-locally'
+gem 'capistrano-docker', github: 'netguru/capistrano-docker'
+
+
+
 gem 'random-word'
 
 # Use jquery as the JavaScript library
