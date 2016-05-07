@@ -28,10 +28,10 @@ class Player < ActiveRecord::Base
   scope :uniorder, -> (sort, order) {order("#{sort} #{order}")}
   scope :with_kpd, -> { select('*, round((kills / deaths),2) as kpd') }
   # Stewpid query, but i don't really wanna change legacy scheme
-  scope :by_country, -> { select('flag, country, count(playerId) as players_total, avg(activity) as avg_activity').where(hideranking: 0).where.not(flag: "").group(:flag) }
+  scope :by_country, -> { select('flag, country, count(playerId) as players_total, avg(activity) as avg_activity').where(hideranking: 0).where.not(flag: '').group(:flag) }
   scope :name_search, ->(name) { where('lastName LIKE :query', query: "%#{name}%") }
   scope :country_search, ->(name) { where('country LIKE :query or flag LIKE :query', query: "%#{name}%") }
 
-  belongs_to :country, foreign_key: :country, primary_key: :name
+  belongs_to :country, foreign_key: :flag, primary_key: :flag
 
 end

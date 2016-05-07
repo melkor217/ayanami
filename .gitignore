@@ -20,3 +20,4 @@
 /.idea
 
 /.rake_tasks~
+/Dockerfile.production

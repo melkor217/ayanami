@@ -18,3 +18,11 @@ docker:
   host: ayanami-mysql
 
 
+production:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: steam
+  username: ayanami
+  password: <%= ENV['MYSQL_PASSWORD'] %>
+  host: 192.168.88.254

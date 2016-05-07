@@ -28,11 +28,7 @@ gem 'bootstrap-table-rails'
 gem 'rails_param' # Better param validators
 
 
-gem 'capistrano'
-gem 'capistrano-docker', github: 'netguru/capistrano-docker'
-gem 'capistrano-upload-config'
-
-
+gem 'lograge'
 
 gem 'random-word'
 
@@ -53,7 +49,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'unicorn'
 
 # Use Capistrano for deployment
-gem 'capistrano-rails', group: :development
+#gem 'capistrano-rails', group: :development
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

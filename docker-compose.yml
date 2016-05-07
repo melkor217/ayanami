@@ -13,7 +13,9 @@ services:
   ayanami-production:
   # production DB is still not dockerized for me :(
   # service still requires you (or capistrano) to put proper database.yml
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.production
     ports:
       - "127.0.0.1:3456:3000"
     working_dir: /ayanami
