@@ -10,7 +10,7 @@ class Player < ActiveRecord::Base
 
   def self.sort_allowed?
     # Fields that are allowed for sorting
-    return %w{kills deaths lastname activity skill playerId lastName kpd headshots}
+    return %w{kills deaths lastname activity skill playerId lastName kpd headshots connection_time}
   end
   def self.sort_default
     # Default sorting field

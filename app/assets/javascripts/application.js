@@ -19,6 +19,18 @@
 //= require bootstrap-table-fixed-columns
 //= require_tree .
 
+String.prototype.toHHMMSS = function () {
+    var sec_num = parseInt(this, 10); // don't forget the second param
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours   < 10) {hours   = "0"+hours;}
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    return hours+':'+minutes+':'+seconds;
+}
+
 var getQueryParam = function(param) {
     // http://test.url/page.html?param=a&b=c
     // ->
@@ -50,9 +62,13 @@ function skillFormatter(value, row, index) {
 }
 
 function activityFormatter(value, row, index) {
-    return '<span role="progressbar" ' + 
-        'class="progress-bar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' +
-        value.toString() + '" style="width:' + ((value+17)*100/117).toString() + '%"> ' + value.toString() + '%</span>';
+    return '<div class="progress"><div role="progressbar" ' + 
+        'class="progress-bar progress-bar-info" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' +
+        value.toString() + '" style="width:' + value.toString() + '%; text-align"><span>' + value.toString() + '%</span></div></div>';
+}
+
+function timeFormatter(value, row, index) {
+    return value.toString().toHHMMSS();
 }
 
 $(window).unload(function (e) {
@@ -142,3 +158,5 @@ $(function () {
             $result.text('Event: search.bs.table');
         });
 });
+
+
