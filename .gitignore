@@ -21,3 +21,4 @@
 
 /.rake_tasks~
 /Dockerfile.production
+/public/assets/

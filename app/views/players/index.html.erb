@@ -23,16 +23,15 @@
        data-page-number="<%= params[:page] %>">
   <thead>
   <tr>
-    <th data-formatter="runningFormatter">Position</th>
-    <th data-field="playerId" data-sortable="true">ID</th>
-    <th data-field="lastName" data-sortable="true">Name</th>
-    <th data-field="skill" data-sortable="true">Skill</th>
-    <th data-field="activity" data-sortable="true">Activity</th>
-
-    <th data-field="kills" data-sortable="true">Kills</th>
-    <th data-field="deaths" data-sortable="true">Deaths</th>
-    <th data-field="headshots" data-sortable="true">Headshots</th>
-    <th data-field="kpd" data-sortable="true">K/D</th>
+    <th data-formatter="runningFormatter" class="col-md-1">Position</th>
+    <th data-field="playerId" data-sortable="true" class="col-md-1">ID</th>
+    <th data-field="lastName" data-sortable="true" class="col-md-2">Name</th>
+    <th data-field="skill" data-formatter="skillFormatter" data-sortable="true" class="col-md-1">Skill</th>
+    <th data-field="activity" data-formatter="activityFormatter" data-sortable="true" class="col-md-1">Activity</th>
+    <th data-field="kills" data-sortable="true" class="col-sm-1">Kills</th>
+    <th data-field="deaths" data-sortable="true" class="col-sm-1">Deaths</th>
+    <th data-field="headshots" data-sortable="true" class="col-sm-1">Headshots</th>
+    <th data-field="kpd" data-sortable="true" class="col-sm-1">K/D</th>
   </tr>
   </thead>
 </table>

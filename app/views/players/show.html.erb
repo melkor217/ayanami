@@ -29,10 +29,11 @@
       <tr>
         <td>Activity</td>
         <td>
-            <div class="progress-bar" role="progressbar" aria-valuenow="<%= @player.activity %>"
+            <span class="progress-bar" role="progressbar" aria-valuenow="<%= @player.activity %>"
                  aria-valuemin="0" aria-valuemax="100" style="width:<%= @player.activity %>%">
               <%= @player.activity %>%
-          </div></td>
+            </span>
+        </td>
       </tr>
       </tbody>
     </table>

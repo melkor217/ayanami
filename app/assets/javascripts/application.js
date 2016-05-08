@@ -38,9 +38,21 @@ function runningFormatter(value, row, index) {
         return index + 1 + (getQueryParam('page') -1 )*getQueryParam('limit');
     }
     else {
-        return index + 1
+        return index + 1;
     }
 
+}
+
+function skillFormatter(value, row, index) {
+    var sign = value.last_change>0?'+':'';
+    var color_class = value.last_change>=0?'text-success':'text-danger';
+    return value.points + ' <small><span class="' + color_class + '">(' + sign + value.last_change + ')</span></small>';
+}
+
+function activityFormatter(value, row, index) {
+    return '<span role="progressbar" ' + 
+        'class="progress-bar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' +
+        value.toString() + '" style="width:' + ((value+17)*100/117).toString() + '%"> ' + value.toString() + '%</span>';
 }
 
 $(window).unload(function (e) {
