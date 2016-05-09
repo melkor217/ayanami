@@ -1,29 +1,27 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Servers</h1>
-
-<table class="table table-bordered" sort-name="Players">
+<table data-toggle="table" class="fixed">
   <thead>
     <tr>
-      <th colspan="2" class="col-md-1">Name</th>
-      <th data-field="test" class="col-md-2">IP addr</th>
-      <th class="col-md-2">Players</th>
-      <th class="col-md-1">Total players</th>
-      <th class="col-md-1">Kills</th>
-      <th class="col-md-1">Headshots</th>
-      <th class="col-md-2">Map</th>
-      <th class="col-md-3">Kills per player</th>
+      <th></th>
+      <th class="col-md-3" data-field="name" data-sortable="true">Name</th>
+      <th class="col-md-2" data-field="ip" data-sortable="true">IP address</th>
+      <th class="col-md-2" data-field="online" data-sortable="false">Players</th>
+      <th class="col-md-2" data-field="players" data-sortable=true">Total players</th>
+      <th class="col-md-1" data-field="kills" data-sortable="true">Kills</th>
+      <th class="col-md-1" data-field="headshots" data-sortable="true">Headshots</th>
+      <th class="col-md-2" data-field="map" data-sortable="true">Map</th>
+      <th class="col-md-1" data-field="kpp" data-sortable="true">Kills per player</th>
     </tr>
   </thead>
 
   <tbody>
     <% @servers.each do |server| %>
       <tr>
+        <td><a class="btn btn-info" role="button" href="steam://connect/<%= server.publicaddress  %>">Connect</a></td>
         <td>
-          <%= link_to(server.name, server, {:class=>"btn btn-link"}) %>
-        </td>
-        <td>
-          <a class="btn btn-info" role="button" href="steam://connect/<%= server.publicaddress  %>">Connect</a>
+          <%= link_to(server.name, server, {:class=>"btn-link"}) %>
         </td>
         <td><%= server.publicaddress %></td>
         <td><%= "#{server.act_players} / #{server.max_players}" %></td>
@@ -37,6 +35,3 @@
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Server', new_server_path %>

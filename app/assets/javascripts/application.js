@@ -52,7 +52,10 @@ function runningFormatter(value, row, index) {
     else {
         return index + 1;
     }
+}
 
+function urlFormatter(value, row, index) {
+    return '<a class="btn-link" href="' + row.url + '">' + row.lastName + '</a>';
 }
 
 function skillFormatter(value, row, index) {
