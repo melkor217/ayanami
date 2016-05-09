@@ -5,7 +5,7 @@
 <table class="table table-bordered" sort-name="Players">
   <thead>
     <tr>
-      <th colspan="2" class="col-xs-1">Name</th>
+      <th colspan="2" class="col-md-1">Name</th>
       <th data-field="test" class="col-md-2">IP addr</th>
       <th class="col-md-2">Players</th>
       <th class="col-md-1">Total players</th>
@@ -20,7 +20,7 @@
     <% @servers.each do |server| %>
       <tr>
         <td>
-          <%= link_to(server.name, server) %>
+          <%= link_to(server.name, server, {:class=>"btn btn-link"}) %>
         </td>
         <td>
           <a class="btn btn-info" role="button" href="steam://connect/<%= server.publicaddress  %>">Connect</a>
