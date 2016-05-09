@@ -62,9 +62,12 @@ function skillFormatter(value, row, index) {
 }
 
 function activityFormatter(value, row, index) {
-    return '<div class="progress"><div role="progressbar" ' + 
+    // css is stewpid -_-
+    return '<div style="vertical-align: center;overflow: hidden; height: 20px;">' +
+        '<div class="progress"><div role="progressbar" ' +
         'class="progress-bar progress-bar-info" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' +
-        value.toString() + '" style="width:' + value.toString() + '%; text-align"><span>' + value.toString() + '%</span></div></div>';
+        value.toString() + '" style="width:' + value.toString() + '%; height: 20px;"><span>' +
+        value.toString() + '%</span></div></div></div>';
 }
 
 function timeFormatter(value, row, index) {
@@ -96,6 +99,7 @@ function updateQueryStringParameter(uri, key, value) {
     }
     return uri.replace(/[^=&]+=(&|$)/g, "").replace(/&$/, "");
 }
+
 
 $(function () {
     var $result = $('#eventsResult');

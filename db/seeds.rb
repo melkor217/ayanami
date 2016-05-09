@@ -21,3 +21,20 @@
     player.flag = country.flag
   end
 end
+
+10.times do |c|
+  Server.create(
+      address: "1.2.3.#{c}",
+      port: 27015,
+      name: "server#{c}",
+      sortorder: c,
+      game: 'csgo',
+      publicaddress: "1.2.3.#{c}:27015",
+      rcon_password: 'test',
+      kills: rand(100..1000),
+      players: rand(1000..2000),
+      headshots: rand(50..90),
+      act_map: 'de_dust2',
+      act_players: rand(8..12),
+      max_players: 15)
+end

@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Servers</h1>
+
+<table class="table table-bordered" sort-name="Players">
+  <thead>
+    <tr>
+      <th colspan="2" class="col-xs-1">Name</th>
+      <th data-field="test" class="col-md-2">IP addr</th>
+      <th class="col-md-2">Players</th>
+      <th class="col-md-1">Total players</th>
+      <th class="col-md-1">Kills</th>
+      <th class="col-md-1">Headshots</th>
+      <th class="col-md-2">Map</th>
+      <th class="col-md-3">Kills per player</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @servers.each do |server| %>
+      <tr>
+        <td>
+          <%= link_to(server.name, server) %>
+        </td>
+        <td>
+          <a class="btn btn-info" role="button" href="steam://connect/<%= server.publicaddress  %>">Connect</a>
+        </td>
+        <td><%= server.publicaddress %></td>
+        <td><%= "#{server.act_players} / #{server.max_players}" %></td>
+        <td><%= server.players %></td>
+        <td><%= server.kills %></td>
+        <td><%= server.headshots %></td>
+        <td><%= server.act_map %></td>
+        <td><%= (server.kills.to_f / server.players).round(2) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Server', new_server_path %>
