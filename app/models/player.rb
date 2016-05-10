@@ -32,6 +32,12 @@ class Player < ActiveRecord::Base
   scope :name_search, ->(name) { where('lastName LIKE :query', query: "%#{name}%") }
   scope :country_search, ->(name) { where('country LIKE :query or flag LIKE :query', query: "%#{name}%") }
 
+  def country
+    Rails.cache.fetch("country_#{self.flag}", expires_in: 1.day) do
+      super
+    end
+  end
+
   belongs_to :country, foreign_key: :flag, primary_key: :flag
 
 end
