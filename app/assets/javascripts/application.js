@@ -55,7 +55,7 @@ function runningFormatter(value, row, index) {
 }
 
 function urlFormatter(value, row, index) {
-    return '<a class="btn-link" href="' + row.url + '">' + row.lastName + '</a>';
+    return '<a class="btn-link" href="' + row.path + '">' + row.lastName + '</a>';
 }
 
 function skillFormatter(value, row, index) {

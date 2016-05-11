@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-5000.times do
+500.times do
   Player.create do |player|
     player.game = 'csgo'
     player.lastName = (RandomWord.adjs.next.to_s + ' ' + RandomWord.nouns.next.to_s).titleize[0..63]
@@ -37,4 +37,16 @@ end
       act_map: 'de_dust2',
       act_players: rand(8..12),
       max_players: 15)
+end
+
+Player.all.each do |player|
+  rand(3..20).times do
+    Frag.create(serverId: Server.last.serverId,
+                map: 'de_dust2',
+                killerId: player.playerId,
+                victimId: Player.where.not(playerId: player.playerId).first.playerId,
+                weapon: 'ak47',
+                eventTime: rand(1.year.ago..Time.now),
+                headshot: rand(0..1))
+  end
 end
