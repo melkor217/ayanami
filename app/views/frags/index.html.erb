@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Frags</h1>
+<table data-toggle="table" class="fixed">
+  <thead>
+  <tr>
+    <th></th>
+    <th class="col-md-3" data-field="eventTime" data-sortable="true">Time</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @frags.each do |frag| %>
+      <tr>
+        <td><%= frag.eventTime %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
