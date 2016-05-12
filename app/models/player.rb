@@ -50,4 +50,10 @@ class Player < ActiveRecord::Base
     end
   end
 
+  def self.total
+    Rails.cache.fetch("total_players", expires: 10.minutes) do
+      Player.count
+    end
+  end
+
 end

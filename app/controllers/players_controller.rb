@@ -28,6 +28,7 @@ class PlayersController < ApplicationController
   # GET /players/1
   # GET /players/1.json
   def show
+    @total = Player.total
   end
 
   private
