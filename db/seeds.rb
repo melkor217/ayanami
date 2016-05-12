@@ -38,13 +38,14 @@ end
       act_players: rand(8..12),
       max_players: 15)
 end
-
 Player.all.each do |player|
   rand(3..20).times do
+    other_players = Player.where.not(playerId: player.playerId)
+    random_player = other_players.offset(rand(0..(other_players.count-1))).first
     Frag.create(serverId: Server.last.serverId,
                 map: 'de_dust2',
                 killerId: player.playerId,
-                victimId: Player.where.not(playerId: player.playerId).first.playerId,
+                victimId: random_player.playerId,
                 weapon: 'ak47',
                 eventTime: rand(1.year.ago..Time.now),
                 headshot: rand(0..1))

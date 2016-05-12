@@ -4,10 +4,10 @@
 <table data-toggle="table" class="fixed">
   <thead>
   <tr>
-    <th class="col-md-1" data-field="killer" data-sortable="true">Killer</th>
-    <th class="col-md-1" data-field="victim" data-sortable="true">Victim</th>
-    <th class="col-md-3" data-field="weapon" data-sortable="true">Weapon</th>
-    <th class="col-md-3" data-field="eventTime" data-sortable="true">Time</th>
+    <th class="col-md-1" data-field="killer">Killer</th>
+    <th class="col-md-1" data-field="victim">Victim</th>
+    <th class="col-md-3" data-field="weapon">Weapon</th>
+    <th class="col-md-3" data-field="eventTime">Time</th>
   </tr>
   </thead>
 
@@ -22,4 +22,8 @@
   <% end %>
   </tbody>
 </table>
-<%= paginate @frags, :theme => 'twitter-bootstrap-3' %>
+<div align="right">
+  <%= paginate @frags, :theme => 'twitter-bootstrap-3' %>
+</div>
+<br/>
+<%= link_to 'Back', :back %>

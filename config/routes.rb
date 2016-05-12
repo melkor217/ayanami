@@ -2,11 +2,12 @@ Rails.application.routes.draw do
   resources :frags
   resources :servers
   resources :weapons
-  root 'players#index'
   resources :countries
-  resources :players
-  get '/players/:id/frags', to: 'frags#index'
+  resources :players do
+    resources :frags
+  end
 
+  root 'players#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
