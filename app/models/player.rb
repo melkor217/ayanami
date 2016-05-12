@@ -18,7 +18,7 @@ class Player < ActiveRecord::Base
   end
 
   def self.sort_allowed_by_country?
-    return %w{players_total avg_activity flag country}
+    return %w{players_total avg_activity avg_skill avg_kills flag country}
   end
 
   def self.sort_default_by_country
@@ -28,7 +28,12 @@ class Player < ActiveRecord::Base
   scope :uniorder, -> (sort, order) {order("#{sort} #{order}")}
   scope :with_kpd, -> { select('*, round((kills / deaths),2) as kpd') }
   # Stewpid query, but i don't really wanna change legacy scheme
-  scope :by_country, -> { select('flag, country, count(playerId) as players_total, avg(activity) as avg_activity').where(hideranking: 0).where.not(flag: '').group(:flag) }
+  scope :by_country, -> { select('flag,
+country,
+count(playerId) as players_total,
+round(avg(activity),2) as avg_activity,
+round(avg(skill),2) as avg_skill,
+round(avg(kills),2) as avg_kills').where(hideranking: 0).where.not(flag: '').group(:flag) }
   scope :name_search, ->(name) { where('lastName LIKE :query', query: "%#{name}%") }
   scope :country_search, ->(name) { where('country LIKE :query or flag LIKE :query', query: "%#{name}%") }
 
