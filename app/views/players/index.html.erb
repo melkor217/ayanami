@@ -23,7 +23,8 @@
        data-page-number="<%= params[:page] %>">
   <thead>
   <tr>
-    <th data-formatter="runningFormatter">#</th>
+    <%# <th data-formatter="runningFormatter">#</th> %>
+    <th data-field="ranking" data-sortable="true">Rank</th>
     <th data-field="lastName" data-formatter="urlFormatter" data-sortable="true" class="col-md-2">Name</th>
     <th data-field="skill" data-formatter="skillFormatter" data-sortable="true" class="col-md-2">Skill</th>
     <th data-field="connection_time" data-formatter="timeFormatter" data-sortable="true" class="col-md-2">Connection time</th>

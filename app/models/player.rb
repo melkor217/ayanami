@@ -43,4 +43,11 @@ class Player < ActiveRecord::Base
   def frag
     Frag.where("killerId = ? OR victimId = ?", self.playerId, self.playerId)
   end
+
+  def ranking
+    Rails.cache.fetch("rank_#{self.skill}", expires_in: 10.minutes) do
+      Player.where('skill > ?', self.skill).count + 1
+    end
+  end
+
 end

@@ -1,6 +1,6 @@
 json.rows do
   json.array!(@players) do |player|
-    json.extract! player, :playerId, :lastName, :kills, :deaths, :kpd, :headshots, :activity, :connection_time
+    json.extract! player, :playerId, :lastName, :kills, :deaths, :kpd, :headshots, :activity, :connection_time, :ranking
     json.url player_path(player, format: :json)
     json.skill do
       json.points player.skill
