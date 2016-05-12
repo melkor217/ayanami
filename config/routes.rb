@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :frags
   resources :servers
   resources :weapons
-  resources :countries
+  resources :countries, param: :countryId
   resources :players do
     resources :frags
   end

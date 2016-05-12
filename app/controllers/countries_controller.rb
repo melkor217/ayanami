@@ -1,10 +1,10 @@
 class CountriesController < ApplicationController
-  before_action :set_country, only: [:show, :edit, :update, :destroy]
+  before_action :set_country, only: [:show]
 
   # GET /countries
   # GET /countries.json
   def index
-    param! :order, String, in: %w(asc desc), transform: :downcase, default: "desc"
+    param! :order, String, in: %w(asc desc), transform: :downcase, default: 'desc'
     param! :sort, String, in: Player.sort_allowed_by_country?, default: Player.sort_default_by_country
     param! :search, String, default: nil
     #@countries = Player.by_country.order(params[:sort] => params[:order])
@@ -18,11 +18,17 @@ class CountriesController < ApplicationController
   # GET /countries/1
   # GET /countries/1.json0
   def show
+    param! :order, String, in: %w(asc desc), transform: :downcase, default: 'desc'
+    param! :sort, String, in: Player.sort_allowed?, default: Player.sort_default
+    param! :limit, Integer, in: (10..100), default: 25
+    param! :page, Integer, default: 1
+    param! :search, String, default: nil
+    param! :countryId, String, default: nil
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_country
-      @country = Country.find(params[:id])
+      @country = Country.find(params[:countryId])
     end
 end

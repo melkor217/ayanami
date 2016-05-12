@@ -4,36 +4,5 @@
 <div class="alert alert-success" id="eventsResult">
   Here is the result of event.
 </div>
-<table id="table" style="cursor: pointer;" class="fixed"
-       data-toggle="table"
-       data-show-refresh="true"
-       data-show-toggle="true"
-       data-show-columns="true"
-       data-flat="true"
-       data-url="<%= players_path(format: :json) %>"
-       data-pagination="true"
-       data-side-pagination="server"
-       data-no-turbolink="true"
-       data-search="true"
-       data-page-list="[10, 25, 50, 100]"
-       data-sort-name="<%= params[:sort] %>"
-       data-sort-order="<%= params[:order] %>"
-       data-search-text="<%= params[:search] %>"
-       data-page-size="<%= params[:limit] %>"
-       data-page-number="<%= params[:page] %>">
-  <thead>
-  <tr>
-    <%# <th data-formatter="runningFormatter">#</th> %>
-    <th data-field="ranking" data-sortable="true">Rank</th>
-    <th data-field="lastName" data-formatter="urlFormatter" data-sortable="true" class="col-md-2">Name</th>
-    <th data-field="skill" data-formatter="skillFormatter" data-sortable="true" class="col-md-2">Skill</th>
-    <th data-field="activity" data-formatter="activityFormatter" data-sortable="true" class="col-md-2">Activity</th>
-    <th data-field="connection_time" data-formatter="timeFormatter" data-sortable="true" class="col-md-2">Connection time</th>
-    <th data-field="kills" data-sortable="true" class="col-sm-1">Kills</th>
-    <th data-field="deaths" data-sortable="true" class="col-sm-1">Deaths</th>
-    <th data-field="headshots" data-sortable="true" class="col-sm-1">Headshots</th>
-    <th data-field="kpd" data-sortable="true" class="col-sm-1">K/D</th>
-  </tr>
-  </thead>
-</table>
+<%= render 'shared/playertable' %>
 <br>

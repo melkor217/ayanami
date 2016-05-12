@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+
 <p>
   <strong>Flag:</strong>
   <%= @country.flag %>
@@ -9,5 +10,7 @@
   <strong>Name:</strong>
   <%= @country.name %>
 </p>
+
+<%= render 'shared/playertable' %>
 
 <%= link_to 'Back', countries_path %>

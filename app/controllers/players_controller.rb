@@ -10,8 +10,13 @@ class PlayersController < ApplicationController
     param! :page, Integer, default: 1
     param! :offset, Integer, default: (params[:page]-1)*params[:limit]
     param! :search, String, default: nil
+    param! :contryId, String, default: nil
 
-    query = Player.where(hideranking: 0)
+    if params[:countryId]
+      query = Country.find(params[:countryId]).players.where(hideranking: 0)
+    else
+      query = Player.where(hideranking: 0)
+    end
     @total = query.count
     query = query.with_kpd
     if params[:search]
