@@ -46,16 +46,20 @@ var getQueryParam = function(param) {
 
 function runningFormatter(value, row, index) {
     // Position formatter for tables
-    if (getQueryParam('page') && getQueryParam('limit')) {
-        return index + 1 + (getQueryParam('page') -1 )*getQueryParam('limit');
-    }
-    else {
+    //if (getQueryParam('page') && getQueryParam('limit')) {
+    //    return index + 1 + (getQueryParam('page') -1 )*getQueryParam('limit');
+    //}
+    //else {
         return index + 1;
-    }
+    //}
 }
 
 function urlFormatter(value, row, index) {
     return '<a class="btn-link" href="' + row.path + '">' + row.lastName + '</a>';
+}
+
+function countryFormatter(value, row, index) {
+    return '<a class="btn-link" href="' + row.path + '">' + row.country + '</a>';
 }
 
 function skillFormatter(value, row, index) {

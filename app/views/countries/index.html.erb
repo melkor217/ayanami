@@ -10,10 +10,10 @@
        data-flat="true"
        data-url="<%= countries_path(format: :json) %>"
        data-pagination="true"
-       data-side-pagination="server"
-       data-no-turbolink="true"
+       data-side-pagination="client"
        data-search="true"
-       data-page-list="[10, 25, 50, 100]"
+       data-page-size="50"
+       data-page-list="[25, 50, 100]"
        data-sort-name="<%= params[:sort] %>"
        data-sort-order="<%= params[:order] %>"
        data-search-text="<%= params[:search] %>">
@@ -21,10 +21,11 @@
   <tr>
     <th data-formatter="runningFormatter">Position</th>
     <th data-field="flag" data-sortable="true">Flag</th>
-    <th data-field="country" data-sortable="true">Country</th>
+    <th data-field="country" data-formatter="countryFormatter" data-sortable="true">Country</th>
     <th data-field="players_total" data-sortable="true">Players</th>
     <th data-field="avg_activity" data-sortable="true">Activity</th>
     <th data-field="avg_skill" data-sortable="true">Avg points</th>
+    <th data-field="kpd" data-sortable="true">K/D</th>
     <th data-field="avg_kills" data-sortable="true">Avg kills</th>
   </tr>
   </thead>

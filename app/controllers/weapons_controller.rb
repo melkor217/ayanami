@@ -7,7 +7,7 @@ class WeaponsController < ApplicationController
     param! :order, String, in: %w(asc desc), transform: :downcase, default: "asc"
     param! :sort, String, in: Weapon.sort_allowed?, default: Weapon.sort_default
     param! :search, String, default: nil
-    query = Weapon.uniorder(params[:sort],params[:order])
+    query = Weapon.where(game: 'csgo').uniorder(params[:sort],params[:order])
     if params[:search]
       query = query.name_search(params[:search])
     end
