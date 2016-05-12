@@ -4,7 +4,9 @@
 <table data-toggle="table" class="fixed">
   <thead>
   <tr>
-    <th></th>
+    <th class="col-md-1" data-field="killer" data-sortable="true">Killer</th>
+    <th class="col-md-1" data-field="victim" data-sortable="true">Victim</th>
+    <th class="col-md-3" data-field="weapon" data-sortable="true">Weapon</th>
     <th class="col-md-3" data-field="eventTime" data-sortable="true">Time</th>
   </tr>
   </thead>
@@ -12,8 +14,12 @@
   <tbody>
   <% @frags.each do |frag| %>
       <tr>
+        <td><%= player_link(frag.killerId) %></td>
+        <td><%= player_link(frag.victimId) %></td>
+        <td><%= frag.weapon %></td>
         <td><%= frag.eventTime %></td>
       </tr>
   <% end %>
   </tbody>
 </table>
+<%= paginate @frags, :theme => 'twitter-bootstrap-3' %>

@@ -40,4 +40,7 @@ class Player < ActiveRecord::Base
 
   belongs_to :country, foreign_key: :flag, primary_key: :flag
   has_many :frag, foreign_key: :killerId, primary_key: :playerId
+  def frag
+    Frag.where("killerId = ? OR victimId = ?", self.playerId, self.playerId)
+  end
 end

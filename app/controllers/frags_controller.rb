@@ -1,25 +1,21 @@
 class FragsController < ApplicationController
-  before_action :set_frag, only: [:show]
 
   # GET /frags
   # GET /frags.json
   def index
-    @frags = Frag.all
+    param! :id, Integer, default: nil
+    param! :limit, Integer, in: (10..100), default: 25
+    param! :page, Integer, default: 1
+    param! :offset, Integer, default: (params[:page]-1)*params[:limit]
+    if params[:id]
+      @frags = Player.find(params[:id]).frag.page(params[:page])
+    else
+      @frags = Frag.all.page(params[:page])
+    end
   end
 
   # GET /frags/1
   # GET /frags/1.json
   def show
   end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_frag
-      @frag = Frag.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def frag_params
-      params.fetch(:frag, {})
-    end
 end
