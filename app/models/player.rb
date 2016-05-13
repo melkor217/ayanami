@@ -51,6 +51,25 @@ sum(kills)/sum(deaths) as kpd
     Frag.where("killerId = ? OR victimId = ?", self.playerId, self.playerId)
   end
 
+  def killstat
+    kills = Frag.where(killerId: self.playerId).group(:victimId).count()
+    deaths = Frag.where(victimId: self.playerId).group(:killerId).count()
+    result = {}
+    kills.each do |k,v|
+      if not result[k]
+        result[k] = {}
+      end
+      result[k].merge!(kills: v)
+    end
+    deaths.each do |k,v|
+      if not result[k]
+        result[k] = {}
+      end
+        result[k].merge!(deaths: v)
+    end
+    return result
+  end
+
   def ranking
     Rails.cache.fetch("rank_#{self.skill}", expires_in: 10.minutes) do
       Player.where('skill > ?', self.skill).count + 1
@@ -62,5 +81,4 @@ sum(kills)/sum(deaths) as kpd
       Player.count
     end
   end
-
 end

@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :weapons
   resources :countries, param: :countryId
   resources :players do
+    member do
+      get :killstat
+    end
     resources :frags
   end
 

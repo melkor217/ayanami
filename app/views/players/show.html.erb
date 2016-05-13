@@ -12,7 +12,7 @@
       </tr>
       <tr>
         <td>Ranking</td>
-        <td> <%= @player.ranking %> / <%= @total %> (<%= 100-((@player.ranking-1).to_f / @total)*100 %>%) </td>
+        <td> <%= @player.ranking %> / <%= @total %> (<%= 100-((@player.ranking-1).to_f / @total)*100.round(2) %>%) </td>
       </tr>
       <tr>
         <td>Points</td>
@@ -51,7 +51,7 @@
     </table>
   </div>
   <div>
-    <%= link_to "Frags", player_frags_url(@player), {:class=>"btn-link"} %>
+    <%= link_to "Frags", player_frags_path(@player), {:class=>"btn-link"} %>
   </div>
 </div>
 

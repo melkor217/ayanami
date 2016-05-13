@@ -39,7 +39,7 @@ end
       max_players: 15)
 end
 Player.all.each do |player|
-  rand(3..20).times do
+  rand(20..40).times do
     other_players = Player.where.not(playerId: player.playerId)
     random_player = other_players.offset(rand(0..(other_players.count-1))).first
     Frag.create(serverId: Server.last.serverId,
