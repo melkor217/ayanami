@@ -17,12 +17,11 @@ class PlayersController < ApplicationController
     else
       query = Player.where(hideranking: 0)
     end
-    @total = query.count
-    query = query.with_kpd
     if params[:search]
-      query = query.name_search(params[:search]).limit(params[:limit])
+      query = query.name_search(params[:search])
     end
-    @players = query.uniorder(params[:sort], params[:order]).limit(params[:limit]).offset params[:offset]
+    @total = query.count
+    @players = query.with_kpd.uniorder(params[:sort], params[:order]).limit(params[:limit]).offset params[:offset]
   end
 
   # GET /players/1

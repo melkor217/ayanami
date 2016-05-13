@@ -5,3 +5,5 @@ json.rows do
     json.path weapon_path(weapon)
   end
 end
+
+json.total @total
