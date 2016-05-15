@@ -10,7 +10,7 @@ class WeaponsController < ApplicationController
     param! :limit, Integer, in: (10..100), default: 25
     param! :page, Integer, default: 1
     param! :offset, Integer, default: (params[:page]-1)*params[:limit]
-    query = Weapon.where(game: 'csgo').uniorder(params[:sort],params[:order])
+    query = Weapon.where(game: 'csgo').uniorder(params[:sort], params[:order])
     if params[:search]
       query = query.name_search(params[:search])
     end
@@ -27,8 +27,8 @@ class WeaponsController < ApplicationController
 
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_weapon
-      @weapon = Weapon.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_weapon
+    @weapon = Weapon.find(params[:id])
+  end
 end

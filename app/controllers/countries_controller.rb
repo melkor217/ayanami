@@ -8,7 +8,7 @@ class CountriesController < ApplicationController
     param! :sort, String, in: Player.sort_allowed_by_country?, default: Player.sort_default_by_country
     param! :search, String, default: nil
     #@countries = Player.by_country.order(params[:sort] => params[:order])
-    query = Player.by_country.uniorder(params[:sort],params[:order])
+    query = Player.by_country.uniorder(params[:sort], params[:order])
     if params[:search]
       query = query.country_search(params[:search])
     end
@@ -27,8 +27,8 @@ class CountriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_country
-      @country = Country.find(params[:countryId])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_country
+    @country = Country.find(params[:countryId])
+  end
 end

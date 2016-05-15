@@ -12,6 +12,7 @@ class Player < ActiveRecord::Base
     # Fields that are allowed for sorting
     return %w{kills deaths lastname activity skill playerId lastName kpd headshots connection_time}
   end
+
   def self.sort_default
     # Default sorting field
     return 'skill'
@@ -25,7 +26,7 @@ class Player < ActiveRecord::Base
     return 'players_total'
   end
 
-  scope :uniorder, -> (sort, order) {order("#{sort} #{order}")}
+  scope :uniorder, -> (sort, order) { order("#{sort} #{order}") }
   scope :with_kpd, -> { select('*, round((kills / deaths),2) as kpd') }
   # Stewpid query, but i don't really wanna change legacy scheme
   scope :by_country, -> { select('flag,
@@ -47,6 +48,7 @@ sum(kills)/sum(deaths) as kpd
 
   belongs_to :country, foreign_key: :flag, primary_key: :flag
   has_many :frag, foreign_key: :killerId, primary_key: :playerId
+
   def frag
     Frag.where("killerId = ? OR victimId = ?", self.playerId, self.playerId)
   end
@@ -55,17 +57,17 @@ sum(kills)/sum(deaths) as kpd
     kills = Frag.where(killerId: self.playerId).group(:victimId).count()
     deaths = Frag.where(victimId: self.playerId).group(:killerId).count()
     result = {}
-    deaths.each do |k,v|
+    deaths.each do |k, v|
       if not result[k]
         result[k] = {}
       end
-        result[k].merge!(deaths: v)
+      result[k].merge!(deaths: v)
     end
-    kills.each do |k,v|
+    kills.each do |k, v|
       if not result[k]
         result[k] = {}
       end
-      result[k].merge!(kills: v, kpd: v.to_f/[result[k][:deaths].to_i,1].max)
+      result[k].merge!(kills: v, kpd: v.to_f/[result[k][:deaths].to_i, 1].max)
     end
     return result
   end
