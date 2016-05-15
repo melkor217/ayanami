@@ -18,7 +18,7 @@
   <tbody>
   <% @player.weapons.each do |weapon, kills| %>
       <tr>
-        <td><%= Weapon.find_by(code: weapon).name %> </td>
+        <td><%= Weapon.find_by(code: weapon, game: 'csgo').name %> </td>
         <td><%= kills %> </td>
       </tr>
   <% end %>
