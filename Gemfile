@@ -27,7 +27,7 @@ gem "passenger"
 gem 'kaminari', :git => "git://github.com/amatsuda/kaminari.git", :branch => 'master'
 gem 'bootstrap-table-rails'
 
-gem 'rails_param' # Better param validators
+gem 'rails_param', :git => "git://github.com/nicolasblanco/rails_param.git" # Better param validators
 
 
 gem 'lograge'
