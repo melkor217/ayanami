@@ -11,7 +11,7 @@
       <td><%= playerId %> </td>
       <td><%= stats[:kills].to_i %> </td>
       <td><%= stats[:deaths].to_i %> </td>
-      <td><%= (stats[:kills].to_i.to_f / [stats[:deaths].to_i,1].max).round(2) %> </td>
+      <td><%= stats[:kpd].to_f.round(2) %> </td>
     </tr>
     <% end %>
   </tbody>

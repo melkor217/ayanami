@@ -55,17 +55,17 @@ sum(kills)/sum(deaths) as kpd
     kills = Frag.where(killerId: self.playerId).group(:victimId).count()
     deaths = Frag.where(victimId: self.playerId).group(:killerId).count()
     result = {}
-    kills.each do |k,v|
-      if not result[k]
-        result[k] = {}
-      end
-      result[k].merge!(kills: v)
-    end
     deaths.each do |k,v|
       if not result[k]
         result[k] = {}
       end
         result[k].merge!(deaths: v)
+    end
+    kills.each do |k,v|
+      if not result[k]
+        result[k] = {}
+      end
+      result[k].merge!(kills: v, kpd: v.to_f/[result[k][:deaths].to_i,1].max)
     end
     return result
   end
