@@ -72,6 +72,10 @@ sum(kills)/sum(deaths) as kpd
     return result
   end
 
+  def weapons
+    return self.frag.group(:weapon).count
+  end
+
   def ranking
     Rails.cache.fetch("rank_#{self.skill}", expires_in: 10.minutes) do
       Player.where('skill > ?', self.skill).count + 1

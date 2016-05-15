@@ -46,7 +46,7 @@ Player.all.each do |player|
                 map: 'de_dust2',
                 killerId: player.playerId,
                 victimId: random_player.playerId,
-                weapon: 'ak47',
+                weapon: ['ak47', 'nova', 'aug'].sample,
                 eventTime: rand(1.year.ago..Time.now),
                 headshot: rand(0..1))
   end

@@ -1,5 +1,5 @@
 class PlayersController < ApplicationController
-  before_action :set_player, only: [:show, :killstats]
+  before_action :set_player, only: [:show, :killstats, :weapons]
 
   # GET /players
   # GET /players.json
@@ -9,8 +9,6 @@ class PlayersController < ApplicationController
     param! :limit, Integer, in: (10..100), default: 25
     param! :page, Integer, default: 1
     param! :offset, Integer, default: (params[:page]-1)*params[:limit]
-    param! :search, String, default: nil
-    param! :contryId, String, default: nil
 
     if params[:countryId]
       query = Country.find(params[:countryId]).players.where(hideranking: 0)
@@ -32,6 +30,9 @@ class PlayersController < ApplicationController
 
   def killstats
     @killstats = @player.killstats
+  end
+
+  def weapons
   end
 
   private

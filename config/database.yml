@@ -17,7 +17,6 @@ docker:
   password: vae2Iex8jie5Uich
   host: ayanami-mysql
 
-
 production:
   adapter: mysql2
   encoding: utf8

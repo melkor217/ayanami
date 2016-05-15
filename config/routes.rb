@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :players do
     member do
       get :killstats
+      get :weapons
     end
     resources :frags
   end

@@ -1,0 +1,29 @@
+<table class="table table-bordered"
+       data-toggle="table"
+       data-page-size="50"
+       data-page-list="[10, 25, 50, 100]"
+       data-search="true"
+       data-show-refresh="true"
+       data-show-toggle="true"
+       data-show-columns="true"
+       data-pagination="true"
+       data-side-pagination="client"
+       data-sort-name="kills"
+       data-sort-order="desc"
+>
+  <thead>
+  <th class="col-md-4" data-searchable="true" data-field="weapon" data-sortable="true">Weapon</th>
+  <th class="col-md-1" data-searchable="false" data-field="kills" data-sortable="true">Kills</th>
+  </thead>
+  <tbody>
+  <% @player.weapons.each do |weapon, kills| %>
+      <tr>
+        <td><%= Weapon.find_by(code: weapon).name %> </td>
+        <td><%= kills %> </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to 'Back', :back, {:class => "btn-link"} %>
