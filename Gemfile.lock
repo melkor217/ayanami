@@ -103,6 +103,9 @@ GEM
     nio4r (1.2.1)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    passenger (5.0.28)
+      rack
+      rake (>= 0.8.1)
     rack (2.0.0.rc1)
       json
     rack-test (0.6.3)
@@ -194,6 +197,7 @@ DEPENDENCIES
   kaminari!
   lograge
   mysql2
+  passenger
   rails (~> 5.0.0.rc1)
   rails_param
   random-word

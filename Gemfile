@@ -20,6 +20,8 @@ gem 'mysql2' # mysql DB driver
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 
+gem "passenger"
+
 #gem 'kaminari' # Paginator
 # http://stackoverflow.com/questions/34413971/rails-5-0-0-beta1-generating-an-url-from-non-sanitized-request-parameters-is-i
 gem 'kaminari', :git => "git://github.com/amatsuda/kaminari.git", :branch => 'master'
