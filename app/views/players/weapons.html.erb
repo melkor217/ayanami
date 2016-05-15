@@ -14,12 +14,14 @@
   <thead>
   <th class="col-md-4" data-searchable="true" data-field="weapon" data-sortable="true">Weapon</th>
   <th class="col-md-1" data-searchable="false" data-field="kills" data-sortable="true">Kills</th>
+  <th class="col-md-1" data-searchable="false" data-field="total" data-sortable="true">% of total</th>
   </thead>
   <tbody>
-  <% @player.weapons.each do |weapon, kills| %>
+  <% @weapons.each do |weapon, kills| %>
       <tr>
         <td><%= Weapon.find_by(code: weapon, game: 'csgo').name %> </td>
         <td><%= kills %> </td>
+        <td><%= (100*(kills.to_f/@sum)).round(2) %>% </td>
       </tr>
   <% end %>
   </tbody>

@@ -33,6 +33,10 @@ class PlayersController < ApplicationController
   end
 
   def weapons
+    @weapons = @player.weapons
+    @sum = @weapons.map do |k,v|
+      v
+    end.sum
   end
 
   private

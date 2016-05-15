@@ -32,6 +32,7 @@ class Player < ActiveRecord::Base
   scope :by_country, -> { select('flag,
 country,
 count(playerId) as players_total,
+round(avg(connection_time)) as avg_connection_time,
 round(avg(activity),2) as avg_activity,
 round(avg(skill),2) as avg_skill,
 round(avg(kills),2) as avg_kills,
