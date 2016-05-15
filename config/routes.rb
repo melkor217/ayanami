@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :countries, param: :countryId
   resources :players do
     member do
-      get :killstat
+      get :killstats
     end
     resources :frags
   end

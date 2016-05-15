@@ -51,7 +51,7 @@ sum(kills)/sum(deaths) as kpd
     Frag.where("killerId = ? OR victimId = ?", self.playerId, self.playerId)
   end
 
-  def killstat
+  def killstats
     kills = Frag.where(killerId: self.playerId).group(:victimId).count()
     deaths = Frag.where(victimId: self.playerId).group(:killerId).count()
     result = {}

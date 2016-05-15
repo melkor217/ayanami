@@ -1,5 +1,5 @@
 class PlayersController < ApplicationController
-  before_action :set_player, only: [:show, :killstat]
+  before_action :set_player, only: [:show, :killstats]
 
   # GET /players
   # GET /players.json
@@ -30,8 +30,8 @@ class PlayersController < ApplicationController
     @total = Player.total
   end
 
-  def killstat
-    @killstat = @player.killstat
+  def killstats
+    @killstats = @player.killstats
   end
 
   private
