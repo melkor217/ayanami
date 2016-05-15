@@ -21,7 +21,7 @@
       <tr>
         <td><%= Weapon.find_by(code: weapon, game: 'csgo').name %> </td>
         <td><%= kills %> </td>
-        <td><%= (100*(kills.to_f/@sum)).round(2) %>% </td>
+        <td><%= (100*(kills.to_f/[@sum,1].max)).round(2) %>% </td>
       </tr>
   <% end %>
   </tbody>
