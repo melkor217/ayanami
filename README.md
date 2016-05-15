@@ -12,3 +12,7 @@ for inspection.
 - Implement compatable MongoDB models
 - Replace hlstatsx daemon with a cool new one
 
+## Sad things
+
+- CSGO is still the only game supported
+- There is still no unit tests :(
