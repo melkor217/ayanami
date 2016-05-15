@@ -12,7 +12,7 @@
       </tr>
       <tr>
         <td>Ranking</td>
-        <td> <%= @player.ranking %> / <%= @total %> (<%= 100-((@player.ranking-1).to_f / @total)*100.round(2) %>%)</td>
+        <td> <%= @player.ranking %> / <%= @total %> (<%= (100-((@player.ranking-1).to_f / @total))*100.round(2) %>%)</td>
       </tr>
       <tr>
         <td>Points</td>
