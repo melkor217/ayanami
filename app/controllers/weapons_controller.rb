@@ -26,8 +26,10 @@ class WeaponsController < ApplicationController
     param! :limit, Integer, in: (10..100), default: 25
     param! :page, Integer, default: 1
     param! :offset, Integer, default: (params[:page]-1)*params[:limit]
-    @frags = @weapon.frags_grouped.to_a[params[:offset],params[:limit]]
-    @total = @weapon.frags_grouped.count
+    if request.format.json?
+      @frags = @weapon.frags_grouped.to_a[params[:offset],params[:limit]]
+      @total = @weapon.frags_grouped.count
+    end
   end
 
 
