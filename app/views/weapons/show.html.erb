@@ -1,3 +1,31 @@
 <p id="notice"><%= notice %></p>
 
+<%= @weapon.name %>
+
+<table id="table" class="fixed"
+       data-toggle="table"
+       data-show-refresh="true"
+       data-show-toggle="true"
+       data-show-columns="true"
+       data-flat="true"
+       data-url="<%= weapon_path(format: :json, countryId: params[:countryId]) %>"
+       data-pagination="true"
+       data-side-pagination="server"
+       data-search="true"
+       data-page-list="[10, 25, 50, 100]"
+       data-sort-name="<%= params[:sort] %>"
+       data-sort-order="<%= params[:order] %>"
+       data-search-text="<%= params[:search] %>"
+       data-page-size="<%= params[:limit] %>"
+       data-page-number="<%= params[:page] %>">
+  <thead>
+  <tr>
+    <%# <th data-formatter="runningFormatter">#</th> %>
+    <%# <th data-field="ranking" data-sortable="true">Rank</th> %>
+    <th data-field="playerId" data-sortable="false" class="col-sm-1">Player ID</th>
+    <th data-field="frags" data-sortable="false" class="col-sm-1">Frags</th>
+  </tr>
+  </thead>
+</table>
+
 <%= link_to 'Back', weapons_path %>

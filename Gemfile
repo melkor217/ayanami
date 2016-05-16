@@ -17,6 +17,8 @@ gem 'therubyracer', platforms: :ruby
 gem 'mysql2' # mysql DB driver
 #gem 'mongoid' # mongo DB driver
 
+gem 'friendly_id'
+
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 

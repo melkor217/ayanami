@@ -2,7 +2,7 @@
 
 <h1>Listing Weapons</h1>
 
-<table id="table" style="cursor: pointer;"
+<table id="table"
        data-toggle="table"
        data-show-refresh="true"
        data-show-toggle="true"
@@ -12,7 +12,7 @@
        data-pagination="true"
        data-side-pagination="server"
        data-search="true"
-       data-page-size="25"
+       data-page-size="50"
        data-page-list="[10, 25, 50, 100]"
        data-sort-name="<%= params[:sort] %>"
        data-sort-order="<%= params[:order] %>"
@@ -22,7 +22,7 @@
   <thead>
   <tr>
     <th data-formatter="runningFormatter">Position</th>
-    <th data-field="name" data-sortable="true">Name</th>
+    <th data-field="name" data-formatter="weaponFormatter" data-sortable="true">Name</th>
     <th data-field="modifier" data-sortable="true">Modifier</th>
     <th data-field="kills" data-sortable="true">Kills</th>
     <th data-field="headshots" data-sortable="true">Headshots</th>

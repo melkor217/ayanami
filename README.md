@@ -9,6 +9,8 @@ for inspection.
 ## Roadmap
 
 - Write less ugly looking replacement for hlstatsx web
+    - Make it show a lot of data
+    - Make it fancy
 - Implement compatable MongoDB models
 - Replace hlstatsx daemon with a cool new one
 

@@ -62,6 +62,10 @@ function countryFormatter(value, row, index) {
     return '<a class="btn-link" href="' + row.path + '">' + row.country + '</a>';
 }
 
+function weaponFormatter(value, row, index) {
+    return '<a class="btn-link" href="' + row.path + '">' + row.name + '</a>';
+}
+
 function skillFormatter(value, row, index) {
     var sign = value.last_change>0?'+':'';
     var color_class = value.last_change>=0?'text-success':'text-danger';
@@ -114,10 +118,10 @@ $(function () {
     $('#table').on('all.bs.table', function (e, name, args) {
             console.log('Event:', name, ', data:', args);
         })
-        .on('click-row.bs.table', function (e, row, $element) {
-            Turbolinks.visit(row["path"]);
-            $result.text('Event: click-row.bs.table');
-        })
+        //.on('click-row.bs.table', function (e, row, $element) {
+        //    Turbolinks.visit(row["path"]);
+        //    $result.text('Event: click-row.bs.table');
+        //})
         .on('dbl-click-row.bs.table', function (e, row, $element) {
             $result.text('Event: dbl-click-row.bs.table');
         })

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :frags
   resources :servers
-  resources :weapons
+  resources :weapons, param: :code
   resources :countries, param: :countryId
   resources :players do
     member do
