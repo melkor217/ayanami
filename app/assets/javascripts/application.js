@@ -63,7 +63,7 @@ function countryFormatter(value, row, index) {
 }
 
 function flagFormatter(value, row, index) {
-    return '<a class="btn-link" href="' + row.path + '"><img src="' + row.icon + '" width="32" height="32" alt="' + value + '"/></a>';
+    return '<a class="btn-link" href="' + row.path + '"><img src="' + row.icon + '" width="32" height="32" alt="' + value + '"/>('+value+')</a>';
 }
 
 function weaponFormatter(value, row, index) {

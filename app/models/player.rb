@@ -37,7 +37,7 @@ round(avg(connection_time)) as avg_connection_time,
 round(avg(activity),2) as avg_activity,
 round(avg(skill),2) as avg_skill,
 round(avg(kills),2) as avg_kills,
-sum(kills)/sum(deaths) as kpd
+round(sum(kills)/sum(deaths),2) as kpd
 ').where(hideranking: 0).where.not(flag: '').group(:flag) }
   scope :name_search, ->(name) { where('lastName LIKE :query', query: "%#{name}%") }
   scope :country_search, ->(name) { where('country LIKE :query or flag LIKE :query', query: "%#{name}%") }
