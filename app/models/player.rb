@@ -1,4 +1,5 @@
 class Player < ActiveRecord::Base
+
   if Rails.configuration.database_configuration[Rails.env]['adapter'] != 'mysql2'
     include Mongoid::Document
     field :flag, type: String
@@ -73,8 +74,16 @@ sum(kills)/sum(deaths) as kpd
     return result
   end
 
+  def self.cache_find(playerId)
+    Rails.cache.fetch("player_#{playerId}", expires_in: 1.hours) do
+      self.find(playerId)
+    end
+  end
+
   def weapons
-    return self.frag.group(:weapon).count
+    return self.frag.group(:weapon).count.transform_keys do |key|
+      Weapon.find_by(code: key, game: 'csgo')
+    end
   end
 
   def ranking

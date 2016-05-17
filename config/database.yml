@@ -2,6 +2,7 @@
 development:
   adapter: mysql2
   encoding: utf8
+  pool: 10
   reconnect: false
   database: steam-dev
   username: csgods
@@ -11,6 +12,7 @@ development:
 docker:
   adapter: mysql2
   encoding: utf8
+  pool: 10
   reconnect: false
   database: ayanami
   username: root
@@ -20,6 +22,7 @@ docker:
 production:
   adapter: mysql2
   encoding: utf8
+  pool: 10
   reconnect: false
   database: steam
   username: ayanami

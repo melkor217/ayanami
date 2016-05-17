@@ -4,7 +4,7 @@ class WeaponsController < ApplicationController
   # GET /weapons
   # GET /weapons.json
   def index
-    param! :order, String, in: %w(asc desc), transform: :downcase, default: "asc"
+    param! :order, String, in: %w(asc desc), transform: :downcase, default: "desc"
     param! :sort, String, in: Weapon.sort_allowed?, default: Weapon.sort_default
     param! :search, String, default: nil
     param! :limit, Integer, in: (10..100), default: 25
@@ -36,6 +36,6 @@ class WeaponsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_weapon
-    @weapon = Weapon.find_by(code: params[:code], game: 'csgo')
+    @weapon = Weapon.find_by!(code: params[:code], game: 'csgo')
   end
 end

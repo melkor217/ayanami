@@ -8,7 +8,7 @@
        data-show-toggle="true"
        data-show-columns="true"
        data-flat="true"
-       data-url="<%= weapon_path(format: :json, countryId: params[:countryId]) %>"
+       data-url="<%= weapon_path(format: :json, code: params[:code]) %>"
        data-pagination="true"
        data-side-pagination="server"
        data-search="true"
@@ -22,7 +22,7 @@
   <tr>
     <%# <th data-formatter="runningFormatter">#</th> %>
     <%# <th data-field="ranking" data-sortable="true">Rank</th> %>
-    <th data-field="playerId" data-sortable="false" class="col-sm-1">Player ID</th>
+    <th data-field="playerId" data-sortable="false" data-formatter="urlFormatter" class="col-sm-1">Player ID</th>
     <th data-field="frags" data-sortable="false" class="col-sm-1">Frags</th>
   </tr>
   </thead>
