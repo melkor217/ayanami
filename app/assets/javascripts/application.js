@@ -50,7 +50,7 @@ function runningFormatter(value, row, index) {
     //    return index + 1 + (getQueryParam('page') -1 )*getQueryParam('limit');
     //}
     //else {
-        return index + 1;
+    return index + 1;
     //}
 }
 
@@ -60,6 +60,10 @@ function urlFormatter(value, row, index) {
 
 function countryFormatter(value, row, index) {
     return '<a class="btn-link" href="' + row.path + '">' + row.country + '</a>';
+}
+
+function flagFormatter(value, row, index) {
+    return '<a class="btn-link" href="' + row.path + '"><img src="' + row.icon + '" width="32" height="32" alt="' + value + '"/></a>';
 }
 
 function weaponFormatter(value, row, index) {
@@ -98,8 +102,8 @@ function updateQueryStringParameter(uri, key, value) {
     // http://uri.com/page?qwe=123
     // ->
     // http://uri.com/page?qwe=123&key=value
-    
-    
+
+
     var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
     var separator = uri.indexOf('?') !== -1 ? "&" : "?";
     if (uri.match(re)) {
@@ -116,12 +120,12 @@ $(function () {
     var $result = $('#eventsResult');
 
     $('#table').on('all.bs.table', function (e, name, args) {
-            console.log('Event:', name, ', data:', args);
-        })
-        //.on('click-row.bs.table', function (e, row, $element) {
-        //    Turbolinks.visit(row["path"]);
-        //    $result.text('Event: click-row.bs.table');
-        //})
+        console.log('Event:', name, ', data:', args);
+    })
+    //.on('click-row.bs.table', function (e, row, $element) {
+    //    Turbolinks.visit(row["path"]);
+    //    $result.text('Event: click-row.bs.table');
+    //})
         .on('dbl-click-row.bs.table', function (e, row, $element) {
             $result.text('Event: dbl-click-row.bs.table');
         })
@@ -173,5 +177,4 @@ $(function () {
             $result.text('Event: search.bs.table');
         });
 });
-
 

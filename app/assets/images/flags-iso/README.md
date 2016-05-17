@@ -1,0 +1,1 @@
+Country flag icons from https://www.gosquared.com/resources/flag-icons/

@@ -2,7 +2,7 @@
 
 <h1>Listing Countries</h1>
 
-<table id="table" style="cursor: pointer;"
+<table id="table"
        data-toggle="table"
        data-show-refresh="true"
        data-show-toggle="true"
@@ -20,7 +20,7 @@
   <thead>
   <tr>
     <th data-formatter="runningFormatter">Position</th>
-    <th data-field="flag" data-sortable="true">Flag</th>
+    <th data-field="flag" data-formatter="flagFormatter" data-sortable="true">Flag</th>
     <th data-field="country" data-formatter="countryFormatter" data-sortable="true">Country</th>
     <th data-field="players_total" data-sortable="true">Players</th>
     <th data-field="avg_activity" data-sortable="true">Activity</th>

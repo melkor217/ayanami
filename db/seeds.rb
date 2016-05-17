@@ -115,9 +115,6 @@ end
     player.game = 'csgo'
     player.lastName = (RandomWord.adjs.next.to_s + ' ' + RandomWord.nouns.next.to_s).titleize[0..63]
     player.activity = rand (0..100)
-    kills = rand (0.1000)
-    deaths = (kills * (rand (0.6..1.4))).round
-    #player.skill = (kills.to_f / [deaths,1].max)*1000*(rand (0.9 .. 1.1))
     player.skill = DEFAULT_SKILL
     player.connection_time = 0
     player.headshots = 0
