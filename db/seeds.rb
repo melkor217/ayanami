@@ -78,13 +78,12 @@ end
 
 
 def do_kill(killer, victim, weapon, server)
-  headshot = rand(0..9)==0 ? 0 : 1
-
+  headshot = rand(0..9)==0?0:1
 
   killer.skill += killer_skill_change(killer, victim, weapon)
   killer.kills += 1
   killer.connection_time += rand(2..20)
-  if headshot
+  if headshot == 1
     killer.headshots += 1
   end
   killer.save
@@ -94,7 +93,12 @@ def do_kill(killer, victim, weapon, server)
   victim.connection_time += rand(2..20)
   victim.save
 
-  weapon.increment!(:kills)
+  weapon.kills += 1
+  weapon.save
+  if headshot == 1
+    weapon.headshots += 1
+  end
+  weapon.save
 
   Frag.create(serverId: server.serverId,
               map: 'de_dust2',
@@ -116,7 +120,7 @@ end
     #player.skill = (kills.to_f / [deaths,1].max)*1000*(rand (0.9 .. 1.1))
     player.skill = DEFAULT_SKILL
     player.connection_time = 0
-    player.headshots = rand (0 .. kills)
+    player.headshots = 0
     country = Country.offset(rand(Country.count)).first
     player.country = country
     player.flag = country.flag

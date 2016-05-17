@@ -19,9 +19,9 @@
   <tbody>
   <% @weapons.each do |weapon, kills| %>
       <tr>
-        <td><%= link_to(weapon.name, weapon, {:class => "btn-link"} ) %> </td>
+        <td><%= link_to(weapon.name, weapon, {:class => "btn-link"}) %> </td>
         <td><%= kills %> </td>
-        <td><%= (100*(kills.to_f/[@sum,1].max)).round(2) %>% </td>
+        <td><%= (100*(kills.to_f/[@sum, 1].max)).round(2) %>%</td>
       </tr>
   <% end %>
   </tbody>

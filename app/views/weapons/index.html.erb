@@ -2,7 +2,7 @@
 
 <h1>Listing Weapons</h1>
 
-<table id="table"
+<table id="table" class="fixed"
        data-toggle="table"
        data-show-refresh="true"
        data-show-toggle="true"
@@ -22,10 +22,10 @@
   <thead>
   <tr>
     <th data-formatter="runningFormatter">Position</th>
-    <th data-field="name" data-formatter="weaponFormatter" data-sortable="true">Name</th>
-    <th data-field="modifier" data-sortable="true">Modifier</th>
-    <th data-field="kills" data-sortable="true">Kills</th>
-    <th data-field="headshots" data-sortable="true">Headshots</th>
+    <th data-field="name" class="col-md-6" data-formatter="weaponFormatter" data-sortable="true">Name</th>
+    <th data-field="modifier" class="col-md-2" data-sortable="true">Modifier</th>
+    <th data-field="kills" class="col-md-2" data-sortable="true">Kills</th>
+    <th data-field="headshots" class="col-md-2" data-sortable="true">Headshots</th>
   </tr>
   </thead>
 </table>
