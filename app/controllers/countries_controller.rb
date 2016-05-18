@@ -24,6 +24,8 @@ class CountriesController < ApplicationController
     param! :page, Integer, default: 1
     param! :search, String, default: nil
     param! :countryId, String, default: nil
+
+    @scope = Player.where(hideranking: 0)
   end
 
   private
