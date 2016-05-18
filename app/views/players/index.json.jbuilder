@@ -10,4 +10,6 @@ json.rows do
   end
 end
 
+
+
 json.total @total

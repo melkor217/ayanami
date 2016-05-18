@@ -21,28 +21,35 @@
 
 String.prototype.toHHMMSS = function () {
     var sec_num = parseInt(this, 10); // don't forget the second param
-    var hours   = Math.floor(sec_num / 3600);
+    var hours = Math.floor(sec_num / 3600);
     var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
     var seconds = sec_num - (hours * 3600) - (minutes * 60);
 
-    if (hours   < 10) {hours   = "0"+hours;}
-    if (minutes < 10) {minutes = "0"+minutes;}
-    if (seconds < 10) {seconds = "0"+seconds;}
-    return hours+':'+minutes+':'+seconds;
+    if (hours < 10) {
+        hours = "0" + hours;
+    }
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+    if (seconds < 10) {
+        seconds = "0" + seconds;
+    }
+    return hours + ':' + minutes + ':' + seconds;
 }
 
-var getQueryParam = function(param) {
+var getQueryParam = function (param) {
     // http://test.url/page.html?param=a&b=c
     // ->
     // param
     var found;
-    window.location.search.substr(1).split("&").forEach(function(item) {
-        if (param ==  item.split("=")[0]) {
+    window.location.search.substr(1).split("&").forEach(function (item) {
+        if (param == item.split("=")[0]) {
             found = item.split("=")[1];
         }
     });
     return found;
 };
+
 
 function runningFormatter(value, row, index) {
     // Position formatter for tables
@@ -63,36 +70,47 @@ function countryFormatter(value, row, index) {
 }
 
 function flagFormatter(value, row, index) {
-    return '<a class="btn-link" href="' + row.path + '"><img src="' + row.icon + '" width="32" height="32" alt="' + value + '"/>('+value+')</a>';
+    return '<a class="btn-link" href="' + row.path + '"><img src="' + row.icon + '" width="32" height="32" alt="' + value + '"/>(' + value + ')</a>';
 }
 
 function weaponFormatter(value, row, index) {
     return '<a class="btn-link" href="' + row.path + '">' + row.name + '</a>';
 }
 
+
+function progressBar(value, row_value, limits) {
+    var percent = 100 * (row_value - limits.min) / (limits.max - limits.min);
+    return '<div style="vertical-align: center;overflow: hidden; height: 20px;">' +
+        '<div class="progress"><div role="progressbar" ' +
+        'class="progress-bar progress-bar-info" aria-valuemin="' + limits.min + '" aria-valuemax="' + limits.max + '" aria-valuenow="' +
+        row_value.toString() + '" style="width:' + percent + '%; height: 20px;"><span>' +
+        value + '</span></div></div></div>';
+}
+
 function skillFormatter(value, row, index) {
-    var sign = value.last_change>0?'+':'';
-    var color_class = value.last_change>=0?'text-success':'text-danger';
-    return value.points + ' <small><span class="' + color_class + '">(' + sign + value.last_change + ')</span></small>';
+    var sign = value.last_change > 0 ? '+' : '';
+    var color_class = value.last_change >= 0 ? 'text-success' : 'text-danger';
+    var str = value.points + ' <small class="' + color_class + '">(' + sign + value.last_change + ')</small>';
+    return progressBar(str, value.points, {'min': this.min, 'max': this.max});
 }
 
 function activityFormatter(value, row, index) {
+    return progressBar(value + '%', value, {'min': this.min, 'max': this.max})
+}
+
+function killsFormatter(value, row, index) {
     // css is stewpid -_-
-    return '<div style="vertical-align: center;overflow: hidden; height: 20px;">' +
-        '<div class="progress"><div role="progressbar" ' +
-        'class="progress-bar progress-bar-info" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' +
-        value.toString() + '" style="width:' + value.toString() + '%; height: 20px;"><span>' +
-        value.toString() + '%</span></div></div></div>';
+    return progressBar(value, value, {'min': this.min, 'max': this.max});
 }
 
 function timeFormatter(value, row, index) {
     return value.toString().toHHMMSS();
 }
 
-$(window).unload(function (e) {
-    e.preventDefault();
-    alert("Back was pressed!");
-});
+//$(window).unload(function (e) {
+//    e.preventDefault();
+//    alert("Back was pressed!");
+//});
 
 function updateQueryStringParameter(uri, key, value) {
     // http://uri.com/page?key=old
@@ -120,12 +138,12 @@ $(function () {
     var $result = $('#eventsResult');
 
     $('#table').on('all.bs.table', function (e, name, args) {
-        console.log('Event:', name, ', data:', args);
+        //console.log('Event:', name, ', data:', args);
     })
-    //.on('click-row.bs.table', function (e, row, $element) {
-    //    Turbolinks.visit(row["path"]);
-    //    $result.text('Event: click-row.bs.table');
-    //})
+    /*.on('click-row.bs.table', function (e, row, $element) {
+     Turbolinks.visit(row["path"]);
+     $result.text('Event: click-row.bs.table');
+     })*/
         .on('dbl-click-row.bs.table', function (e, row, $element) {
             $result.text('Event: dbl-click-row.bs.table');
         })

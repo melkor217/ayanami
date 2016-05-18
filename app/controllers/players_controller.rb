@@ -10,16 +10,21 @@ class PlayersController < ApplicationController
     param! :page, Integer, default: 1
     param! :offset, Integer, default: (params[:page]-1)*params[:limit]
 
-    if params[:countryId]
-      query = Country.find(params[:countryId]).players.where(hideranking: 0)
-    else
-      query = Player.where(hideranking: 0)
+
+    if request.format.json?
+      if params[:countryId]
+        query = Country.find(params[:countryId]).players.where(hideranking: 0)
+      else
+        query = Player.where(hideranking: 0)
+      end
+      if params[:search]
+        query = query.name_search(params[:search])
+      end
+      @total = query.count
+      @players = query.with_kpd.uniorder(params[:sort], params[:order]).limit(params[:limit]).offset params[:offset]
+    elsif request.format.html?
+      @scope = Player.where(hideranking: 0)
     end
-    if params[:search]
-      query = query.name_search(params[:search])
-    end
-    @total = query.count
-    @players = query.with_kpd.uniorder(params[:sort], params[:order]).limit(params[:limit]).offset params[:offset]
   end
 
   # GET /players/1
