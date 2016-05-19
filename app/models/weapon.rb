@@ -15,7 +15,9 @@ class Weapon < ActiveRecord::Base
   scope :uniorder, -> (sort, order) {order("#{sort} #{order}")}
 
   def frags_grouped(options = {})
-    MyCache.fetch(options.merge(mode: :weapon, game: self.game, code: self.code, expires_in: 1.hours)) do
+    options.merge!(mode: :weapon, game: self.game, code: self.code, expires_in: 1.hours)
+    puts options
+    MyCache.fetch(:weapon, options) do
      Frag.where(weapon: self.code).by_game('csgo').group(:killerId).uniorder(:count_killerid, :desc).count(:killerId)
     end
   end
