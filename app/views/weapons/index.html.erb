@@ -8,7 +8,7 @@
        data-show-toggle="true"
        data-show-columns="true"
        data-flat="true"
-       data-url="<%= weapons_path(format: :json) %>"
+       data-url="<%= weapons_path(format: :json, game_game: params[:game_game]) %>"
        data-pagination="true"
        data-side-pagination="server"
        data-search="true"

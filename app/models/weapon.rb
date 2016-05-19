@@ -20,7 +20,7 @@ class Weapon < ActiveRecord::Base
   def frags_grouped(options = {})
     name = {mode: :weapon, game: self.game, code: self.code}
     Rails.cache.fetch(name, options) do
-      Frag.where(weapon: self.code).by_game('csgo').group(:killerId).uniorder(:count_killerid, :desc).count(:killerId)
+      Frag.joins(:server).where('hlstats_Servers.game' => self.game).where(weapon: self.code).group(:killerId).uniorder(:count_killerid, :desc).count(:killerId)
     end
   end
 

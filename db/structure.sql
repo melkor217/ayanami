@@ -2550,7 +2550,7 @@ INSERT INTO `hlstats_Games` (`code`, `name`, `realgame`, `hidden`) VALUES
 ('csp', 'CSPromod', 'csp', '1'),
 ('valve', 'Half-Life 1 Multiplayer', 'valve', '1'),
 ('nd', 'Nuclear Dawn', 'nd', '1'),
-('csgo', 'Counter-Strike: Global Offensive', 'csgo', '1'),
+('csgo', 'Counter-Strike: Global Offensive', 'csgo', '0'),
 ('dinodday', 'Dino D-Day', 'dinodday', '1');
 
 -- --------------------------------------------------------

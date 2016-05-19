@@ -1,9 +1,11 @@
 
 Rails.application.routes.draw do
-  resources :games
+  resources :games, param: :game do
+      resources :weapons, param: :code
+  end
+  resources :weapons, param: :code
   resources :frags
   resources :servers
-  resources :weapons, param: :code
   resources :countries, param: :countryId
   resources :players do
     member do
@@ -12,6 +14,7 @@ Rails.application.routes.draw do
     end
     resources :frags
   end
+
 
   root 'players#index'
 

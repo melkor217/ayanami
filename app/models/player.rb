@@ -43,7 +43,7 @@ round(sum(kills)/sum(deaths),2) as kpd
     end
   end
 
-  has_one :country, foreign_key: :flag, primary_key: :flag
+  belongs_to :country, foreign_key: :flag, primary_key: :flag
   has_many :frag, foreign_key: :killerId, primary_key: :playerId
 
   def frag

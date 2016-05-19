@@ -118,36 +118,39 @@ end
     player.skill = DEFAULT_SKILL
     player.connection_time = 0
     player.headshots = 0
-    country = Country.offset(rand(Country.count)).first
-    player.country = country
-    player.flag = country.flag
+    c = Country.all.sample
+    player.country = c
+    player.flag = c.flag
     player.last_skill_change = rand(-130..130)
   end
 end
 
-10.times do |c|
-  Server.create(
-      address: "1.2.3.#{c}",
-      port: 27015,
-      name: "server#{c}",
-      sortorder: c,
-      game: 'csgo',
-      publicaddress: "1.2.3.#{c}:27015",
-      rcon_password: 'test',
-      kills: rand(100..1000),
-      players: rand(1000..2000),
-      headshots: rand(50..90),
-      act_map: 'de_dust2',
-      act_players: rand(8..12),
-      max_players: 15)
+Game.where(hidden: '0').each do |game|
+  (2..4).each do |c|
+    Server.create(
+        address: "#{game.code}#{c}.net",
+        port: 27015,
+        name: "#{game.code} server #{c}",
+        sortorder: c,
+        publicaddress: "1.2.3.#{c}:27015",
+        rcon_password: 'test',
+        game: game.code,
+        kills: rand(100..1000),
+        players: rand(1000..2000),
+        headshots: rand(50..90),
+        act_map: 'de_dust2',
+        act_players: rand(8..12),
+        max_players: 15)
+  end
 end
 Player.all.each do |player|
   rand(0..20).times do
     random_player = Player.where.not(playerId: player.playerId).sample
     rand(1..5).times do
-      weapon = Weapon.where(game: :csgo).sample
+      server = Server.all.sample
+      weapon = Weapon.where(game: server.game).sample
       rand(1..7).times do
-        do_kill(player, random_player, weapon, Server.last)
+        do_kill(player, random_player, weapon, server)
       end
     end
   end

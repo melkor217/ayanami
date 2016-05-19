@@ -2,13 +2,15 @@
 
 <%= @weapon.name %>
 
+
+
 <table id="table" class="fixed"
        data-toggle="table"
        data-show-refresh="true"
        data-show-toggle="true"
        data-show-columns="true"
        data-flat="true"
-       data-url="<%= weapon_path(format: :json, code: params[:code]) %>"
+       data-url="<%= weapon_path(format: :json, code: params[:code], game: params[:game_game]) %>"
        data-pagination="true"
        data-side-pagination="server"
        data-search="true"
