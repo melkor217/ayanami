@@ -15,6 +15,7 @@ services:
   # service still requires you (or capistrano) to put proper database.yml
     depends_on:
       - ayanami-redis
+    entrypoint: bash -lc "./wait-for-it.sh ayanami-redis:6379; rake db:exists || rake db:create db:structure:load; ./bin/rails runner 'CacheHeater.run'"
     restart: always
     build:
       context: .
@@ -22,7 +23,7 @@ services:
     ports:
       - "127.0.0.1:3456:3000"
     working_dir: /ayanami
-    command: ./bin/rails server -b 0.0.0.0
+    #command: ./bin/rails server -b 0.0.0.0
   ayanami-mysql:
     image: mysql
     environment:
