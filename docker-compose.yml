@@ -15,7 +15,7 @@ services:
   # service still requires you (or capistrano) to put proper database.yml
     depends_on:
       - ayanami-redis
-    entrypoint: bash -lc "./wait-for-it.sh ayanami-redis:6379; rake db:exists || rake db:create db:structure:load; ./bin/rails runner 'CacheHeater.run'"
+    entrypoint: bash -lc "./wait-for-it.sh ayanami-redis:6379; rake db:exists || rake db:create db:structure:load; ./bin/rails runner 'CacheHeater.run'; passenger start"
     restart: always
     build:
       context: .
