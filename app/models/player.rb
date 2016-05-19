@@ -36,8 +36,9 @@ round(sum(kills)/sum(deaths),2) as kpd
   scope :name_search, ->(name) { where('lastName LIKE :query', query: "%#{name}%") }
   scope :country_search, ->(name) { where('country LIKE :query or flag LIKE :query', query: "%#{name}%") }
 
-  def country
-    Rails.cache.fetch(mode: :country, country: self.flag, expires_in: 1.day) do
+  def country(options = {})
+    options.merge!(expires_in: 6.hours)
+    Rails.cache.fetch({mode: :country, country: self.flag}, options) do
       super
     end
   end
@@ -68,8 +69,9 @@ round(sum(kills)/sum(deaths),2) as kpd
     return result
   end
 
-  def self.cache_find(playerId)
-    Rails.cache.fetch(mode: :player, player: playerId, expires_in: 1.hours) do
+  def self.cache_find(playerId, options = {})
+    options.merge!(expires_in: 1.hours)
+    Rails.cache.fetch({mode: :player, player: playerId}, options) do
       self.find(playerId)
     end
   end
@@ -80,14 +82,16 @@ round(sum(kills)/sum(deaths),2) as kpd
     end
   end
 
-  def ranking
-    Rails.cache.fetch(mode: :rank, rank: self.skill, expires_in: 10.minutes) do
+  def ranking(options = {})
+    options.merge!(expires_in: 10.minutes)
+    Rails.cache.fetch({mode: :rank, rank: self.skill}, options) do
       Player.where('skill > ?', self.skill).count + 1
     end
   end
 
-  def self.total
-    Rails.cache.fetch(mode: :total_players, expires: 10.minutes) do
+  def self.total(options = {})
+    options.merge!(expires: 10.minutes)
+    Rails.cache.fetch({mode: :total_players}, options) do
       Player.count
     end
   end
