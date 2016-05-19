@@ -13,6 +13,9 @@ services:
   ayanami-production:
   # production DB is still not dockerized for me :(
   # service still requires you (or capistrano) to put proper database.yml
+    depends_on:
+      - ayanami-redis
+    restart: always
     build:
       context: .
       dockerfile: Dockerfile.production
@@ -25,3 +28,5 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=vae2Iex8jie5Uich
       - MYSQL_DATABASE=ayanami
+  ayanami-redis:
+    image: redis

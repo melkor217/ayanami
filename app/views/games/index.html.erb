@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Games</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Hidden</th>
+      <th>Realgame</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @games.each do |game| %>
+      <tr>
+        <td><%= game.code %></td>
+        <td><%= game.name %></td>
+        <td><%= game.hidden %></td>
+        <td><%= game.realgame %></td>
+        <td><%= link_to 'Show', game %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

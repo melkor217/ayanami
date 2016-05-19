@@ -14,9 +14,9 @@ class Weapon < ActiveRecord::Base
   scope :name_search, ->(name) { where('name LIKE :query', query: "%#{name}%") }
   scope :uniorder, -> (sort, order) {order("#{sort} #{order}")}
 
-  def frags_grouped
-    Rails.cache.fetch("weapon_#{self.name}_#{self.code}", expires_in: 1.hours) do
-     self.frags.group(:killerId).uniorder(:count_killerid, :desc).count(:killerId)
+  def frags_grouped(options = {})
+    MyCache.fetch(options.merge(mode: :weapon, game: self.game, code: self.code, expires_in: 1.hours)) do
+     Frag.where(weapon: self.code).by_game('csgo').group(:killerId).uniorder(:count_killerid, :desc).count(:killerId)
     end
   end
 

@@ -1,11 +1,5 @@
 class Player < ActiveRecord::Base
 
-  if Rails.configuration.database_configuration[Rails.env]['adapter'] != 'mysql2'
-    include Mongoid::Document
-    field :flag, type: String
-    field :name, type: String
-  end
-
   self.table_name = "hlstats_Players" # MySQL table name
   alias_attribute :country_name, :country
 
@@ -43,7 +37,7 @@ round(sum(kills)/sum(deaths),2) as kpd
   scope :country_search, ->(name) { where('country LIKE :query or flag LIKE :query', query: "%#{name}%") }
 
   def country
-    Rails.cache.fetch("country_#{self.flag}", expires_in: 1.day) do
+    Rails.cache.fetch(mode: :country, country: self.flag, expires_in: 1.day) do
       super
     end
   end
@@ -75,7 +69,7 @@ round(sum(kills)/sum(deaths),2) as kpd
   end
 
   def self.cache_find(playerId)
-    Rails.cache.fetch("player_#{playerId}", expires_in: 1.hours) do
+    Rails.cache.fetch(mode: :player, player: playerId, expires_in: 1.hours) do
       self.find(playerId)
     end
   end
@@ -87,13 +81,13 @@ round(sum(kills)/sum(deaths),2) as kpd
   end
 
   def ranking
-    Rails.cache.fetch("rank_#{self.skill}", expires_in: 10.minutes) do
+    Rails.cache.fetch(mode: rank, rank: self.skill, expires_in: 10.minutes) do
       Player.where('skill > ?', self.skill).count + 1
     end
   end
 
   def self.total
-    Rails.cache.fetch("total_players", expires: 10.minutes) do
+    Rails.cache.fetch(mode: :total_players, expires: 10.minutes) do
       Player.count
     end
   end
