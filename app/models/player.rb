@@ -81,7 +81,7 @@ round(sum(kills)/sum(deaths),2) as kpd
   end
 
   def ranking
-    Rails.cache.fetch(mode: rank, rank: self.skill, expires_in: 10.minutes) do
+    Rails.cache.fetch(mode: :rank, rank: self.skill, expires_in: 10.minutes) do
       Player.where('skill > ?', self.skill).count + 1
     end
   end
