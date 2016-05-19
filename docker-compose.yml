@@ -21,7 +21,7 @@ services:
       context: .
       dockerfile: Dockerfile.production
     ports:
-      - "127.0.0.1:3456:3000"
+      - "127.0.0.1:3456:8080"
     working_dir: /ayanami
     #command: ./bin/rails server -b 0.0.0.0
   ayanami-mysql:
