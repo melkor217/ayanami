@@ -18,6 +18,7 @@ class Weapon < ActiveRecord::Base
   scope :uniorder, -> (sort, order) { order("#{sort} #{order}") }
 
   def frags_grouped(options = {})
+    options.merge!(raw: true)
     name = {mode: :weapon, game: self.game, code: self.code}
     Rails.cache.fetch(name, options) do
       Frag.where(weapon: self.code).by_game('csgo').group(:killerId).uniorder(:count_killerid, :desc).count(:killerId)
