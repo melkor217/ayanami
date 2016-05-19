@@ -6,5 +6,5 @@ class Frag < ActiveRecord::Base
 
   scope :by_game, -> (game) { Frag.joins(server: :games).where("hlstats_Games.code" => game) }
 
-  belongs_to :server, primary_key: :serverId, foreign_key: :serverId
+  has_one :server, primary_key: :serverId, foreign_key: :serverId
 end
