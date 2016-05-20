@@ -27,4 +27,4 @@ production:
   database: steam
   username: ayanami
   password: <%= ENV['MYSQL_PASSWORD'] %>
-  host: 192.168.88.254
+  host: ayanami-mysql
