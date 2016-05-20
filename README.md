@@ -70,18 +70,18 @@ Ayanami is easy to set up with docker-compose. You basically need only four thin
 
 So, step-by-step guide:
 
-0) Ensure that your user is allowed to run docker
-1) Download source code tree and `cd` to it
-2) Copy `Dockerfile.production.example` to `Dockerfile.production`, then replace MYSQL_PASSWORD and SECRET_KEY_BASE with
+* Ensure that your user is allowed to run docker
+* Download source code tree and `cd` to it
+* Copy `Dockerfile.production.example` to `Dockerfile.production`, then replace MYSQL_PASSWORD and SECRET_KEY_BASE with
    their real values in it
-3) Create a directory for MySQL persistent data. I use `/srv/ayanami/mysql` for it in my example
-4) Copy `Dockerfile.mysql.example` to `Dockerfile.mysql`, then replace MYSQL_ROOT_PASSWORD with your password
+* Create a directory for MySQL persistent data. I use `/srv/ayanami/mysql` for it in my example
+* Copy `Dockerfile.mysql.example` to `Dockerfile.mysql`, then replace MYSQL_ROOT_PASSWORD with your password
 (it should same with MYSQL_PASSWORD). Replace `/srv/ayanami/mysql` with a choosen mysql directory, otherwise ensure that
 it exists
-6) Run `docker-compose up ayanami-production`. Add `-d` flag if you want to daemonize it. It should create three
+* Run `docker-compose up ayanami-production`. Add `-d` flag if you want to daemonize it. It should create three
   containers. You can inspect them, check logs etc with `docker-compose` commands.
-7) Check out http://localhost:3456
-8) Database is also accessable on localhost:13306 with root/chosen_password
+* Check out http://localhost:3456
+* Database is also accessable on localhost:13306 with root/chosen_password
 
 If you want to switch your hlstatsx stuff to dockerized database completely, you should:
 
