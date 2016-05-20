@@ -21,4 +21,5 @@
 
 /.rake_tasks~
 /Dockerfile.production
+/Dockerfile.mysql
 /public/assets/
