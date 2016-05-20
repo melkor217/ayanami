@@ -24,8 +24,9 @@ class Player < ActiveRecord::Base
   scope :uniorder, -> (sort, order) { order("#{sort} #{order}") }
   scope :with_kpd, -> { select('*, round((kills / deaths),2) as kpd') }
   # Stewpid query, but i don't really wanna change legacy scheme
+  # any_value for compat with  ONLY_FULL_GROUP_BY mode
   scope :by_country, -> { select('flag,
-country,
+any_value(country) as country,
 count(playerId) as players_total,
 round(avg(connection_time)) as avg_connection_time,
 round(avg(activity),2) as avg_activity,
