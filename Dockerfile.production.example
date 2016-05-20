@@ -1,0 +1,17 @@
+FROM debian:sid
+RUN apt-get update && apt-get install -y cron git ruby bundler zlib1g-dev libmysqlclient-dev libsqlite3-dev mysql-client wget curl
+RUN rm -rfv /var/lib/apt/lists/*
+RUN mkdir /ayanami
+COPY Gemfile /ayanami/
+COPY Gemfile.lock /ayanami/
+WORKDIR /ayanami
+RUN bundle install
+ENV RAILS_ENV production
+ENV RAILS_PUBLIC_FILE_SERVER true
+ENV MYSQL_PASSWORD changeme
+ENV SECRET_KEY_BASE changeme2
+COPY . /ayanami
+
+RUN ./bin/rake assets:precompile
+RUN whenever -w
+

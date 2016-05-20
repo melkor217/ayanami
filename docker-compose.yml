@@ -5,11 +5,12 @@ services:
   # service still requires you (or capistrano) to put proper database.yml
     depends_on:
       - ayanami-redis
-    entrypoint: >
-      bash -lc "./wait-for-it.sh ayanami-redis:6379; ./wait-for-it.sh";
-      bash -lc "ayanami-mysql:3306 rake db:exists || rake db:create db:structure:load";
-      bash -lc "./bin/rails runner 'CacheHeater.run'";
-      bash -lc "unicorn -c config/unicorn.rb"
+      - ayanami-mysql
+    command: >
+                 bash -lc "./wait-for-it.sh -t 0 ayanami-redis:6379; ./wait-for-it.sh -t 0 ayanami-mysql:3306;
+                 rake db:exists || rake db:create db:structure:load;
+                 ./bin/rails runner 'CacheHeater.run';
+                 unicorn -c config/unicorn.rb"
     restart: always
     build:
       context: .
@@ -19,11 +20,12 @@ services:
     working_dir: /ayanami
     #command: ./bin/rails server -b 0.0.0.0
   ayanami-mysql:
-  build:
-    context: .
-    dockerfile: Dockerfile.mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=vae2Iex8jie5Uich
-      - MYSQL_DATABASE=ayanami
+    build:
+      context: .
+      dockerfile: Dockerfile.mysql
+    ports:
+      - "127.0.0.1:13306:3306"
+    volumes:
+      - /srv/ayanami/mysql:/var/lib/mysql
   ayanami-redis:
     image: redis

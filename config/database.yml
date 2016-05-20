@@ -24,7 +24,7 @@ production:
   encoding: utf8
   pool: 10
   reconnect: false
-  database: steam
-  username: ayanami
+  database: ayanami
+  username: root
   password: <%= ENV['MYSQL_PASSWORD'] %>
   host: ayanami-mysql
