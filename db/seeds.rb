@@ -111,7 +111,7 @@ def do_kill(killer, victim, weapon, server)
 end
 
 112.times do
-  Player.create do |player|
+  player = Player.create do |player|
     player.game = 'csgo'
     player.lastName = (RandomWord.adjs.next.to_s + ' ' + RandomWord.nouns.next.to_s).titleize[0..63]
     player.activity = rand (0..100)
@@ -123,6 +123,9 @@ end
     player.flag = c.flag
     player.last_skill_change = rand(-130..130)
   end
+
+  UniqueId.create(player: player, uniqueId: player.playerId+999999, game: :csgo)
+  UniqueId.create(player: player, uniqueId: player.playerId+999, game: :tf)
 end
 
 Game.where(hidden: '0').each do |game|
