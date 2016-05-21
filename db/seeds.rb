@@ -14,6 +14,7 @@ PLAYER_MIN_KILLS = 50
 DEFAULT_SKILL = 1000
 
 def killer_skill_change(killer, victim, weapon)
+  return if not killer.skill or not victim.skill
   # From hlstats.pl, 17.05.2016
   if SKILL_RATIO_CAP > 0
     lowratio = 0.7
@@ -42,6 +43,7 @@ def killer_skill_change(killer, victim, weapon)
 end
 
 def victim_skill_change(killer, victim, weapon)
+  return if not killer.skill or not victim.skill
   killer_skill_change = killer_skill_change(killer, victim, weapon)
   if SKILL_MODE == 0
     victim_skill_change = killer_skill_change
