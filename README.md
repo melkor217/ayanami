@@ -95,3 +95,6 @@ If you want to switch your hlstatsx stuff to dockerized database completely, you
 * run `docker-compose exec mysql mysql -p ayanami < dump.sql ` or
 `mysql -h 127.0.0.1 -P 13306 -u MYSQL_USER -p ayanami < dump.sql` to restore dump
 * Reconfigure you hlstatsx daemon to use new database URL
+
+By the way, funny fact: hlstatsx web UI does not support mysql5.7 with it's default settings. I've added
+`$db->query("SET SESSION sql_mode = ''")` to php runtime to fix this.
