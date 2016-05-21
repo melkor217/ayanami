@@ -1,31 +1,29 @@
 version: '2'
+
+
 services:
-  ayanami-production:
-  # production DB is still not dockerized for me :(
-  # service still requires you (or capistrano) to put proper database.yml
+  ayanami:
+    env_file: ./secrets.env
     depends_on:
-      - ayanami-redis
-      - ayanami-mysql
+      - redis
+      - mysql
     command: >
-                 bash -lc "./wait-for-it.sh -t 0 ayanami-redis:6379; ./wait-for-it.sh -t 0 ayanami-mysql:3306;
-                 rake db:exists || rake db:create db:structure:load;
+                 bash -lc "./wait-for-it.sh -t 300 redis:6379; ./wait-for-it.sh -t 300 mysql:3306;
+                 rake db:check || rake db:create db:structure:load;
                  ./bin/rails runner 'CacheHeater.run';
                  unicorn -c config/unicorn.rb"
     restart: always
-    build:
-      context: .
-      dockerfile: Dockerfile.production
+    build: .
     ports:
       - "127.0.0.1:3456:8080"
-    working_dir: /ayanami
-    #command: ./bin/rails server -b 0.0.0.0
-  ayanami-mysql:
-    build:
-      context: .
-      dockerfile: Dockerfile.mysql
+  mysql:
+    env_file: ./secrets.env
+    image: mysql
+    entrypoint: /entrypoint.sh
+    command: mysqld
     ports:
       - "127.0.0.1:13306:3306"
     volumes:
       - /srv/ayanami/mysql:/var/lib/mysql
-  ayanami-redis:
+  redis:
     image: redis

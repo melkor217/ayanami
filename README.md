@@ -72,22 +72,26 @@ So, step-by-step guide:
 
 * Ensure that your user is allowed to run docker
 * Download source code tree and `cd` to it
-* Copy `Dockerfile.production.example` to `Dockerfile.production`, then replace MYSQL_PASSWORD and SECRET_KEY_BASE with
-   their real values in it
-* Create a directory for MySQL persistent data. I use `/srv/ayanami/mysql` for it in my example
-* Copy `Dockerfile.mysql.example` to `Dockerfile.mysql`, then replace MYSQL_ROOT_PASSWORD with your password
-(it should same with MYSQL_PASSWORD). Replace `/srv/ayanami/mysql` with a choosen mysql directory, otherwise ensure that
-it exists
-* Run `docker-compose up ayanami-production`. Add `-d` flag if you want to daemonize it. It should create three
+* Choose a directory where MySQL server will be store data. Ensure that directory exists and `mysql` user has write
+ access to it (chmod 777 for sure, hehe). Default value is `/srv/ayanami/mysql`.
+* If you have old MySQL data, just copy MySQL files (usually `/var/lib/mysql`) to that directory
+* Copy `secrets.env.example` to `secrets.env`. Then edit it and set MySQL passwords up.
+ If you've just uploaded MySQL data
+ to directory, your username/password should have full access to specified database.
+ Otherwise, specified database and user will be created
+* Run `docker-compose up`. Add `-d` flag if you want to daemonize it. It should create three
   containers. You can inspect them, check logs etc with `docker-compose` commands.
 * Check out http://localhost:3456
+* If you want to generate fixture data to look at stuff, run `docker-compose exec ayanami rake db:seed`
 * Database is also accessable on localhost:13306 with root/chosen_password
+* You can enter any container with `docker compose exec {ayanami|mysql|redis} bash`. Remember that all your changes
+will not be permanent, with an exception for MySQL data :)
 
 If you want to switch your hlstatsx stuff to dockerized database completely, you should:
 
 * Make an sql dump with `mysqldump`. Let's call it `dump.sql`
-* Ensure that dockerized schema is empty and exists: `docker-compose exec ayanami-production rake db:drop db:create`
+* Ensure that dockerized schema is empty and exists: `docker-compose exec ayanami rake db:drop db:create`
 (you should run this command from a source tree)
-* run `docker-compose exec ayanami-mysql mysql -p ayanami < dump.sql ` or
-`mysql -h 127.0.0.1 -P 13306 -u root -p ayanami < dump.sql` to restore dump
+* run `docker-compose exec mysql mysql -p ayanami < dump.sql ` or
+`mysql -h 127.0.0.1 -P 13306 -u MYSQL_USER -p ayanami < dump.sql` to restore dump
 * Reconfigure you hlstatsx daemon to use new database URL

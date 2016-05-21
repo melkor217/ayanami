@@ -24,7 +24,7 @@ production:
   encoding: utf8
   pool: 10
   reconnect: false
-  database: ayanami
-  username: root
+  database: <%= ENV['MYSQL_DATABASE'] %>
+  username: <%= ENV['MYSQL_USER'] %>
   password: <%= ENV['MYSQL_PASSWORD'] %>
-  host: ayanami-mysql
+  host: mysql
