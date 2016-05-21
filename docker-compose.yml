@@ -10,6 +10,7 @@ services:
     command: >
                  bash -lc "./wait-for-it.sh -t 300 redis:6379; ./wait-for-it.sh -t 300 mysql:3306;
                  rake db:check || rake db:create db:structure:load;
+                 rake db:migrate;
                  ./bin/rails runner 'CacheHeater.run';
                  unicorn -c config/unicorn.rb"
     restart: always
