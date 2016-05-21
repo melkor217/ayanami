@@ -83,7 +83,7 @@ So, step-by-step guide:
   containers. You can inspect them, check logs etc with `docker-compose` commands.
 * Check out http://localhost:3456
 * If you want to generate fixture data to look at stuff, run `docker-compose exec ayanami rake db:seed`
-* Database is also accessable on localhost:13306 with root/chosen_password
+* Database is also accessable on localhost:13306 with specified user/password
 * You can enter any container with `docker compose exec {ayanami|mysql|redis} bash`. Remember that all your changes
 will not be permanent, with an exception for MySQL data :)
 
