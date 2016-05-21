@@ -74,7 +74,7 @@ function flagFormatter(value, row, index) {
 }
 
 function weaponFormatter(value, row, index) {
-    return '<a class="btn-link" href="' + row.path + '"><img src="' + row.icon + '"/>' + row.name + '</a>';
+    return '<a class="btn-link" href="' + row.path + '"><img height="30" src="' + row.icon + '"/>' + row.name + '</a>';
 }
 
 
