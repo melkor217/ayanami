@@ -5,8 +5,5 @@ class CsgoAddM4a1Silcencer < ActiveRecord::Migration[5.0]
       weapon.modifier = 1.05
     end
   end
-  def down
-     Weapon.where(code: :m4a1_silencer).destroy_all
-  end
 end
 
