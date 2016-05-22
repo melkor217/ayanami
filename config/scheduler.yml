@@ -1,0 +1,10 @@
+heat_weapon_cache:
+  cron: "*/30 * * * *"
+  class: HeatWeaponCacheJob
+  queue: default
+  description: "Heat weapon cache every 30 minutes"
+avatar_finder:
+  cron: "*/10 * * * *"
+  class: UpdateAvatarsJob
+  queue: default
+  description: "Get some avatars from steam every 10 minutes"

@@ -1,7 +1,9 @@
 FROM debian:sid
 
-RUN apt-get update && apt-get install -y cron git ruby bundler zlib1g-dev libmysqlclient-dev libsqlite3-dev mysql-client wget curl
+RUN apt-get update && apt-get install -y git ruby zlib1g-dev libmysqlclient-dev wget curl
 RUN rm -rfv /var/lib/apt/lists/*
+
+RUN gem install bundle
 
 RUN mkdir /ayanami
 WORKDIR /ayanami
@@ -16,7 +18,6 @@ RUN bundle install
 COPY . /ayanami
 
 RUN ./bin/rake assets:precompile
-RUN whenever -w # add crontab for delayed stuff
 
 CMD unicorn -c config/unicorn.rb
 
