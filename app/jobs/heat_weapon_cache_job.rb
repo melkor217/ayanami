@@ -1,4 +1,5 @@
 class HeatWeaponCacheJob < ApplicationJob
+  sidekiq_options unique: :until_and_while_executing
   queue_as :default
 
   def perform
