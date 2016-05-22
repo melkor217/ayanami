@@ -30,5 +30,8 @@ services:
     volumes:
       - /srv/ayanami/mysql:/var/lib/mysql
   redis:
+    volumes:
+      - /srv/ayanami/redis:/data
     image: redis
     restart: unless-stopped
+    command: redis-server --save 60 1000

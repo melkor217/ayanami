@@ -72,9 +72,11 @@ So, step-by-step guide:
 
 * Ensure that your user is allowed to run docker
 * Download source code tree and `cd` to it
-* Choose a directory where MySQL server will be store data. Ensure that directory exists and `mysql` user has write
- access to it (chmod 777 for sure, hehe). Default value is `/srv/ayanami/mysql`.
-* If you have old MySQL data, just copy MySQL files (usually `/var/lib/mysql`) to that directory
+* Choose a directory where MySQL server will be store data and set it into docker-compose.yml.
+ Ensure that directory exists and `mysql` user has write
+ access to it (chmod 777 for sure, hehe). Default directory is `/srv/ayanami/mysql`.
+* Do the same with redis directory (default value: `/srv/ayanami/redis`)
+* If you have old MySQL data from hlx, just copy MySQL files (usually `/var/lib/mysql`) to that directory
 * Copy `secrets.env.example` to `secrets.env`. Then edit it and set MySQL passwords up.
  If you've just uploaded MySQL data
  to directory, your username/password should have full access to specified database.
