@@ -1,8 +1,8 @@
 class GetPlayerSteamInfoJob < ApplicationJob
-  sidekiq_options unique: :until_and_while_executing
   queue_as :default
 
-  def perform(uniqueid)
+  def perform(options = {})
+    uniqueid = UniqueId.find_by!(options)
     # Do something later
     if uniqueid and /^[0-9]:[0-9]+$/.match(uniqueid.uniqueId)
       prefix = uniqueid.uniqueId.split(':').first.to_i

@@ -207,6 +207,9 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    sidekiq-unique-jobs (4.0.17)
+      sidekiq (>= 2.6)
+      thor
     spring (1.7.1)
     sprockets (3.6.0)
       concurrent-ruby (~> 1.0)
@@ -267,6 +270,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   sidekiq!
+  sidekiq-unique-jobs
   sinatra!
   spring
   sqlite3

@@ -66,7 +66,7 @@ round(sum(kills)/sum(deaths),2) as kpd
       if not result[k]
         result[k] = {}
       end
-      result[k].merge!(kills: v, kpd: v.to_f/[result[k][:deaths].to_i, 1].max)
+      result[k].merge!(kills: v, kpd: (v.to_f/[result[k][:deaths].to_i, 1].max).round(2))
     end
     return result
   end

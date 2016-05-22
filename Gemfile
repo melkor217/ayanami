@@ -70,5 +70,6 @@ gem 'redis-rails', '~> 5.0.0.pre'
 
 gem 'unicorn'
 gem 'sidekiq', :git => 'git://github.com/mperham/sidekiq'
+gem 'sidekiq-unique-jobs'
 gem 'sinatra', :git => 'git://github.com/sinatra/sinatra.git'
 gem 'composite_primary_keys', :git => 'git://github.com/composite-primary-keys/composite_primary_keys.git'

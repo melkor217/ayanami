@@ -6,27 +6,21 @@
        data-show-refresh="true"
        data-show-toggle="true"
        data-show-columns="true"
+       data-url="<%= killstats_player_path(format: :json, id: params[:id]) %>"
        data-pagination="true"
-       data-side-pagination="client"
-       data-sort-name="kills"
-       data-sort-order="desc"
+       data-side-pagination="server"
+       data-sort-name="<%= params[:sort] %>"
+       data-sort-order="<%= params[:order] %>"
+       data-page-size="<%= params[:limit] %>"
+       data-page-number="<%= params[:page] %>">
 >
   <thead>
-  <th class="col-md-4" data-searchable="true" data-field="player" data-sortable="true">Player</th>
+  <th class="col-md-4" data-searchable="true" data-field="lastName" data-formatter="urlFormatter" data-sortable="true">Player</th>
   <th class="col-md-1" data-searchable="false" data-field="kills" data-sortable="true">Kills</th>
   <th class="col-md-1" data-searchable="false" data-field="deaths" data-sortable="true">Deaths</th>
   <th class="col-md-1" data-searchable="false" data-field="kpd" data-sortable="true">K/D</th>
   </thead>
   <tbody>
-  <% @killstats.each do |playerId, stats| %>
-      <tr>
-        <td><img width="30" height="30" src="<%= Player.find(playerId).unique_ids.first.avatar_icon %>"><%= link_to(Player.find(playerId).lastName, Player.find(playerId), {:class => "btn-link"}) %> </td>
-        <td><%= stats[:kills].to_i %> </td>
-        <td><%= stats[:deaths].to_i %> </td>
-        <td><%= stats[:kpd].to_f.round(2) %> </td>
-      </tr>
-  <% end %>
-  </tbody>
 </table>
 
 

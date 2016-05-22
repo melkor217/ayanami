@@ -26,7 +26,6 @@ class PlayersController < ApplicationController
       @scope = Player.where(hideranking: 0)
     end
   end
-
   # GET /players/1
   # GET /players/1.json
   def show
@@ -34,7 +33,29 @@ class PlayersController < ApplicationController
   end
 
   def killstats
-    @killstats = @player.killstats
+    param! :limit, Integer, in: (10..100), default: 25
+    param! :page, Integer, default: 1
+    param! :offset, Integer, default: (params[:page]-1)*params[:limit]
+    param! :order, String, in: %w(asc desc), transform: :downcase, default: "desc"
+    param! :sort, String, in: ['kills', 'deaths', 'kpd'], default: 'kills'
+
+    if request.format.json?
+      ks = @player.killstats
+      puts ks
+      ks = ks.sort_by do |k,v|
+        val = v[params[:sort].to_sym].to_i
+        if params[:order].to_sym == :asc
+          val
+        else
+          -val
+        end
+      end
+
+      ks = ks.to_a
+      puts ks
+      @total = ks.count
+      @killstats = ks[params[:offset]..(params[:offset]+params[:limit])]
+    end
   end
 
   def weapons
