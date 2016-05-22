@@ -1,5 +1,9 @@
 
 Rails.application.routes.draw do
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
   resources :games, param: :game do
       resources :weapons, param: :code
   end

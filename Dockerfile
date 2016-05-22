@@ -9,11 +9,11 @@ WORKDIR /ayanami
 COPY ./Gemfile .
 COPY ./Gemfile.lock .
 
-RUN bundle install
-COPY . /ayanami
-
 ENV RAILS_ENV production
 ENV RAILS_PUBLIC_FILE_SERVER true
+
+RUN bundle install
+COPY . /ayanami
 
 RUN ./bin/rake assets:precompile
 RUN whenever -w # add crontab for delayed stuff

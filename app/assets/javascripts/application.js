@@ -62,7 +62,15 @@ function runningFormatter(value, row, index) {
 }
 
 function urlFormatter(value, row, index) {
-    return '<a class="btn-link" href="' + row.path + '">' + row.lastName + '</a>';
+    var img
+    if(row.avatarIcon) {
+        img = '<img width="30" height="30" src="'+row.avatarIcon+'"/>' 
+    }
+    else {
+        img = '<img width="30" height="30" src=""/>' 
+    }
+    return img + 
+        '<a class="btn-link" href="' + row.path + '">' + row.lastName + '</a>';
 }
 
 function countryFormatter(value, row, index) {

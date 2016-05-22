@@ -24,3 +24,6 @@ every 30.minutes do
   runner 'CacheHeater.run'
 end
 
+every 10.minutes do
+  runner 'AvatarFinder.run'
+end

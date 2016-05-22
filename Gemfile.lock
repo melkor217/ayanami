@@ -8,10 +8,36 @@ GIT
       activesupport (>= 3.0.0)
 
 GIT
+  remote: git://github.com/composite-primary-keys/composite_primary_keys.git
+  revision: d1d05ef9a6485b92c1fe17ca9291632e71e387bf
+  specs:
+    composite_primary_keys (9.0.0.beta1)
+      activerecord (~> 5.0.0.beta3)
+
+GIT
+  remote: git://github.com/mperham/sidekiq
+  revision: 77b05da266a9c3ec31d340dc81990a1068aad234
+  specs:
+    sidekiq (4.1.2)
+      concurrent-ruby (~> 1.0)
+      connection_pool (~> 2.2, >= 2.2.0)
+      redis (~> 3.2, >= 3.2.1)
+
+GIT
   remote: git://github.com/nicolasblanco/rails_param.git
   revision: d0c1ccee213ed655da16c9597058032845429028
   specs:
     rails_param (0.9.0)
+
+GIT
+  remote: git://github.com/sinatra/sinatra.git
+  revision: 5e9e23621c1f6abbd793b46452cb11ae8ca1277e
+  specs:
+    sinatra (2.0.0.pre.alpha)
+      mustermann (~> 0.4)
+      rack (= 2.0.0.rc1)
+      rack-protection (~> 1.5)
+      tilt (~> 2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -73,6 +99,7 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.2)
+    connection_pool (2.2.0)
     debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (2.6.0)
@@ -109,12 +136,16 @@ GEM
     mini_portile2 (2.0.0)
     minitest (5.9.0)
     multi_json (1.12.1)
-    mysql2 (0.4.4)
+    mustermann (0.4.0)
+      tool (~> 0.2)
+    mysql2 (0.3.21)
     nio4r (1.2.1)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     rack (2.0.0.rc1)
       json
+    rack-protection (1.5.3)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.0.rc1)
@@ -191,6 +222,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.4)
+    tool (0.2.3)
     turbolinks (2.5.3)
       coffee-rails
     tzinfo (1.2.2)
@@ -220,6 +252,7 @@ DEPENDENCIES
   bootstrap-table-rails
   byebug
   coffee-rails
+  composite_primary_keys!
   friendly_id
   jbuilder (~> 2.0)
   jquery-rails
@@ -233,6 +266,8 @@ DEPENDENCIES
   redis-rails (~> 5.0.0.pre)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  sidekiq!
+  sinatra!
   spring
   sqlite3
   therubyracer

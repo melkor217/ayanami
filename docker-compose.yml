@@ -12,8 +12,10 @@ services:
                  rake db:check || rake db:create db:structure:load;
                  rake db:migrate;
                  ./bin/rails runner 'CacheHeater.run';
+                 ./bin/rails runner 'AvatarFinder.run';
+                 bundle exec sidekiq -d -c 2 -L log/sidekiq.log;
                  unicorn -c config/unicorn.rb"
-    restart: always
+    restart: unless-stopped
     build: .
     ports:
       - "127.0.0.1:3456:8080"
@@ -22,9 +24,11 @@ services:
     image: mysql
     entrypoint: /entrypoint.sh
     command: mysqld
+    restart: unless-stopped
     ports:
       - "127.0.0.1:13306:3306"
     volumes:
       - /srv/ayanami/mysql:/var/lib/mysql
   redis:
     image: redis
+    restart: unless-stopped

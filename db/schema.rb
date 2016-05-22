@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160521200202) do
+ActiveRecord::Schema.define(version: 20160521205625) do
 
   create_table "geoLiteCity_Blocks", id: false, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
     t.bigint "startIpNum", default: 0, null: false, unsigned: true
@@ -438,10 +438,15 @@ ActiveRecord::Schema.define(version: 20160521200202) do
   end
 
   create_table "hlstats_PlayerUniqueIds", primary_key: ["uniqueId", "game"], force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
-    t.integer "playerId",            default: 0,  null: false, unsigned: true
-    t.string  "uniqueId", limit: 64, default: "", null: false
-    t.string  "game",     limit: 32, default: "", null: false
-    t.integer "merge",                                         unsigned: true
+    t.integer  "playerId",                default: 0,  null: false, unsigned: true
+    t.string   "uniqueId",     limit: 64, default: "", null: false
+    t.string   "game",         limit: 32, default: "", null: false
+    t.integer  "merge",                                             unsigned: true
+    t.datetime "steamUpdated"
+    t.string   "avatarIcon"
+    t.string   "avatarMedium"
+    t.string   "avatarFull"
+    t.integer  "vacBanned"
     t.index ["playerId"], name: "playerId", using: :btree
   end
 
