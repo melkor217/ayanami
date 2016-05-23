@@ -48,8 +48,13 @@ round(sum(kills)/sum(deaths),2) as kpd
   has_many :unique_ids, primary_key: :playerId, foreign_key: :playerId
   has_many :frag, foreign_key: :killerId, primary_key: :playerId
 
-  def frag
-    Frag.where("killerId = ? OR victimId = ?", self.playerId, self.playerId)
+  def frag(game = nil)
+    if game
+      frags = Frag.all.by_game(game)
+    else
+      frags = Frag.all
+    end
+    frags.where("killerId = ? OR victimId = ?", self.playerId, self.playerId)
   end
 
   def killstats

@@ -18,9 +18,15 @@ class Weapon < ActiveRecord::Base
   scope :uniorder, -> (sort, order) { order("#{sort} #{order}") }
 
   def frags_grouped(options = {})
-    name = {mode: :weapon, game: self.game, code: self.code}
+    name = {mode: :weaponstats, game: self.game, code: self.code}
     Rails.cache.fetch(name, options) do
       Frag.joins(:server).where('hlstats_Servers.game' => self.game).where(weapon: self.code).group(:killerId).uniorder(:count_killerid, :desc).count(:killerId)
+    end
+  end
+
+  def self.cache_find(code, game, options = {})
+    Rails.cache.fetch({mode: :weapon, code: code, game: game}, options) do
+      Weapon.find_by!(code: code, game: game)
     end
   end
 
