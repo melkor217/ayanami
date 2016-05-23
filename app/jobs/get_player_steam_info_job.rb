@@ -1,6 +1,4 @@
 class GetPlayerSteamInfoJob < ApplicationJob
-  queue_as :default
-
   def perform(options = {})
     uniqueid = UniqueId.find_by!(options)
     # Do something later

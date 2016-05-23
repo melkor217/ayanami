@@ -4,7 +4,7 @@ class UniqueId < ActiveRecord::Base
 
   def avatar_icon
     if self.avatarIcon == nil
-      GetPlayerSteamInfoJob.perform_later(game: self.game, uniqueId: self.uniqueId)
+      GetPlayerSteamInfoJob.set(queue: :urgent).perform_later(game: self.game, uniqueId: self.uniqueId)
       return nil
     else
       return self.avatarIcon
