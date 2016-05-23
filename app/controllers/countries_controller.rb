@@ -32,5 +32,6 @@ class CountriesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_country
     @country = Country.find(params[:countryId])
+    @players = Player.where(flag: @country.flag).by_country().first
   end
 end
