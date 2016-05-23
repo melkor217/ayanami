@@ -22,7 +22,7 @@ class PlayersController < ApplicationController
       end
       @total = query.count
       @players = query.with_kpd.uniorder(params[:sort], params[:order]).limit(params[:limit]).offset params[:offset]
-    elsif request.format.html?
+    else
       @scope = Player.where(hideranking: 0)
     end
   end
