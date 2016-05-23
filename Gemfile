@@ -8,7 +8,7 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails'
+gem 'coffee-rails', git: 'git://github.com/rails/coffee-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
@@ -71,4 +71,6 @@ gem 'unicorn'
 gem 'sidekiq', :git => 'git://github.com/mperham/sidekiq'
 gem 'sidekiq-unique-jobs'
 gem 'sinatra', :git => 'git://github.com/sinatra/sinatra.git'
+
+# We need composite primary keys to keep compatibility
 gem 'composite_primary_keys', :git => 'git://github.com/composite-primary-keys/composite_primary_keys.git'

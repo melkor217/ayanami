@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: git://github.com/mperham/sidekiq
-  revision: 77b05da266a9c3ec31d340dc81990a1068aad234
+  revision: 19581c4b571d35a5a9c5069ba76b22b58487b380
   specs:
     sidekiq (4.1.2)
       concurrent-ruby (~> 1.0)
@@ -28,6 +28,14 @@ GIT
   revision: d0c1ccee213ed655da16c9597058032845429028
   specs:
     rails_param (0.9.0)
+
+GIT
+  remote: git://github.com/rails/coffee-rails
+  revision: 54de8caa5df87de66dea75a8b423696cf23ca1e6
+  specs:
+    coffee-rails (4.1.1)
+      coffee-script (>= 2.2.0)
+      railties (>= 4.0.0, < 5.2.x)
 
 GIT
   remote: git://github.com/sinatra/sinatra.git
@@ -90,9 +98,6 @@ GEM
     bootstrap-table-rails (1.10.1)
     builder (3.2.2)
     byebug (9.0.4)
-    coffee-rails (4.1.1)
-      coffee-script (>= 2.2.0)
-      railties (>= 4.0.0, < 5.1.x)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
@@ -101,7 +106,7 @@ GEM
     connection_pool (2.2.0)
     debug_inspector (0.0.2)
     erubis (2.7.0)
-    execjs (2.6.0)
+    execjs (2.7.0)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
     globalid (0.3.6)
@@ -129,15 +134,15 @@ GEM
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
     method_source (0.8.2)
-    mime-types (3.0)
+    mime-types (3.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2016.0221)
+    mime-types-data (3.2016.0521)
     mini_portile2 (2.0.0)
     minitest (5.9.0)
     multi_json (1.12.1)
     mustermann (0.4.0)
       tool (~> 0.2)
-    mysql2 (0.3.21)
+    mysql2 (0.4.4)
     nio4r (1.2.1)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
@@ -245,7 +250,7 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
-    websocket-driver (0.6.3)
+    websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
 
@@ -257,7 +262,7 @@ DEPENDENCIES
   bootstrap-sass
   bootstrap-table-rails
   byebug
-  coffee-rails
+  coffee-rails!
   composite_primary_keys!
   friendly_id
   jbuilder (~> 2.0)
