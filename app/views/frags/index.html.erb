@@ -1,29 +1,32 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Frags</h1>
-<table data-toggle="table" class="fixed">
+
+
+
+
+<table id="table" class="fixed"
+       data-toggle="table"
+       data-show-refresh="true"
+       data-show-toggle="true"
+       data-show-columns="true"
+       data-flat="true"
+       data-pagination="true"
+       data-side-pagination="server"
+       data-url="<%= frags_path(format: :json, player_id: params[:player_id]) %>"
+       data-search="true"
+       data-row-style="fragStyle"
+       data-page-list="[10, 25, 50, 100]"
+       data-search-text="<%= params[:search] %>"
+  data-page-size="<%= params[:limit] %>"
+  data-page-number="<%= params[:page] %>">
   <thead>
   <tr>
-    <th class="col-md-1" data-field="killer">Killer</th>
-    <th class="col-md-1" data-field="victim">Victim</th>
-    <th class="col-md-3" data-field="weapon">Weapon</th>
+    <th data-field="id" data-formatter="fragFormatter">Rank</th>
     <th class="col-md-3" data-field="eventTime">Time</th>
   </tr>
   </thead>
-
-  <tbody>
-  <% @frags.each do |frag| %>
-      <tr>
-        <td><%= player_link(frag.killerId) %></td>
-        <td><%= player_link(frag.victimId) %></td>
-        <td><%= frag.weapon %></td>
-        <td><%= frag.eventTime %></td>
-      </tr>
-  <% end %>
-  </tbody>
 </table>
-<div align="right">
-  <%= paginate @frags %>
-</div>
+
 <br/>
 <%= link_to 'Back', :back %>

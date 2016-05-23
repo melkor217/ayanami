@@ -85,6 +85,33 @@ function weaponFormatter(value, row, index) {
     return '<a class="btn-link" href="' + row.path + '"><img height="30" src="' + row.icon + '"/>' + row.name + '</a>';
 }
 
+function fragStyle(row, index) {
+    var classes = '';
+    if(row.eventType == 'kill') {
+        classes = 'success';
+    }
+    if(row.eventType == 'death') {
+        classes = 'danger';
+    }
+    return {
+        classes: classes
+    };
+}
+
+function fragFormatter(value, row, index) {
+    var killer_img = '<img src="" width="30" height="30"/>'
+    if(row.killer.avatarIcon) {
+        killer_img = '<img src="'+row.killer.avatarIcon+'"/>';
+    }
+    var killer = '<a class="btn-link" href="'+row.killer.path+'">'+killer_img+row.killer.lastName+'</a>';
+    var victim_img = '<img src="" width="30" height="30"/>'
+    if(row.victim.avatarIcon) {
+        victim_img = '<img src="'+row.victim.avatarIcon+'"/>';
+    }
+    var victim = '<a class="btn-link" href="'+row.victim.path+'">'+row.victim.lastName+victim_img+'</a>';
+    var weapon = '<img src="'+row.weapon.icon+'"/>';
+    return killer + weapon + victim;
+}
 
 function progressBar(value, row_value, limits) {
     var percent = 100 * (row_value - limits.min) / (limits.max - limits.min);
