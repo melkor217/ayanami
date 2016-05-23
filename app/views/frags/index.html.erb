@@ -13,7 +13,7 @@
        data-flat="true"
        data-pagination="true"
        data-side-pagination="server"
-       data-url="<%= frags_path(format: :json, player_id: params[:player_id]) %>"
+       data-url="<%= frags_path(format: :json, player_id: params[:player_id], game_game: params[:game_game]) %>"
        data-search="true"
        data-row-style="fragStyle"
        data-page-list="[10, 25, 50, 100]"
@@ -22,7 +22,8 @@
   data-page-number="<%= params[:page] %>">
   <thead>
   <tr>
-    <th data-field="id" data-formatter="fragFormatter">Rank</th>
+    <th data-field="id" data-formatter="fragFormatter">Frag</th>
+    <th data-field="id" data-field="server" data-formatter="serverFormatter">Server</th>
     <th class="col-md-3" data-field="eventTime">Time</th>
   </tr>
   </thead>

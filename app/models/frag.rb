@@ -4,7 +4,9 @@ class Frag < ActiveRecord::Base
 
   scope :uniorder, -> (sort, order) { order("#{sort} #{order}") }
 
-  scope :by_game, -> (game) { Frag.joins(server: :game).where("hlstats_Games.code" => game) }
+  scope :by_game, -> (game) do
+    Frag.where(server: Server.where(game: game).pluck(:serverId))
+  end
 
   has_one :server, primary_key: :serverId, foreign_key: :serverId
 end

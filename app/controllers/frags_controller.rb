@@ -9,13 +9,16 @@ class FragsController < ApplicationController
     param! :offset, Integer, default: (params[:page]-1)*params[:limit]
     param! :game_game, String, default: Rails.configuration.default_game
 
-    if params[:player_id]
-      @frags = Player.find(params[:player_id]).frag.by_game(params[:game_game]).offset(params[:offset]).limit(params[:limit])
-    else
-      query = Frag.by_game(params[:game_game])
-      @total = query.count
-      @frags = query.offset(params[:offset]).limit(params[:limit])
+    if request.format.json?
+      if params[:player_id]
+        query =  Player.find(params[:player_id]).frag(params[:game_game])
+        @frags = query.order(id: :desc).offset(params[:offset]).limit(params[:limit])
+        @total = query.count
+      else
+        query = Frag.by_game(params[:game_game])
+        @total = 50000
+        @frags = query.order(id: :desc).offset(params[:offset]).limit(params[:limit])
+      end
     end
   end
-
 end

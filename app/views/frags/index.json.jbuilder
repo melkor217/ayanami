@@ -5,6 +5,7 @@ json.rows do
     killer = Player.cache_find(frag.killerId)
     victim = Player.cache_find(frag.victimId)
     weapon = Weapon.cache_find(frag.weapon, params[:game_game])
+    server = Server.cache_find(frag.serverId)
     json.killer do
       json.avatarIcon killer.unique_ids.first.avatar_icon
       json.lastName killer.lastName
@@ -22,6 +23,11 @@ json.rows do
       json.game weapon.game
       json.name weapon.name
       json.icon asset_path("weapons/#{weapon.game}/1/#{weapon.code}.png")
+    end
+    json.server do
+      json.serverId server.serverId
+      json.name server.name
+      json.path server_path(server)
     end
     json.url frag_path(frag, format: :json)
 

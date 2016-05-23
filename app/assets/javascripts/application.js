@@ -81,6 +81,10 @@ function flagFormatter(value, row, index) {
     return '<a class="btn-link" href="' + row.path + '"><img src="' + row.icon + '" width="32" height="32" alt="' + value + '"/>(' + value + ')</a>';
 }
 
+function serverFormatter(value, row, index) {
+    return '<a class="btn-link" href="' + row.server.path + '">' + row.server.name + '</a>';
+}
+
 function weaponFormatter(value, row, index) {
     return '<a class="btn-link" href="' + row.path + '"><img height="30" src="' + row.icon + '"/>' + row.name + '</a>';
 }
