@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160522234232) do
+ActiveRecord::Schema.define(version: 20160523185113) do
 
   create_table "geoLiteCity_Blocks", id: false, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
     t.bigint "startIpNum", default: 0, null: false, unsigned: true
@@ -450,7 +450,7 @@ ActiveRecord::Schema.define(version: 20160522234232) do
     t.index ["playerId"], name: "playerId", using: :btree
   end
 
-  create_table "hlstats_Players", primary_key: "playerId", unsigned: true, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
+  create_table "hlstats_Players", primary_key: "playerId", unsigned: true, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.integer "last_event",                    default: 0,    null: false
     t.integer "connection_time",               default: 0,    null: false, unsigned: true
     t.string  "lastName",          limit: 64,  default: "",   null: false
