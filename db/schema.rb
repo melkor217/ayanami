@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160521205625) do
+ActiveRecord::Schema.define(version: 20160522234232) do
 
   create_table "geoLiteCity_Blocks", id: false, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
     t.bigint "startIpNum", default: 0, null: false, unsigned: true
