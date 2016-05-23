@@ -1,9 +1,7 @@
 FROM debian:sid
 
-RUN apt-get update && apt-get install -y git ruby zlib1g-dev libmysqlclient-dev wget curl
+RUN apt-get update && apt-get install -y git ruby bundler zlib1g-dev libmysqlclient-dev wget curl
 RUN rm -rfv /var/lib/apt/lists/*
-
-RUN gem install bundle
 
 RUN mkdir /ayanami
 WORKDIR /ayanami

@@ -1,3 +1,5 @@
+require 'sidekiq/scheduler'
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -80,3 +82,15 @@ Rails.application.configure do
   config.cache_store = :redis_store, 'redis://redis:6379/0/cache', { expires_in: 90.minutes }
 end
 
+Sidekiq.configure_client do |config|
+  config.redis = { url: 'redis://redis:6379/12/sidekiq' }
+end
+
+# We shedule jobs only for production
+Sidekiq.configure_server do |config|
+  config.redis = { url: 'redis://redis:6379/12/sidekiq' }
+  config.on(:startup) do
+    Sidekiq.schedule = YAML.load_file(File.expand_path("../../../config/scheduler.yml",__FILE__))
+    Sidekiq::Scheduler.reload_schedule!
+  end
+end
