@@ -6,12 +6,18 @@ Modern web interface for hlstatsx DB, written in ruby.
 My instance on http://beta.melkor217.tk is now probably available
 for inspection.
 
+## Where to get hlstatsx itself?
+
+It install instructions on https://bitbucket.org/Maverick_of_UC/hlstatsx-community-edition/wiki/Install .
+You can get it's source code from that bitbucket repo. Also u'll need to get superlogs plugin form alliedmods.net
+or somewhere. For csgo i would prefer to use hlstatsx and superlogs-csgo from noxus repo: https://github.com/laam4/noxus
+
 ## Roadmap
 
 - Write less ugly looking replacement for hlstatsx web
     - Make it show a lot of data
     - Make it fancy
-- Implement compatable MongoDB models
+- Implement compatible MongoDB models
 - Replace hlstatsx daemon with a cool new one
 
 ## How to create schema?
