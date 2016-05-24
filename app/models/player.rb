@@ -27,7 +27,7 @@ class Player < ActiveRecord::Base
   # any_value for compat with  ONLY_FULL_GROUP_BY mode
   scope :by_country, -> { select('flag,
 min(country) as country,
-count(playerId) as players_total,
+count(*) as players_total,
 round(avg(connection_time)) as avg_connection_time,
 round(avg(activity),2) as avg_activity,
 round(avg(skill),2) as avg_skill,
@@ -100,6 +100,20 @@ round(sum(kills)/sum(deaths),2) as kpd
     options.merge!(expires: 10.minutes)
     Rails.cache.fetch({mode: :total_players}, options) do
       Player.count
+    end
+  end
+
+  def self.cached_minimum(column, options = {})
+    options.merge!(expires: 15.minutes)
+    Rails.cache.fetch({mode: :players_min, column: column}, options) do
+      self.minimum(column)
+    end
+  end
+
+  def self.cached_maximum(column, options = {})
+    options.merge!(expires: 15.minutes)
+    Rails.cache.fetch({mode: :players_max, column: column}, options) do
+      self.maximum(column)
     end
   end
 end

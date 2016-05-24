@@ -7,3 +7,4 @@ class Game < ApplicationRecord
   has_many :servers, foreign_key: :game, primary_key: :code
   has_many :weapons, foreign_key: :game, primary_key: :code
 end
+

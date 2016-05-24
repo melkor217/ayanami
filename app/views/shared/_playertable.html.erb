@@ -1,4 +1,3 @@
-
 <table id="table" class="fixed player-table"
        data-toggle="table"
        data-show-refresh="true"
@@ -18,12 +17,31 @@
   <thead>
   <tr>
     <%# <th data-formatter="runningFormatter">#</th> %>
-    <th data-field="ranking" data-sortable="true">Rank</th>
+    <th data-field="ranking"
+        data-sortable="true">
+      Rank
+    </th>
     <th data-field="lastName" data-formatter="urlFormatter" data-sortable="true" class="col-md-2">Name</th>
-    <th data-field="skill" data-formatter="skillFormatter" data-min="<%= @scope.minimum(:skill) %>" data-max="<%= @scope.maximum(:skill) %>" data-sortable="true" class="col-md-2">Skill</th>
+    <th data-field="skill"
+        data-formatter="skillFormatter"
+        data-min="<%= @scope.cached_minimum(:skill) %>"
+        data-max="<%= @scope.cached_maximum(:skill) %>"
+        data-sortable="true"
+        class="col-md-2">
+      Skill
+    </th>
     <th data-field="activity" data-formatter="activityFormatter" data-min="0" data-max="100" data-sortable="true" class="col-md-2">Activity</th>
-    <th data-field="connection_time" data-formatter="timeFormatter" data-sortable="true" class="col-md-2">Connection time</th>
-    <th data-field="kills" data-formatter="killsFormatter" data-min="<%= @scope.minimum(:kills) %>" data-max="<%= @scope.maximum(:kills) %>" data-sortable="true" class="col-sm-1">Kills</th>
+    <th data-field="connection_time" data-formatter="timeFormatter" data-sortable="true" class="col-md-2">Connection
+      time
+    </th>
+    <th data-field="kills"
+        data-formatter="killsFormatter"
+        data-min="<%= @scope.cached_minimum(:kills) %>"
+        data-max="<%= @scope.cached_maximum(:kills) %>"
+        data-sortable="true"
+        class="col-sm-1">
+      Kills
+    </th>
     <th data-field="deaths" data-sortable="true" class="col-sm-1">Deaths</th>
     <th data-field="headshots" data-sortable="true" class="col-sm-1">Headshots</th>
     <th data-field="kpd" data-sortable="true" class="col-sm-1">K/D</th>
