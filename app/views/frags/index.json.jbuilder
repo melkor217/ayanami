@@ -2,7 +2,7 @@
 json.rows do
   json.array!(@frags) do |frag|
     json.extract! frag, :id, :headshot
-    json.eventTime frag.eventTime.to_s
+    json.eventTime "#{time_ago_in_words(frag.eventTime)} ago"
     killer = Player.cache_find(frag.killerId)
     victim = Player.cache_find(frag.victimId)
     weapon = Weapon.cache_find(frag.weapon, params[:game_game])
