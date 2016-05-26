@@ -41,6 +41,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
   #config.cache_store = :memory_store
   config.cache_store = :redis_store, 'redis://127.0.0.1:6379/0/cache', { expires_in: 90.minutes }
+  config.react.variant = :development
 end
 
 Sidekiq.configure_client do |config|
@@ -49,6 +50,4 @@ end
 
 Sidekiq.configure_server do |config|
   config.redis = { url: 'redis://127.0.0.1:6379/12/sidekiq' }
-
-  config.react.variant = :development
 end

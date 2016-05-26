@@ -80,6 +80,7 @@ Rails.application.configure do
   config.lograge.enabled = true
   # config.cache_store = :mem_cache_store
   config.cache_store = :redis_store, 'redis://redis:6379/0/cache', { expires_in: 90.minutes }
+  config.react.variant = :production
 end
 
 Sidekiq.configure_client do |config|
@@ -93,6 +94,4 @@ Sidekiq.configure_server do |config|
     Sidekiq.schedule = YAML.load_file(File.expand_path("../../../config/scheduler.yml",__FILE__))
     Sidekiq::Scheduler.reload_schedule!
   end
-
-  config.react.variant = :production
 end
