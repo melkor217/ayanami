@@ -74,3 +74,4 @@ gem 'sinatra', :git => 'git://github.com/sinatra/sinatra.git'
 
 # We need composite primary keys to keep compatibility
 gem 'composite_primary_keys', :git => 'git://github.com/composite-primary-keys/composite_primary_keys.git'
+gem 'react-rails'
