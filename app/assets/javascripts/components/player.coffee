@@ -54,7 +54,10 @@
             td null, Math.round(100 * @state.player.kills / @state.player.deaths) / 100
           tr null,
             td null, "Activity"
-            td null, React.createElement(ProgressBar, current: @state.player.activity, value: @state.player.activity)
+            td null, React.createElement(ProgressBar, current: @state.player.activity, value: "#{@state.player.activity}%")
+          tr null,
+            td null, "ConnectionTime"
+            td null, "#{@state.player.connection_time}".toHHMMSS()
         ]
 
   componentDidMount: ->

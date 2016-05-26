@@ -3,6 +3,9 @@ class Player < ActiveRecord::Base
   self.table_name = "hlstats_Players" # MySQL table name
   alias_attribute :country_name, :country
 
+
+
+
   def self.sort_allowed?
     # Fields that are allowed for sorting
     return %w{kills deaths lastname activity skill playerId lastName kpd headshots connection_time}
