@@ -101,4 +101,32 @@
   render: ->
     React.DOM.span null,
       "#{@props.current}/#{@props.total} (#{Math.round(100 * (100 - 100 * (@props.current * 1.0 - 1) / @props.total)) / 100}%)"
-      
+
+@ProgressBar = React.createClass
+  getDefaultProps: ->
+    limits:
+      min: 0
+      max: 100
+    current: 0 # raw value
+    value: 0 # formatted value for printing
+  render: ->
+    {span, div} = React.DOM
+    percent = 100 * (@props.current - @props.limits.min) / (@props.limits.max - @props.limits.min)
+    div
+      classname: 'progressbar-container'
+      children: [
+        div
+          className: 'progress'
+          children: [
+            div
+              className: "progress-bar progress-bar-info",
+              role: "progressbar"
+              'aria-valuemin': @props.limits.min
+              'aria-valuemax': @props.limits.max
+              'aria-valuenow': @props.current
+              style: {width: "#{percent}%"}
+              children: [
+                span null, @props.value
+              ]
+          ]
+      ]

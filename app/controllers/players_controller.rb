@@ -30,6 +30,10 @@ class PlayersController < ApplicationController
   # GET /players/1.json
   def show
     @total = Player.total
+    @skill_limits = {
+        min: Player.where(hideranking: 0).minimum(:skill),
+        max: Player.where(hideranking: 0).maximum(:skill)
+    }
   end
 
   def killstats
