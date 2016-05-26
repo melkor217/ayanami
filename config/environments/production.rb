@@ -93,4 +93,6 @@ Sidekiq.configure_server do |config|
     Sidekiq.schedule = YAML.load_file(File.expand_path("../../../config/scheduler.yml",__FILE__))
     Sidekiq::Scheduler.reload_schedule!
   end
+
+  config.react.variant = :production
 end

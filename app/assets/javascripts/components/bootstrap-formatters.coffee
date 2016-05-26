@@ -64,6 +64,8 @@
     'min': @min
     'max': @max
 
+
+
 @activityFormatter = (value, row, index) ->
   progressBar value + '%', value,
     'min': @min
@@ -77,3 +79,26 @@
 
 @timeFormatter = (value, row, index) ->
   value.toString().toHHMMSS()
+
+
+@Skill = React.createClass
+  getDefaultProps: ->
+    points: 1000
+    last_change: 0
+  render: ->
+    {div, small} = React.DOM
+    sign = if @props.last_change > 0 then '+' else ''
+    color = if @props.last_change < 0 then 'text-danger' else 'text-success'
+    div null, "#{@props.points} ",
+      small
+        className: color,
+        "(#{sign}#{@props.last_change})"
+
+@Ranking = React.createClass
+  getDefaultProps: ->
+    current: 1
+    total: 1
+  render: ->
+    React.DOM.span null,
+      "#{@props.current}/#{@props.total} (#{Math.round(100 * (100 - 100 * (@props.current * 1.0 - 1) / @props.total)) / 100}%)"
+      

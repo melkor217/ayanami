@@ -4,51 +4,7 @@
 <div class="row">
 
   <div class="col-md-4">
-    <table class="table table-bordered">
-      <tbody>
-      <tr>
-        <td>Name</td>
-        <td> <%= @player.lastName %> </td>
-      </tr>
-      <tr>
-        <td>Ranking</td>
-        <td> <%= @player.ranking %> / <%= @total %> (<%= (100-((@player.ranking-1).to_f / @total)*100).round(2) %>%)</td>
-      </tr>
-      <tr>
-        <td>Points</td>
-        <td> <%= @player.skill %> </td>
-      </tr>
-      <tr>
-        <td>Kills</td>
-        <td> <%= @player.kills %> </td>
-      </tr>
-      <tr>
-        <td>Deaths</td>
-        <td> <%= @player.deaths %> </td>
-      </tr>
-      <tr>
-        <td>Headshots</td>
-        <td> <%= @player.headshots %> </td>
-      </tr>
-      <tr>
-        <td>K/D</td>
-        <td> <%= (@player.kills.to_f / @player.deaths).round(2) %> </td>
-      </tr>
-      <tr>
-        <td>Activity</td>
-        <td>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="<%= @player.activity %>"
-                 aria-valuemin="0" aria-valuemax="100" style="width:<%= @player.activity %>%">
-              <span>
-                <%= @player.activity %>%
-              </span>
-            </div>
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+    <%= react_component 'Player', {total: @total, url: player_path(@player, format: :json)} %>
   </div>
   <div>
     <%= link_to "Frags", player_frags_path(@player), {:class => "btn-link"} %>
