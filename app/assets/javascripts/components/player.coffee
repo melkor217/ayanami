@@ -9,6 +9,7 @@
         points: 1000
         last_change: 0
         activity: 0
+        connection_time: 0
   getDefaultProps: ->
     total: 1
     url: ''
@@ -42,16 +43,16 @@
             td null, React.createElement(Ranking, current: @state.player.ranking, total: @props.total)
           tr null,
             td null, "Kills"
-            td null, @state.player.kills
+            td null, @state.player.kills.toString().addCommas()
           tr null,
             td null, "Headshots"
-            td null, @state.player.headshots
+            td null, @state.player.headshots.toString().addCommas()
           tr null,
             td null, "Deaths"
-            td null, @state.player.deaths
+            td null, @state.player.deaths.toString().addCommas()
           tr null,
             td null, "K/D"
-            td null, Math.round(100 * @state.player.kills / @state.player.deaths) / 100
+            td null, Math.round(100 * @state.player.kills / Math.max(@state.player.deaths,1)) / 100
           tr null,
             td null, "Activity"
             td null, React.createElement(ProgressBar, current: @state.player.activity, value: "#{@state.player.activity}%")
