@@ -19,13 +19,14 @@
 
   <tbody>
     <% @servers.each do |server| %>
+      <% act_players =  Livestats.where(server_id: server.serverId).where.not(steam_id: 'BOT').count %>
       <tr>
         <td><a class="btn btn-info" role="button" href="steam://connect/<%= server.publicaddress  %>">Connect</a></td>
         <td>
           <%= link_to(server.name, server, {:class=>"btn-link"}) %>
         </td>
         <td><%= server.publicaddress %></td>
-        <td><%= "#{server.act_players} / #{server.max_players}" %></td>
+        <td><%= "#{act_players} (#{server.act_players}) / #{server.max_players}" %></td>
         <td><%= server.players %></td>
         <td><%= server.kills %></td>
         <td><%= server.headshots %></td>
