@@ -9,3 +9,6 @@ json.skill do
   json.points player.skill
   json.last_change player.last_skill_change
 end
+json.killstatsPath killstats_player_path(player)
+json.weaponsPath weapons_player_path(player)
+json.fragsPath player_frags_path(player)

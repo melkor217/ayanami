@@ -11,7 +11,8 @@ class FragsController < ApplicationController
 
     if request.format.json?
       if params[:player_id]
-        query =  Player.find(params[:player_id]).frag(params[:game_game])
+        @player = Player.find(params[:player_id])
+        query =  @player.frag(params[:game_game])
         @frags = query.order(id: :desc).offset(params[:offset]).limit(params[:limit])
         @total = query.count
       else
@@ -19,6 +20,8 @@ class FragsController < ApplicationController
         @total = 50000
         @frags = query.order(id: :desc).offset(params[:offset]).limit(params[:limit])
       end
+    elsif params[:player_id]
+      @player = Player.find(params[:player_id])
     end
   end
 end

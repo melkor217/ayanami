@@ -1,25 +1,5 @@
-<p id="notice"><%= notice %></p>
-
-
-<div class="row">
-
-  <div class="col-md-4">
-    <%= react_component 'Player',
-                        {total: @total,
-                         url: player_path(@player, format: :json),
-                         skill_limits: @skill_limits
-                        } %>
-  </div>
-  <h3>
-    <div>
-      <%= link_to "Frags", player_frags_path(@player), {:class => "btn-link"} %>
-
-      <br/>
-      <%= link_to "Killstats", killstats_player_path(@player), {:class => "btn-link"} %>
-      <br/>
-      <%= link_to "Weapons", weapons_player_path(@player), {:class => "btn-link"} %>
-    </div>
-  </h3>
-</div>
-
-<%= link_to 'Back', :back, {:class => "btn-link"} %>
+<%= react_component 'Player',
+                    {total: @total,
+                     url: player_path(@player, format: :json),
+                     skill_limits: @skill_limits
+                    } %>

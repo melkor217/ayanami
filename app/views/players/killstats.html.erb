@@ -1,3 +1,5 @@
+<%= react_component 'PlayerHeader', {url: player_path(@player, format: :json)} %>
+
 <table class="table table-bordered"
        data-toggle="table"
        data-page-size="25"
@@ -13,7 +15,6 @@
        data-sort-order="<%= params[:order] %>"
        data-page-size="<%= params[:limit] %>"
        data-page-number="<%= params[:page] %>">
->
   <thead>
   <th class="col-md-4" data-searchable="true" data-field="lastName" data-formatter="urlFormatter" data-sortable="true">Player</th>
   <th class="col-md-1" data-searchable="false" data-field="kills" data-sortable="true">Kills</th>

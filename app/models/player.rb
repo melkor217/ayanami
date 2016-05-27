@@ -87,7 +87,7 @@ round(sum(kills)/sum(deaths),2) as kpd
   end
 
   def weapons
-    return self.frag.group(:weapon).count.transform_keys do |key|
+    return self.frag('csgo').group(:weapon).count.transform_keys do |key|
       Weapon.find_by(code: key, game: 'csgo')
     end
   end

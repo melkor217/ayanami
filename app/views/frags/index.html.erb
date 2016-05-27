@@ -1,9 +1,6 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Frags</h1>
-
-
-
+<% if @player %>
+    <%= react_component 'PlayerHeader', {url: player_path(@player, format: :json)} %>
+<% end %>
 
 <table id="table" class="fixed"
        data-toggle="table"
@@ -18,8 +15,8 @@
        data-row-style="fragStyle"
        data-page-list="[10, 25, 50, 100]"
        data-search-text="<%= params[:search] %>"
-  data-page-size="<%= params[:limit] %>"
-  data-page-number="<%= params[:page] %>">
+       data-page-size="<%= params[:limit] %>"
+       data-page-number="<%= params[:page] %>">
   <thead>
   <tr>
     <th data-field="id" data-formatter="fragFormatter">Frag</th>
