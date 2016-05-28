@@ -2,9 +2,13 @@ json.extract! player, :playerId, :lastName, :kills, :deaths, :headshots, :activi
 if player[:kpd]
   json.extract! player, :kpd
 end
+
+uniqueid = player.unique_ids.first
+
 json.url player_path(player, format: :json)
+json.steamUrl SteamId.steam_profile_url(uniqueid.uniqueId).to_s
 json.path player_path(player)
-json.avatarIcon avatar_url(player.unique_ids.first.avatar_icon)
+json.avatarIcon avatar_url(uniqueid.avatar_icon)
 json.skill do
   json.points player.skill
   json.last_change player.last_skill_change
