@@ -8,13 +8,13 @@ json.rows do
     weapon = Weapon.cache_find(frag.weapon, params[:game_game])
     server = Server.cache_find(frag.serverId)
     json.killer do
-      json.avatarIcon killer.unique_ids.first.avatar_icon
+      json.avatarIcon avatar_url(killer.unique_ids.first.avatar_icon)
       json.lastName killer.lastName
       json.url player_path(killer, format: :json)
       json.path player_path(killer)
     end
     json.victim do
-      json.avatarIcon victim.unique_ids.first.avatar_icon
+      json.avatarIcon avatar_url(victim.unique_ids.first.avatar_icon)
       json.lastName victim.lastName
       json.url player_path(victim, format: :json)
       json.path player_path(victim)

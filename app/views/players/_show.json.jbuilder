@@ -4,7 +4,7 @@ if player[:kpd]
 end
 json.url player_path(player, format: :json)
 json.path player_path(player)
-json.avatarIcon player.unique_ids.first.avatar_icon
+json.avatarIcon avatar_url(player.unique_ids.first.avatar_icon)
 json.skill do
   json.points player.skill
   json.last_change player.last_skill_change

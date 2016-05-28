@@ -38,4 +38,11 @@ module ApplicationHelper
   def last_page(last_page_num)
     { :href => url_for(:page => last_page_num, :format => :json) }
   end
+
+
+  def avatar_url(url)
+    return url if url and url != ''
+    return asset_path('avatars/default.jpg')
+  end
+
 end

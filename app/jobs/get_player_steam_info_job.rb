@@ -3,11 +3,7 @@ class GetPlayerSteamInfoJob < ApplicationJob
     uniqueid = UniqueId.find_by!(options)
     # Do something later
     if uniqueid and /^[0-9]:[0-9]+$/.match(uniqueid.uniqueId)
-      prefix = uniqueid.uniqueId.split(':').first.to_i
-      steamid = uniqueid.uniqueId.split(':').last.to_i
-      id64 = 76561197960265728 + prefix + steamid*2
-
-      uri = URI("http://steamcommunity.com/profiles/#{id64}/?xml=1")
+      uri = SteamId.steam_profile_url(uniqueid.uniqueId, format: :xml)
       begin
         doc = Nokogiri::XML(Net::HTTP.get(uri))
         uniqueid.avatarFull = doc.xpath('//profile/avatarFull').text

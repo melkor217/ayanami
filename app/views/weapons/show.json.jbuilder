@@ -5,7 +5,7 @@ json.rows do
     json.playerId k.first
     player = Player.cache_find(k.first)
     json.lastName player.lastName
-    json.avatarIcon player.unique_ids.first.avatar_icon
+    json.avatarIcon avatar_url(player.unique_ids.first.avatar_icon)
     json.url player_path(player, format: :json)
     json.path player_path(player)
     json.frags k.last
