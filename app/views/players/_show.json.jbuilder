@@ -16,3 +16,7 @@ end
 json.killstatsPath killstats_player_path(player)
 json.weaponsPath weapons_player_path(player)
 json.fragsPath player_frags_path(player)
+
+json.country do
+  json.partial! 'countries/show', country: player.country
+end

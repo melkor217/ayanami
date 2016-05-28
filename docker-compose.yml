@@ -10,9 +10,9 @@ services:
     command: >
                  bash -lc "./wait-for-it.sh -t 300 redis:6379; ./wait-for-it.sh -t 300 mysql:3306;
                  rake db:check || rake db:create db:structure:load;
-                 rake db:migrate;
-                 ./bin/rails runner 'HeatWeaponCacheJob.perform_later';
-                 bundle exec sidekiq -d -c 2 -L log/sidekiq.log;
+                 rake rake db:migrate;
+                 rails runner 'HeatWeaponCacheJob.perform_later';
+                 sidekiq -d -c 2 -L log/sidekiq.log;
                  unicorn -c config/unicorn.rb"
     restart: unless-stopped
     build: .
@@ -34,3 +34,9 @@ services:
     image: redis
     restart: unless-stopped
     command: redis-server --save 60 1000
+  noxus:
+    depends_on:
+      - mysql
+    build: /home/greg/noxus
+    ports:
+      - "127.0.0.1:3456:8080"

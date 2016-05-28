@@ -1,5 +1,6 @@
 class SteamId
   def self.steam_profile_url(steamid, options = {})
+    return nil if not /^[0-9]:[0-9]+$/.match(steamid)
     prefix = steamid.split(':').first.to_i
     steamid = steamid.split(':').last.to_i
     id64 = 76561197960265728 + prefix + steamid*2

@@ -15,7 +15,6 @@ ENV RAILS_PUBLIC_FILE_SERVER true
 RUN bundle install
 COPY . /ayanami
 
-RUN ./bin/rake assets:precompile
+RUN rake assets:precompile
 
 CMD unicorn -c config/unicorn.rb
-

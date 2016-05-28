@@ -1,2 +1,2 @@
 #json.extract! @country, :flag, :name
-json.partial! 'countries/show', players: @average
+json.partial! 'countries/players', players: @average

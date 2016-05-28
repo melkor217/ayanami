@@ -15,13 +15,20 @@
           className: "panel panel-default"
           children: [
             div
-              className: "panel-heading"
+              className: "panel-heading clearfix"
               children: [
                 img
+                  style: {'vertical-align': 'middle'}
                   src: @state.player.avatarIcon
                   width: 30
                   height: 30
-                @state.player.lastName
+                React.DOM.h2 {style: {display: 'inline', 'margin-left': '0.3em', 'vertical-align': 'middle'}},
+                    @state.player.lastName
+                if @state.player.steamUrl
+                  a {href: @state.player.steamUrl, className: "btn-link"},
+                    img
+                     src: "<%= asset_path('misc/steam.png') %>"
+                     style: {'vertical-align': 'middle', 'margin-left': '0.3em'}
               ]
             div
               className: "panel-body"
@@ -101,7 +108,7 @@
       min: 0
       max: 2000
   render: ->
-    {div, img, table, tbody, tr, td} = React.DOM
+    {div, img, table, tbody, tr, td, a} = React.DOM
     div
       children: [
         React.createElement(PlayerHeader, ref: 'header')
@@ -131,6 +138,14 @@
                   tr null,
                     td null, "Ranking"
                     td null, React.createElement(Ranking, current: @state.player.ranking, total: @props.total)
+                  if @state.player.country
+                    tr null,
+                        td null, "Country"
+                        td null,
+                          a {href: @state.player.country.path, className: "btn-link"},
+                            img
+                              src: @state.player.country.icon
+                            "#{@state.player.country.country} (#{@state.player.country.flag})"
                   tr null,
                     td null, "Kills"
                     td null, @state.player.kills.toString().addCommas()

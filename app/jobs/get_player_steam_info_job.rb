@@ -2,8 +2,7 @@ class GetPlayerSteamInfoJob < ApplicationJob
   def perform(options = {})
     uniqueid = UniqueId.find_by!(options)
     # Do something later
-    if uniqueid and /^[0-9]:[0-9]+$/.match(uniqueid.uniqueId)
-      uri = SteamId.steam_profile_url(uniqueid.uniqueId, format: :xml)
+    if uniqueid and (uri = SteamId.steam_profile_url(uniqueid.uniqueId, format: :xml))
       begin
         doc = Nokogiri::XML(Net::HTTP.get(uri))
         uniqueid.avatarFull = doc.xpath('//profile/avatarFull').text
