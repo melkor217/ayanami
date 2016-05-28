@@ -10,9 +10,9 @@ services:
     command: >
                  bash -lc "./wait-for-it.sh -t 300 redis:6379; ./wait-for-it.sh -t 300 mysql:3306;
                  rake db:check || rake db:create db:structure:load;
-                 rake rake db:migrate;
+                 rake db:migrate;
                  rails runner 'HeatWeaponCacheJob.perform_later';
-                 sidekiq -d -c 2 -L log/sidekiq.log;
+                 bundle exec sidekiq -d -C config/sidekiq.yml;
                  unicorn -c config/unicorn.rb"
     restart: unless-stopped
     build: .
