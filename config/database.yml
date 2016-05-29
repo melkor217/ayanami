@@ -21,7 +21,7 @@ docker:
 
 production:
   adapter: mysql2
-  encoding: utf8
+  encoding: utf8mb4
   pool: 10
   reconnect: false
   database: <%= ENV['MYSQL_DATABASE'] %>
