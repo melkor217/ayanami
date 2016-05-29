@@ -81,6 +81,7 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
   config.cache_store = :redis_store, 'redis://redis:6379/0/cache', { expires_in: 90.minutes }
   config.react.variant = :production
+  config.google_analytics_key =  ENV['GOOGLE_ANALYTICS_KEY']
 end
 
 Sidekiq.configure_client do |config|
