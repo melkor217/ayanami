@@ -35,8 +35,9 @@ services:
     restart: unless-stopped
     command: redis-server --save 60 1000
   noxus:
+    env_file: ./secrets.env
     depends_on:
       - mysql
-    build: /home/greg/noxus
+    build: noxus
     ports:
-      - "127.0.0.1:3456:8080"
+      - "127.0.0.1:3457:80"

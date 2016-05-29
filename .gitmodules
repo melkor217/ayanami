@@ -1,0 +1,3 @@
+[submodule "noxus"]
+	path = noxus
+	url = https://github.com/melkor217/noxus.git
