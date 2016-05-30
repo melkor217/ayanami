@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160529085137) do
+ActiveRecord::Schema.define(version: 20160529192550) do
 
   create_table "geoLiteCity_Blocks", id: false, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
     t.bigint "startIpNum", default: 0, null: false, unsigned: true
@@ -363,7 +363,7 @@ ActiveRecord::Schema.define(version: 20160529085137) do
     t.string "name",    default: "", null: false
   end
 
-  create_table "hlstats_Livestats", primary_key: "player_id", id: :integer, default: 0, force: :cascade, options: "ENGINE=MEMORY DEFAULT CHARSET=utf8" do |t|
+  create_table "hlstats_Livestats", primary_key: "player_id", id: :integer, default: 0, force: :cascade, options: "ENGINE=MEMORY DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.integer "server_id",               default: 0,     null: false
     t.string  "cli_address",  limit: 32, default: "",    null: false
     t.string  "cli_city",     limit: 64, default: "",    null: false
@@ -438,10 +438,10 @@ ActiveRecord::Schema.define(version: 20160529085137) do
   end
 
   create_table "hlstats_PlayerUniqueIds", primary_key: ["uniqueId", "game"], force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
-    t.integer  "playerId",                    default: 0,  null: false, unsigned: true
+    t.integer  "playerId",                    default: 0,  null: false,                           unsigned: true
     t.string   "uniqueId",         limit: 64, default: "", null: false
     t.string   "game",             limit: 32, default: "", null: false
-    t.integer  "merge",                                                 unsigned: true
+    t.integer  "merge",                                                                           unsigned: true
     t.datetime "steamUpdated"
     t.string   "avatarIcon"
     t.string   "avatarMedium"
@@ -451,7 +451,7 @@ ActiveRecord::Schema.define(version: 20160529085137) do
     t.integer  "isLimitedAccount"
     t.string   "location"
     t.string   "customURL"
-    t.string   "realname"
+    t.string   "realname",                                              collation: "utf8mb4_bin"
     t.index ["playerId"], name: "playerId", using: :btree
   end
 
@@ -488,6 +488,7 @@ ActiveRecord::Schema.define(version: 20160529085137) do
     t.integer "blockavatar",                   default: 0,    null: false, unsigned: true
     t.integer "activity",                      default: 100,  null: false
     t.integer "createdate",                    default: 0,    null: false
+    t.integer "mmrank"
     t.index ["clan", "playerId"], name: "playerclan", using: :btree
     t.index ["game"], name: "game", using: :btree
     t.index ["hideranking"], name: "hideranking", using: :btree
