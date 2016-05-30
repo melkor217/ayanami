@@ -7,6 +7,10 @@ class Server < ActiveRecord::Base
     end
   end
 
+  def livestats_players
+    Livestats.where(server_id: self.serverId).where.not(steam_id: 'BOT')
+  end
+
   has_many :frags, foreign_key: :serverId, primary_key: :serverId
   belongs_to :games, foreign_key: :code, primary_key: :game
 end

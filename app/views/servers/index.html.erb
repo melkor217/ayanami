@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<%= react_component 'ServerList', {url: servers_path(format: :json)} %>
+
 <h1>Listing Servers</h1>
 <br/>
 <table data-toggle="table" class="fixed">

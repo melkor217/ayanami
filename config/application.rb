@@ -26,6 +26,7 @@ module Ayanami
     config.action_controller.perform_caching = true
     config.autoload_paths << Rails.root.join('lib')
     config.eager_load_paths << Rails.root.join('lib')
+
     config.default_game = :csgo
   end
 end

@@ -1,0 +1,37 @@
+@ServerList = React.createClass
+  componentDidMount: ->
+    if @props.url
+      @serverRequest = $.get @props.url, (data) =>
+        @setState servers: data
+  getInitialState: ->
+    servers: []
+  render: ->
+    {tbody, thead, table, tr, td, th} = React.DOM
+    table
+      className: "table fixed table-bordered"
+      children: [
+        thead
+          children: [
+            tr
+              children: [
+                th null, 'Name'
+              ]
+          ]
+        tbody
+          children: [
+            @state.servers.map (data) -> React.createElement(Server, data)
+          ]
+      ]
+
+
+@Server = React.createClass
+  getInitialState: ->
+    servers: []
+  getDefaultProps: ->
+    name: ''
+  render: ->
+    {tr, td} = React.DOM
+    tr
+      children: [
+        td null, @props.name
+      ]

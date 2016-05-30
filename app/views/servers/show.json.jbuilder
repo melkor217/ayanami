@@ -1,1 +1,1 @@
-json.extract! @server, :id, :created_at, :updated_at
+json.partial! 'servers/show', server: @server
