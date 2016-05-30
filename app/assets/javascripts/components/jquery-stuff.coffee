@@ -8,7 +8,6 @@ $ ->
     return
   ).on('sort.bs.table', (e, name, order) ->
     history.pushState {
-      turbolinks: true
       url: window.location.href
     }, 'new title', updateQueryStringParameter(updateQueryStringParameter(window.location.href, 'sort', name), 'order', order)
     $(window).scrollTop 0
@@ -39,7 +38,6 @@ $ ->
 #history.pushState("object or string representing the state of the page", "new title", window.location+"?page="+number+'&limit='+size);
 #history.pushState("object or string representing the state of the page", "new title", window.location+"?page="+number+'&limit='+size);
     history.pushState {
-      turbolinks: true
       url: window.location.href
     }, 'new title', updateQueryStringParameter(updateQueryStringParameter(window.location.href, 'page', number), 'limit', size)
     $(window).scrollTop 0
@@ -47,7 +45,6 @@ $ ->
     return
   ).on 'search.bs.table', (e, text) ->
     history.pushState {
-      turbolinks: true
       url: window.location.href
     }, 'new title', updateQueryStringParameter(window.location.href, 'search', text)
     $(window).scrollTop 0

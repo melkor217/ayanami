@@ -14,7 +14,13 @@
           children: [
             tr
               children: [
+                th null, ''
                 th null, 'Name'
+                th null, 'IP Address'
+                th null, 'Players'
+                th null, 'Kills'
+                th null, 'Headshots'
+                th null, 'Current map'
               ]
           ]
         tbody
@@ -25,13 +31,20 @@
 
 
 @Server = React.createClass
-  getInitialState: ->
-    servers: []
   getDefaultProps: ->
     name: ''
   render: ->
-    {tr, td} = React.DOM
+    {tr, td, a} = React.DOM
     tr
       children: [
+        td null, a
+          className: "btn btn-info"
+          href: "steam://connect/#{@props.publicaddress}"
+          'Connect'
         td null, @props.name
+        td {style: {'font-family': 'monospace'}}, @props.publicaddress
+        td null, "#{@props.livestats_players} (#{@props.act_players}) / #{@props.max_players}"
+        td null, @props.kills
+        td null, @props.headshots
+        td null, @props.act_map
       ]
