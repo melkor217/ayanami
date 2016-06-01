@@ -1,3 +1,5 @@
+{tbody, thead, table, tr, td, th, a} = React.DOM
+
 @ServerList = React.createClass
   componentDidMount: ->
     if @props.url
@@ -5,8 +7,22 @@
         @setState servers: data
   getInitialState: ->
     servers: []
+  row: (data) ->
+    tr
+      children: [
+        td {}, data.name
+        td null, a
+          className: "btn btn-info"
+          href: "steam://connect/#{data.publicaddress}", 'Connect'
+        td {style: {fontFamily: 'monospace'}}, data.publicaddress
+        td null, "#{data.livestats_players} (#{data.act_players}) / #{data.max_players}"
+        td null, data.kills
+        td null, data.headshots
+        td null, data.act_map
+        td null, data.map_started
+      ]
   render: ->
-    {tbody, thead, table, tr, td, th} = React.DOM
+    {tbody, thead, table, tr, td, th, a} = React.DOM
     table
       className: "table fixed table-bordered"
       children: [
@@ -14,37 +30,26 @@
           children: [
             tr
               children: [
-                th null, ''
-                th null, 'Name'
-                th null, 'IP Address'
-                th null, 'Players'
-                th null, 'Kills'
-                th null, 'Headshots'
-                th null, 'Current map'
+                th
+                  className: 'col-md-2', 'Name'
+                th {}, 'Link'
+                th
+                  className: 'col-md-2', 'IP Address'
+                th
+                  className: 'col-sm-1', 'Players'
+                th
+                  className: 'col-sm-1', 'Kills'
+                th
+                  className: 'col-sm-1', 'Headshots'
+                th
+                  className: 'col-md-2', 'Current map'
+                th
+                  className: 'col-md-2', 'Map time'
               ]
           ]
         tbody
           children: [
-            @state.servers.map (data) -> React.createElement(Server, data)
+            @row(server) for server in @state.servers
           ]
       ]
 
-
-@Server = React.createClass
-  getDefaultProps: ->
-    name: ''
-  render: ->
-    {tr, td, a} = React.DOM
-    tr
-      children: [
-        td null, a
-          className: "btn btn-info"
-          href: "steam://connect/#{@props.publicaddress}"
-          'Connect'
-        td null, @props.name
-        td {style: {'font-family': 'monospace'}}, @props.publicaddress
-        td null, "#{@props.livestats_players} (#{@props.act_players}) / #{@props.max_players}"
-        td null, @props.kills
-        td null, @props.headshots
-        td null, @props.act_map
-      ]

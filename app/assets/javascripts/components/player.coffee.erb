@@ -1,4 +1,3 @@
-
 @PlayerHeader = React.createClass
   componentDidMount: ->
     if @props.url
@@ -18,17 +17,17 @@
               className: "panel-heading clearfix"
               children: [
                 img
-                  style: {'vertical-align': 'middle'}
+                  style: {verticalAlign: 'middle'}
                   src: @state.player.avatarIcon
                   width: 30
                   height: 30
-                React.DOM.h2 {style: {display: 'inline', 'margin-left': '0.3em', 'vertical-align': 'middle'}},
+                React.DOM.h2 {style: {display: 'inline', marginLeft: '0.3em', verticalAlign: 'middle'}},
                     @state.player.lastName
                 if @state.player.steamUrl
                   a {href: @state.player.steamUrl, className: "btn-link"},
                     img
                      src: "<%= asset_path('misc/steam.png') %>"
-                     style: {'vertical-align': 'middle', 'margin-left': '0.3em'}
+                     style: {verticalAlign: 'middle', 'margin-left': '0.3em'}
               ]
             div
               className: "panel-body"
