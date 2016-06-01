@@ -26,6 +26,7 @@ class PlayersController < ApplicationController
       @scope = Player.where(hideranking: 0)
     end
   end
+
   # GET /players/1
   # GET /players/1.json
   def show
@@ -46,7 +47,7 @@ class PlayersController < ApplicationController
     if request.format.json?
       ks = @player.killstats
       puts ks
-      ks = ks.sort_by do |k,v|
+      ks = ks.sort_by do |k, v|
         val = v[params[:sort].to_sym].to_i
         if params[:order].to_sym == :asc
           val
@@ -64,7 +65,7 @@ class PlayersController < ApplicationController
 
   def weapons
     @weapons = @player.weapons
-    @sum = @weapons.map do |k,v|
+    @sum = @weapons.map do |k, v|
       v
     end.sum
   end

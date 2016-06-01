@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160529192550) do
+ActiveRecord::Schema.define(version: 20160601181555) do
 
   create_table "geoLiteCity_Blocks", id: false, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
     t.bigint "startIpNum", default: 0, null: false, unsigned: true
@@ -680,6 +680,23 @@ ActiveRecord::Schema.define(version: 20160529192550) do
     t.string  "fps",         limit: 10, default: "0", null: false
     t.index ["server_id"], name: "server_id", using: :btree
     t.index ["timestamp"], name: "timestamp", using: :btree
+  end
+
+  create_table "steam_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint   "groupID",                   null: false
+    t.string   "groupName"
+    t.string   "groupURL"
+    t.string   "summary",      limit: 2048
+    t.string   "avatarIcon"
+    t.string   "avatarMedium"
+    t.string   "avatarFull"
+    t.string   "memberCount"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["groupID"], name: "index_steam_groups_on_groupID", using: :btree
+    t.index ["groupName"], name: "index_steam_groups_on_groupName", using: :btree
+    t.index ["groupURL"], name: "index_steam_groups_on_groupURL", using: :btree
+    t.index ["memberCount"], name: "index_steam_groups_on_memberCount", using: :btree
   end
 
 end

@@ -10,4 +10,12 @@ class SteamId
     end
     return URI(uri)
   end
+  def self.steam_group_url(options)
+    return nil if not /^[0-9A-z\-]+$/.match(options[:groupURL])
+    if options[:format] == :xml
+      URI("http://steamcommunity.com/groups/#{options[:groupURL]}/memberslistxml/?xml=1")
+    else
+      URI("http://steamcommunity.com/groups/#{options[:groupURL]}/")
+    end
+  end
 end

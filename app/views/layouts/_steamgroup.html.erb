@@ -1,0 +1,9 @@
+<% if (group = SteamGroup.sitegroup) %>
+    <ul class="nav navbar-nav navbar-right">
+      <li style="border-left: 1px solid #999">
+        <a style="margin: 0px; padding: 0px" href="<%= SteamId.steam_group_url(group) %>">
+          <img style="padding: 8px; margin-top: 0px; margin-bot: 0px; margin-left: 5px" class="navbar-brand" src="<%= asset_path('misc/steamgroup.png') %>"/>
+        </a>
+      </li>
+    </ul>
+<% end %>
