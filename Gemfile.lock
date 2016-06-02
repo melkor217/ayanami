@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/amatsuda/kaminari.git
-  revision: 9c44b6461f00471886caff921feea36f29dbb06d
+  revision: 623a7d96b88bad6d14cb66e03dd5b5066b13cccd
   branch: master
   specs:
     kaminari (1.0.0.alpha)
@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: git://github.com/mperham/sidekiq
-  revision: 19581c4b571d35a5a9c5069ba76b22b58487b380
+  revision: b6d9db382c8c381455a456678e81b80b91e077cf
   specs:
     sidekiq (4.1.2)
       concurrent-ruby (~> 1.0)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/coffee-rails
-  revision: 54de8caa5df87de66dea75a8b423696cf23ca1e6
+  revision: 3416e4d1179dc621f9121101a7966c0097fb5009
   specs:
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
@@ -88,7 +88,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.0.0)
-    autoprefixer-rails (6.3.6.1)
+    autoprefixer-rails (6.3.6.2)
       execjs
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
@@ -101,7 +101,7 @@ GEM
       sass (>= 3.3.4)
     bootstrap-table-rails (1.10.1)
     builder (3.2.2)
-    byebug (9.0.4)
+    byebug (9.0.5)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
@@ -116,7 +116,7 @@ GEM
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
-    jbuilder (2.4.1)
+    jbuilder (2.5.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
     jquery-rails (4.1.1)
