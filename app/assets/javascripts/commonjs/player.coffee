@@ -1,10 +1,11 @@
-@PlayerHeader = React.createClass
+PlayerHeader = React.createClass
   componentDidMount: ->
     if @props.url
       @serverRequest = $.get @props.url, (data) =>
         @setState player: data
   getInitialState: ->
     player: {}
+    steam_icon: ''
   render: ->
     {a, div, img, ul, li} = React.DOM
     div
@@ -26,7 +27,7 @@
                 if @state.player.steamUrl
                   a {href: @state.player.steamUrl, className: "btn-link"},
                     img
-                     src: "<%= asset_path('misc/steam.png') %>"
+                     src: @props.steam_icon
                      style: {verticalAlign: 'middle', 'margin-left': '0.3em'}
               ]
             div
@@ -88,7 +89,7 @@
           ]
       ]
 
-@Player = React.createClass
+Player = React.createClass
   getInitialState: ->
     player:
       lastName: 'undefined'
@@ -170,7 +171,17 @@
     @serverRequest = $.get @props.url, (data) =>
       @setState player: data
       @refs.header.setState player: data
-      
 
 
+module.exports.Playerq = React.createClass
+  componentDidMount: ->
+    if @props.url
+      @serverRequest = $.get @props.url, (data) =>
+        @setState player: data
+  getInitialState: ->
+    player: {}
+  render: ->
+    React.DOM.a null, 'test'
 
+module.exports.Player = Player
+module.exports.PlayerHeader = PlayerHeader

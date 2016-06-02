@@ -1,0 +1,30 @@
+{
+  "name": "ayanami",
+  "version": "0.0.0",
+  "description": "## Wtf is this?",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "browserify": "^13.0.1",
+    "browserify-incremental": "^3.1.1",
+    "coffeeify": "^2.0.1",
+    "fixed-data-table": "^0.6.0",
+    "react": "^0.14.8",
+    "react-dom": "^0.14.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/melkor217/ayanami.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/melkor217/ayanami/issues"
+  }
+}

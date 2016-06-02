@@ -1,5 +1,6 @@
-<%= react_component 'Player',
+<%= react_component '_.Player',
                     {total: @total,
                      url: player_path(@player, format: :json),
-                     skill_limits: @skill_limits
+                     skill_limits: @skill_limits,
+                     steam_icon: asset_path('misc/steam.png')
                     } %>

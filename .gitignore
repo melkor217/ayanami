@@ -24,3 +24,4 @@
 /.rake_tasks~
 /public/assets/
 /secrets.env
+/node_modules

@@ -26,9 +26,8 @@ module Ayanami
     config.action_controller.perform_caching = true
     config.autoload_paths << Rails.root.join('lib')
     config.eager_load_paths << Rails.root.join('lib')
-    if defined? config.browserify_rails
-      config.browserify_rails.commandline_options = "-t coffeeify --extension=\".coffee\""
-    end
+    config.browserify_rails.commandline_options = "-t coffeeify --extension=\".coffee\""
+    config.browserify_rails.source_map_environments << "development"
     config.default_game = :csgo
   end
 end
