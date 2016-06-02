@@ -35,6 +35,7 @@ services:
     restart: unless-stopped
     command: redis-server --save 60 1000
   noxus:
+    restart: unless-stopped
     env_file: ./secrets.env
     depends_on:
       - mysql

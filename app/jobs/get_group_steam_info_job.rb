@@ -6,6 +6,7 @@ class GetGroupSteamInfoJob < ApplicationJob
     options[:format] = :xml
     if (uri = SteamId.steam_group_url(options))
       begin
+        options.delete :format
         record = SteamGroup.find_or_initialize_by(options) do |group|
           doc = Nokogiri::XML(Net::HTTP.get(uri))
           logger.debug("Getting info for player #{uri.to_s}")

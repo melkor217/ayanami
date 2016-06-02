@@ -21,7 +21,6 @@ class GetPlayerSteamInfoJob < ApplicationJob
       end
 
     end
-    uniqueid.steamUpdated = Time.now
     uniqueid.save
     sleep 5 if self.queue_name != :urgent
   end
