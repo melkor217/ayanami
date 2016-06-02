@@ -17,7 +17,7 @@ class Player < ActiveRecord::Base
   end
 
   def self.sort_allowed_by_country?
-    return %w{players_total avg_activity avg_skill avg_kills kpd flag country}
+    return %w{players_total avg_activity avg_skill avg_kills avg_connection_time kpd flag country}
   end
 
   def self.sort_default_by_country

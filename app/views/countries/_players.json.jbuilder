@@ -1,4 +1,5 @@
-json.extract! players, :flag, :players_total, :avg_activity, :avg_skill, :avg_kills, :kpd
+json.extract! players, :flag, :players_total,
+              :avg_connection_time, :avg_activity, :avg_skill, :avg_kills, :kpd
 json.country players.country.name
 json.url country_path(players.country, format: :json)
 json.path country_path(players.country)
