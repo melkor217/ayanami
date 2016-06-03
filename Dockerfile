@@ -16,7 +16,6 @@ RUN bundle install
 
 
 RUN passenger-install-nginx-module --auto
-COPY nginx.conf /opt/nginx/conf/nginx.conf
 
 COPY ./package.json .
 RUN npm install

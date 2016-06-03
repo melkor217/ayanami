@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :frags
   end
 
+  resources :random
 
   root 'players#index'
 
