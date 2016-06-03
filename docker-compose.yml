@@ -1,5 +1,8 @@
 version: '2'
 
+#volumes:
+#  assets:
+#    external: false
 
 services:
   ayanami:
@@ -13,11 +16,11 @@ services:
                  rake db:migrate;
                  rails runner 'HeatWeaponCacheJob.perform_later';
                  bundle exec sidekiq -d -C config/sidekiq.yml;
-                 unicorn -c config/unicorn.rb"
+                 passenger start"
     restart: unless-stopped
     build: .
     ports:
-      - "127.0.0.1:3456:8080"
+      - "127.0.0.1:3456:3000"
   mysql:
     env_file: ./secrets.env
     image: mysql

@@ -1,3 +1,5 @@
+{ProgressBar, Skill, Ranking} = require('commonjs/shared')
+
 PlayerHeader = React.createClass
   componentDidMount: ->
     if @props.url
@@ -173,15 +175,6 @@ Player = React.createClass
       @refs.header.setState player: data
 
 
-module.exports.Playerq = React.createClass
-  componentDidMount: ->
-    if @props.url
-      @serverRequest = $.get @props.url, (data) =>
-        @setState player: data
-  getInitialState: ->
-    player: {}
-  render: ->
-    React.DOM.a null, 'test'
 
 module.exports.Player = Player
 module.exports.PlayerHeader = PlayerHeader

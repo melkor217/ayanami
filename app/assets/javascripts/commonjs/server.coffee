@@ -1,6 +1,6 @@
 {tbody, thead, table, tr, td, th, a} = React.DOM
 
-@ServerList = React.createClass
+ServerList = React.createClass
   componentDidMount: ->
     if @props.url
       @serverRequest = $.get @props.url, (data) =>
@@ -53,3 +53,5 @@
           ]
       ]
 
+
+module.exports.ServerList = ServerList

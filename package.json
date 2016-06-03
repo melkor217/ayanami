@@ -10,9 +10,9 @@
     "browserify": "^13.0.1",
     "browserify-incremental": "^3.1.1",
     "coffeeify": "^2.0.1",
-    "fixed-data-table": "^0.6.0",
-    "react": "^0.14.8",
-    "react-dom": "^0.14.8"
+    "jquery": "^2.2.4",
+    "react": "15.0.2",
+    "react-dom": "15.0.2"
   },
   "devDependencies": {},
   "scripts": {
