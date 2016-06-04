@@ -1,35 +1,3 @@
 <%= react_component '_.PlayerHeader', {url: player_path(@player, format: :json)} %>
+<%= react_component '_.WeaponTable', {url: weapons_player_path(@player, format: :json)} %>
 
-<table class="table table-bordered"
-       data-toggle="table"
-       data-page-size="50"
-       data-page-list="[10, 25, 50, 100]"
-       data-search="true"
-       data-show-refresh="true"
-       data-show-toggle="true"
-       data-show-columns="true"
-       data-pagination="true"
-       data-side-pagination="client"
-       data-sort-name="kills"
-       data-sort-order="desc"
->
-  <thead>
-  <th class="col-md-4" data-searchable="true" data-field="weapon" data-sortable="true">Weapon</th>
-  <th class="col-md-1" data-searchable="false" data-field="kills" data-sortable="true">Kills</th>
-  <th class="col-md-1" data-searchable="false" data-field="total" data-sortable="true">% of total</th>
-  </thead>
-  <tbody>
-  <% @weapons.each do |weapon, kills| %>
-      <% if weapon and weapon.name %>
-          <tr>
-            <td><%= link_to(weapon.name, weapon, {:class => "btn-link"}) %> </td>
-            <td><%= kills %> </td>
-            <td><%= (100*(kills.to_f/[@sum, 1].max)).round(2) %>%</td>
-          </tr>
-      <% end %>
-  <% end %>
-  </tbody>
-</table>
-
-
-<%= link_to 'Back', :back, {:class => "btn-link"} %>

@@ -1,32 +1,3 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Weapons</h1>
-
-<table id="table" class="fixed"
-       data-toggle="table"
-       data-show-refresh="true"
-       data-show-toggle="true"
-       data-show-columns="true"
-       data-flat="true"
-       data-url="<%= weapons_path(format: :json, game_game: params[:game_game]) %>"
-       data-pagination="true"
-       data-side-pagination="server"
-       data-search="true"
-       data-page-size="50"
-       data-page-list="[10, 25, 50, 100]"
-       data-sort-name="<%= params[:sort] %>"
-       data-sort-order="<%= params[:order] %>"
-       data-search-text="<%= params[:search] %>"
-       data-page-size="<%= params[:limit] %>"
-       data-page-number="<%= params[:page] %>">
-  <thead>
-  <tr>
-    <th data-formatter="runningFormatter">Position</th>
-    <th data-field="name" class="col-md-6" data-formatter="weaponFormatter" data-sortable="true">Name</th>
-    <th data-field="modifier" class="col-md-2" data-sortable="true">Modifier</th>
-    <th data-field="kills" class="col-md-2" data-sortable="true">Kills</th>
-    <th data-field="headshots" class="col-md-2" data-sortable="true">Headshots</th>
-  </tr>
-  </thead>
-</table>
-<br>
+<%= react_component '_.WeaponTable', {url: weapons_path(format: :json)} %>

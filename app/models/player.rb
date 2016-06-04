@@ -4,8 +4,6 @@ class Player < ActiveRecord::Base
   alias_attribute :country_name, :country
 
 
-
-
   def self.sort_allowed?
     # Fields that are allowed for sorting
     return %w{kills deaths lastname activity skill playerId lastName kpd headshots connection_time}
@@ -87,9 +85,24 @@ round(sum(kills)/sum(deaths),2) as kpd
   end
 
   def weapons
-    return self.frag('csgo').group(:weapon).count.transform_keys do |key|
-      Weapon.find_by(code: key, game: 'csgo')
+    frags = self.frag('csgo').group(:weapon).group(:headshot).count.group_by do |k, _|
+      k.first
+      # {"ak47"=>[[["ak47", false], 1], [["ak47", true], 2]], "aug"=>[[["aug", false], 1], [["aug", true], 5]] }
     end
+    weapons = []
+    frags.each do |k, v|
+      weapon = Weapon.readonly.find_by(code: k, game: 'csgo')
+      weapon.kills = 0
+      weapon.headshots = 0
+      v.each do |r|
+        weapon.kills += r.last
+        if r.first.last == true
+          weapon.headshots += r.last
+        end
+      end
+      weapons.append weapon
+    end
+    return weapons
   end
 
   def ranking(options = {})
