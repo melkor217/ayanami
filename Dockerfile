@@ -24,5 +24,5 @@ COPY . /ayanami
 
 RUN rake assets:precompile
 
-CMD passenger start -d
+CMD passenger start
 
