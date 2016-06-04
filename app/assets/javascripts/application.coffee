@@ -20,7 +20,6 @@
 
 React = window.React = global.React = require('react')
 ReactDOM= window.ReactDOM = global.ReactDOM = require('react-dom')
-window.$ = window.jQuery = require('jquery')
 
 _ = window._ = global._ = require('commonjs/exports')
 #

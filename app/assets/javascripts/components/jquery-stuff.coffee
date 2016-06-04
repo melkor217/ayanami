@@ -1,7 +1,7 @@
 $ ->
   $result = $('#eventsResult')
   $('#table').on('all.bs.table', (e, name, args) ->
-#console.log('Event:', name, ', data:', args);
+    #console.log('Event:', name, ', data:', args);
     return
   ).on('dbl-click-row.bs.table', (e, row, $element) ->
     $result.text 'Event: dbl-click-row.bs.table'
