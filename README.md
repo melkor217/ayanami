@@ -3,7 +3,7 @@
 ## Wtf is this?
 
 Modern web interface for hlstatsx DB, written in ruby.
-My instance on http://beta.melkor217.tk is now probably available
+My instance on https://beta.melkor217.ga is now probably available
 for inspection.
 
 ## Where to get hlstatsx itself?
