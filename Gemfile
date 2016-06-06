@@ -68,3 +68,6 @@ gem 'react-rails'
 gem 'react-bootstrap-rails'
 gem 'browserify-rails'
 gem 'passenger'
+
+
+gem 'omniauth-steam'

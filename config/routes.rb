@@ -1,6 +1,8 @@
 
 Rails.application.routes.draw do
 
+  post '/auth/:provider/callback', to: 'session#create'
+
   require 'sidekiq/web'
   require 'sidekiq-scheduler/web'
   mount Sidekiq::Web => '/sidekiq'
@@ -21,7 +23,7 @@ Rails.application.routes.draw do
   end
 
   resources :random
-
+  get '/session/destroy', to: 'session#destroy', as: :destroy_session
   root 'players#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

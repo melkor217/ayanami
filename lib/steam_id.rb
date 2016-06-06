@@ -18,4 +18,11 @@ class SteamId
       URI("http://steamcommunity.com/groups/#{options[:groupURL]}/")
     end
   end
+
+  def self.to32(steamid64)
+    tmp = steamid64.to_i - 76561197960265728
+    x = tmp % 2
+    y = tmp / 2
+    return "#{x}:#{y}"
+  end
 end

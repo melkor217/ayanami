@@ -16,11 +16,13 @@ class GetPlayerSteamInfoJob < ApplicationJob
         uniqueid.location = doc.xpath('//profile/location').text
         uniqueid.customURL = doc.xpath('//profile/customURL').text
         uniqueid.realname = doc.xpath('//profile/realname').text
+        uniqueid.personaname = doc.xpath('//profile/steamID').text
       rescue
         logger.warn("Failed to get steam profile for #{id64}")
       end
 
     end
+    uniqueid.steamUpdated = Time.now
     uniqueid.save
     sleep 5 if self.queue_name != :urgent
   end

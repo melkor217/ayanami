@@ -13,8 +13,6 @@ ENV RAILS_ENV production
 ENV RAILS_PUBLIC_FILE_SERVER true
 
 RUN bundle install
-
-
 RUN passenger-install-nginx-module --auto
 
 COPY ./package.json .
