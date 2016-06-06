@@ -15,6 +15,10 @@
       ga('create', '<%= google_key %>', 'auto');
       ga('require', 'linkid');
       ga('send', 'pageview');
+      <% if session[:state] %>
+      ga('send', 'event', 'SteamAuth', '<%= session[:state] %>')
+      <% session[:state] = nil %>
+      <% end %>
 
     </script>
 <% end %>

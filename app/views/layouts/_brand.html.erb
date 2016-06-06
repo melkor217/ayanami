@@ -1,11 +1,11 @@
 <% if (group = SteamGroup.sitegroup) %>
     <ul class="nav navbar-nav">
       <li>
-        <a class="navbar-brand" style="padding-right: 5px;" href="/"><%= group.groupName %></a>
+        <a class="navbar-brand" href="/"><%= group.groupName %></a>
       </li>
       <li style="border-right: 1px solid #999">
         <a style="margin: 0px; padding: 0px" href="<%= SteamId.steam_group_url(group) %>">
-          <img alt="Ayanami" class="navbar-brand navbar-group" src="<%= group.avatarMedium %>"/>
+          <img alt="Ayanami" class="navbar-brand navbar-group highlight" src="<%= group.avatarMedium %>"/>
         </a>
       </li>
     </ul>
