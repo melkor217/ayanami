@@ -14,6 +14,10 @@
 
       ga('create', '<%= google_key %>', 'auto');
       ga('require', 'linkid');
+      ga('set', 'dimension1', '<%= !!(/Valve Client/.match(request.user_agent))?'ingame':'browser' %>')
+      <% if session[:uid] %>
+      ga('set', 'userId', '<%= session[:uid] %>')
+      <% end %>
       ga('send', 'pageview');
       <% if session[:state] %>
       ga('send', 'event', 'SteamAuth', '<%= session[:state] %>')
