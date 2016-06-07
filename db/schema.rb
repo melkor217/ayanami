@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160606152341) do
+ActiveRecord::Schema.define(version: 20160607005551) do
 
   create_table "geoLiteCity_Blocks", id: false, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
     t.bigint "startIpNum", default: 0, null: false, unsigned: true
@@ -437,11 +437,11 @@ ActiveRecord::Schema.define(version: 20160606152341) do
     t.index ["name"], name: "name16", length: {"name"=>16}, using: :btree
   end
 
-  create_table "hlstats_PlayerUniqueIds", primary_key: ["uniqueId", "game"], force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
-    t.integer  "playerId",                    default: 0,  null: false,                           unsigned: true
+  create_table "hlstats_PlayerUniqueIds", primary_key: ["uniqueId", "game"], force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+    t.integer  "playerId",                    default: 0,  null: false, unsigned: true
     t.string   "uniqueId",         limit: 64, default: "", null: false
     t.string   "game",             limit: 32, default: "", null: false
-    t.integer  "merge",                                                                           unsigned: true
+    t.integer  "merge",                                                 unsigned: true
     t.datetime "steamUpdated"
     t.string   "avatarIcon"
     t.string   "avatarMedium"
@@ -451,7 +451,7 @@ ActiveRecord::Schema.define(version: 20160606152341) do
     t.integer  "isLimitedAccount"
     t.string   "location"
     t.string   "customURL"
-    t.string   "realname",                                              collation: "utf8mb4_bin"
+    t.string   "realname"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "personaname"
