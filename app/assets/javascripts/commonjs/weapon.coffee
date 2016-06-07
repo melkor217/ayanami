@@ -18,6 +18,7 @@ WeaponTable = React.createClass
   weaponNameFormatter: (cell, row) ->
     a
       href: row.path
+      className: 'highlight'
       children: [
         img
           src: row.icon
@@ -25,7 +26,7 @@ WeaponTable = React.createClass
         row.name
       ]
   render: ->
-    React.createElement(BootstrapTable, data: @state.response.rows, children: [
+    React.createElement(BootstrapTable, data: @state.response.rows, hover: true, children: [
       React.createElement(TableHeaderColumn,
         {
           dataField: 'name'
