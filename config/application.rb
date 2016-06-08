@@ -29,6 +29,6 @@ module Ayanami
     config.browserify_rails.commandline_options = "-t coffeeify --extension=\".coffee\""
     config.browserify_rails.source_map_environments << "development"
     config.default_game = :csgo
-    config.vk_api_id = ENV['VK_API_ID'] || 5498206
+    config.vk_api_id = ENV['VK_API_ID']
   end
 end

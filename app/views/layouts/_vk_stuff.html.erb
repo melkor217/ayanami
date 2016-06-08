@@ -1,5 +1,7 @@
 <script type="text/javascript" src="//vk.com/js/api/openapi.js?121"></script>
 
 <script type="text/javascript">
+<% if Rails.configuration.vk_api_id %>
   VK.init({apiId: <%= Rails.configuration.vk_api_id %>, onlyWidgets: true});
+<% end %>
 </script>

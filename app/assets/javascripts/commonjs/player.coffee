@@ -105,11 +105,6 @@ Player = React.createClass
       kills: 0
       deaths: 0
       headshots: 0
-      skill:
-        points: 1000
-        last_change: 0
-        activity: 0
-        connection_time: 0
   getDefaultProps: ->
     total: 1
     url: ''
@@ -138,12 +133,13 @@ Player = React.createClass
                           height: 30
                         @state.player.lastName
                       ]
-                  tr null,
-                    td null, "Skill"
-                    td null, React.createElement(ProgressBar,
-                      current: @state.player.skill.points,
-                      value: React.createElement(Skill, @state.player.skill),
-                      limits: @props.skill_limits)
+                  if @state.player.skill
+                    tr null,
+                      td null, "Skill"
+                      td null, React.createElement(ProgressBar,
+                        current: @state.player.skill.points,
+                        value: React.createElement(Skill, @state.player.skill),
+                        limits: @props.skill_limits)
                   tr null,
                     td null, "Ranking"
                     td null, React.createElement(Ranking, current: @state.player.ranking, total: @props.total)
@@ -167,16 +163,17 @@ Player = React.createClass
                   tr null,
                     td null, "K/D"
                     td null, Math.round(100 * @state.player.kills / Math.max(@state.player.deaths,1)) / 100
-                  tr null,
-                    td null, "Activity"
-                    td null, React.createElement(ProgressBar, current: @state.player.activity, value: "#{@state.player.activity}%")
+                  if @state.player.activity
+                    tr null,
+                      td null, "Activity"
+                      td null, React.createElement(ProgressBar, current: @state.player.activity, value: "#{@state.player.activity}%")
                   tr null,
                     td null, "ConnectionTime"
                     td null, "#{@state.player.connection_time}".toHHMMSS()
                 ]
           ]
       ]
-  componentDidMount: ->
+  componentWillMount: ->
     @serverRequest = $.get @props.url, (data) =>
       @setState player: data
       @refs.header.setState player: data
