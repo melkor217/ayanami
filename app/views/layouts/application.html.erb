@@ -3,24 +3,30 @@
 <head>
   <meta name="msvalidate.01" content="D262BE6CCF4BDE463A8E8D6CC12A2033"/>
   <meta name="google-site-verification" content="i9McbEsdaSd4wn-wbxAqPTBBf0LTO0wDxf4pvtZvzbI"/>
-  <title>Ayanami</title>
+  <% if content_for?(:title) %>
+      <title><%= content_for(:title) %> - Ayanami</title>
+  <% else %>
+      <title>Ayanami</title>
+  <% end %>
+  <%= render 'layouts/vk_stuff' %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <%= favicon_link_tag('favicon.png') %>
+  <%= render 'layouts/google' %>
 </head>
 <body>
-<%= render 'layouts/google' %>
 <%= render 'layouts/navbar' %>
 
 <%= yield %>
 
 
 
-<footer class="footer">
-  <div class="container" align="center">
-    <p class="text-muted"><%= link_to 'Source code', 'https://github.com/melkor217/ayanami', 'data-no-turbolink' => true, :class => "btn-link" %></p>
-  </div>
+<footer class="footer navbar" style="text-align: center">
+  <span><%= link_to 'Source code', 'https://github.com/melkor217/ayanami', :class => "btn-link" %></span>
+  <span style="display: inline-block">
+    <%= react_component '_.VKWidget', elementId: 'vk_footer_like', path: root_url, title: 'Ayanami: less ugly UI for HLstatsX:CE', type: 'full', track: false %>
+  </span>
 </footer>
 
 </body>

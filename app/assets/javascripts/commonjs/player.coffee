@@ -1,6 +1,10 @@
 {ProgressBar, Skill, Ranking} = require('commonjs/shared')
+{VKWidget} = require('commonjs/vk')
 
 PlayerHeader = React.createClass
+  componentDidUpdate: ->
+    if @state and @state.player and @state.player.lastName
+      document.title = @state.player.lastName + " - Ayanami"
   componentDidMount: ->
     if @props.url
       @serverRequest = $.get @props.url, (data) =>
@@ -17,6 +21,7 @@ PlayerHeader = React.createClass
           className: "panel panel-default"
           children: [
             div
+              style: {verticalAlign: 'middle'}
               className: "panel-heading clearfix"
               children: [
                 img
@@ -31,6 +36,8 @@ PlayerHeader = React.createClass
                     img
                      src: @props.steam_icon
                      style: {verticalAlign: 'middle', 'margin-left': '0.3em'}
+                if @state.player and @state.player.path
+                  React.createElement(VKWidget, elementId: 'vk_like', path: @state.player.path, title: @state.player.lastName)
               ]
             div
               className: "panel-body"
@@ -38,16 +45,16 @@ PlayerHeader = React.createClass
                 ul
                   className: "nav nav-pills"
                   children: [
-                    if @state.player.path
+                    if @state.player.pathname
                       li
                         className:
-                          if @state.player.path == window.location.pathname
+                          if @state.player.pathname == window.location.pathname
                             'active'
                           else
                             ''
                         children: [
                           a
-                            href: @state.player.path
+                            href: @state.player.pathname
                             'General'
                         ]
                     if @state.player.killstatsPath

@@ -7,7 +7,8 @@ uniqueid = player.unique_ids.first
 
 json.url player_path(player, format: :json)
 json.steamUrl SteamId.steam_profile_url(uniqueid.uniqueId).to_s
-json.path player_path(player)
+json.path player_url(player)
+json.pathname player_path(player)
 json.avatarIcon avatar_url(uniqueid.avatar_icon)
 json.skill do
   json.points player.skill

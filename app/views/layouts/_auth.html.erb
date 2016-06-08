@@ -2,7 +2,6 @@
   <li>
     <% if session[:uid] and (uniqueid = UniqueId.find_by!(uniqueId: SteamId.to32(session[:uid]))) %>
         <p class="navbar-text navbar-right">
-          <a href="<%= destroy_session_path %>" class="navbar-link">(sign out)</a>
         </p>
         <p class="navbar-text navbar-right">
           <% if (real_id = UniqueId.find_by(game: session[:default_game], uniqueId: uniqueid.uniqueId)) %>
@@ -12,6 +11,7 @@
           <% else %>
               <%= uniqueid.personaname %>
           <% end %>
+          <a href="<%= destroy_session_path %>" class="navbar-link">(sign out)</a>
         </p>
         <% else %>
       <a class="fake" href="/auth/steam"><button type="submit" class="btn btn-success navbar-btn">Sign in through Steam</button></a>

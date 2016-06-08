@@ -18,9 +18,9 @@ RUN passenger-install-nginx-module --auto
 COPY ./package.json .
 RUN npm install
 
+CMD passenger start
+
 COPY . /ayanami
 
 RUN rake assets:precompile
-
-CMD passenger start
 
