@@ -23,6 +23,12 @@ class Player < ActiveRecord::Base
 
   scope :uniorder, -> (sort, order) { order("#{sort} #{order}") }
   scope :with_kpd, -> { select('*, round((kills / deaths),2) as kpd') }
+  def cached_unique_id(options = {})
+    options.merge!(expires_in: 10.minutes)
+    Rails.cache.fetch({mode: :player_uid, playerId: self.playerId}, options) do
+      unique_ids.first
+    end
+  end
   # Stewpid query, but i don't really wanna change legacy scheme
   # any_value for compat with  ONLY_FULL_GROUP_BY mode
   scope :by_country, -> { select('flag,
