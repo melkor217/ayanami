@@ -13,6 +13,8 @@ SKILL_MODE = 0
 PLAYER_MIN_KILLS = 50
 DEFAULT_SKILL = 1000
 
+sample_games = %w(csgo tf)
+
 def killer_skill_change(killer, victim, weapon)
   return if not killer.skill or not victim.skill
   # From hlstats.pl, 17.05.2016
@@ -112,25 +114,39 @@ def do_kill(killer, victim, weapon, server)
 
 end
 
-112.times do
-  player = Player.create do |player|
-    player.game = 'csgo'
-    player.lastName = (RandomWord.adjs.next.to_s + ' ' + RandomWord.nouns.next.to_s).titleize[0..63]
-    player.activity = rand (0..100)
-    player.skill = DEFAULT_SKILL
-    player.connection_time = 0
-    player.headshots = 0
-    c = Country.all.sample
-    player.country = c
-    player.flag = c.flag
-    player.last_skill_change = rand(-130..130)
-  end
 
-  UniqueId.create(player: player, uniqueId: player.playerId+999999, game: :csgo)
-  UniqueId.create(player: player, uniqueId: player.playerId+999, game: :tf)
+30.times do
+  sample_games.each do |game|
+    clan = Clan.create do |clan|
+      clan.tag = clan.name = RandomWord.nouns.next.to_s.titleize[0..15]
+      clan.game = game
+    end
+  end
 end
 
-Game.where(hidden: '0').each do |game|
+152.times do
+  sample_games.each do |game|
+    player = Player.create do |player|
+      player.game = game
+      player.lastName = (RandomWord.adjs.next.to_s + ' ' + RandomWord.nouns.next.to_s).titleize[0..63]
+      player.activity = rand (0..100)
+      player.skill = DEFAULT_SKILL
+      player.connection_time = 0
+      player.headshots = 0
+      c = Country.all.sample
+      player[:country] = c.name # field, not a relation. dammit.
+      player.country = c
+      player.last_skill_change = rand(-130..130)
+      if rand(0..100) > 80
+        player.clan = Clan.where(game: game).sample
+      end
+    end
+    UniqueId.create(player: player, uniqueId: player.playerId+999999, game: game)
+  end
+end
+
+sample_games.each do |game_str|
+  game = Game.find(game_str)
   (2..4).each do |c|
     Server.create(
         address: "#{game.code}#{c}.net",
@@ -149,12 +165,12 @@ Game.where(hidden: '0').each do |game|
   end
 end
 Player.all.each do |player|
-  rand(0..20).times do
+  rand(0..30).times do
     random_player = Player.where.not(playerId: player.playerId).sample
     rand(1..5).times do
-      server = Server.all.sample
+      server = Server.where(game: random_player.game).sample
       weapon = Weapon.where(game: server.game).sample
-      rand(1..7).times do
+      rand(1..3).times do
         do_kill(player, random_player, weapon, server)
       end
     end

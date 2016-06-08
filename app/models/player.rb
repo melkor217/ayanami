@@ -1,7 +1,6 @@
 class Player < ActiveRecord::Base
 
   self.table_name = "hlstats_Players" # MySQL table name
-  alias_attribute :country_name, :country
 
 
   def self.sort_allowed?
@@ -38,14 +37,16 @@ round(sum(kills)/sum(deaths),2) as kpd
   scope :name_search, ->(name) { where('lastName LIKE :query', query: "%#{name}%") }
   scope :country_search, ->(name) { where('country LIKE :query or flag LIKE :query', query: "%#{name}%") }
 
-  def country(options = {})
+  def cached_country(options = {})
     options.merge!(expires_in: 6.hours)
     Rails.cache.fetch({mode: :country, country: self.flag}, options) do
-      super
+      self.country
     end
   end
 
-  belongs_to :country, foreign_key: :flag, primary_key: :flag
+  belongs_to :country, primary_key: :flag, foreign_key: :flag
+  belongs_to :clan, primary_key: :clanId, foreign_key: :clan
+
   has_many :unique_ids, primary_key: :playerId, foreign_key: :playerId
   has_many :frag, foreign_key: :killerId, primary_key: :playerId
 
