@@ -7,6 +7,7 @@ class GetPlayerSteamInfoJob < ApplicationJob
       begin
         doc = Nokogiri::XML(Net::HTTP.get(uri))
         logger.debug("Getting info for group #{uri.to_s}")
+        raise 'Incorrect xml' if (id64 = doc.xpath('//profule/steamID64')) and id64.to_i != 0
         uniqueid.avatarFull = doc.xpath('//profile/avatarFull').text
         uniqueid.avatarMedium = doc.xpath('//profile/avatarMedium').text
         uniqueid.avatarIcon = doc.xpath('//profile/avatarIcon').text
