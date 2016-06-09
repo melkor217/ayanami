@@ -1,15 +1,12 @@
 version: '2'
 
-#volumes:
-#  assets:
-#    external: false
-
 services:
   ayanami:
     env_file: ./secrets.env
-    depends_on:
+    links:
       - redis
       - mysql
+      - graphite
     command: >
                  bash -lc "./wait-for-it.sh -t 300 redis:6379; ./wait-for-it.sh -t 300 mysql:3306;
                  rake db:check || rake db:create db:structure:load;
@@ -33,15 +30,29 @@ services:
       - /srv/ayanami/mysql:/var/lib/mysql
   redis:
     volumes:
-      - /srv/ayanami/redis:/data
+      - redis-data:/data
     image: redis
     restart: unless-stopped
     command: redis-server --save 60 1000
   noxus:
     restart: unless-stopped
     env_file: ./secrets.env
-    depends_on:
+    links:
       - mysql
     build: noxus
     ports:
       - "127.0.0.1:3457:80"
+  graphite:
+    image: hopsoft/graphite-statsd
+    ports:
+      - "127.0.0.1:33456:80"
+    volumes:
+      - graphite-data:/opt/graphite/storage
+
+volumes:
+  graphite-data:
+    external: false
+  redis-data:
+    external: false
+  mysql-data:
+    external: false
