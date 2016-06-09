@@ -1,1 +1,1 @@
-json.partial! 'players/show', player: @player
+json.partial! 'players/verbose', player: @player
