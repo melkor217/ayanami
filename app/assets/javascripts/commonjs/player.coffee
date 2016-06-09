@@ -2,16 +2,17 @@
 {VKWidget} = require('commonjs/vk')
 
 PlayerHeader = React.createClass
-  componentDidUpdate: ->
+  setTitle: ->
     if @state and @state.player and @state.player.lastName
       document.title = @state.player.lastName + " - Ayanami"
+  componentDidUpdate: ->
+    @setTitle()
   componentDidMount: ->
     if @props.url
       @serverRequest = $.get @props.url, (data) =>
         @setState player: data
   getInitialState: ->
     player: {}
-    steam_icon: ''
   render: ->
     {a, div, img, ul, li} = React.DOM
     div
@@ -31,11 +32,11 @@ PlayerHeader = React.createClass
                   height: 30
                 React.DOM.h2 {style: {display: 'inline', marginLeft: '0.3em', verticalAlign: 'middle'}},
                     @state.player.lastName
-                if @state.player.steamUrl
+                if @state.player.steamUrl and @state.player.steamIcon
                   a {href: @state.player.steamUrl, className: "btn-link"},
                     img
-                     src: @props.steam_icon
-                     style: {verticalAlign: 'middle', 'margin-left': '0.3em'}
+                     src: @state.player.steamIcon
+                     style: {verticalAlign: 'middle', margin: '0em 0.3em'}
                 if @state.player and @state.player.path
                   React.createElement(VKWidget, elementId: 'vk_like', path: @state.player.path, title: @state.player.lastName)
               ]
