@@ -71,3 +71,4 @@ gem 'passenger'
 
 
 gem 'omniauth-steam'
+gem 'trashed'
