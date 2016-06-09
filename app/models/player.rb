@@ -23,12 +23,35 @@ class Player < ActiveRecord::Base
 
   scope :uniorder, -> (sort, order) { order("#{sort} #{order}") }
   scope :with_kpd, -> { select('*, round((kills / deaths),2) as kpd') }
+
   def cached_unique_id(options = {})
     options.merge!(expires_in: 10.minutes)
     Rails.cache.fetch({mode: :player_uid, playerId: self.playerId}, options) do
       unique_ids.first
     end
   end
+
+  def cached_country(options = {})
+    options.merge!(expires_in: 6.hours)
+    Rails.cache.fetch({mode: :country, country: self.flag}, options) do
+      self.country
+    end
+  end
+
+  def self.cached_minimum(column, options = {})
+    options.merge!(expires: 15.minutes)
+    Rails.cache.fetch({mode: :players_min, column: column}, options) do
+      self.minimum(column)
+    end
+  end
+
+  def self.cached_maximum(column, options = {})
+    options.merge!(expires: 15.minutes)
+    Rails.cache.fetch({mode: :players_max, column: column}, options) do
+      self.maximum(column)
+    end
+  end
+
   # Stewpid query, but i don't really wanna change legacy scheme
   # any_value for compat with  ONLY_FULL_GROUP_BY mode
   scope :by_country, -> { select('flag,
@@ -43,12 +66,6 @@ round(sum(kills)/sum(deaths),2) as kpd
   scope :name_search, ->(name) { where('lastName LIKE :query', query: "%#{name}%") }
   scope :country_search, ->(name) { where('country LIKE :query or flag LIKE :query', query: "%#{name}%") }
 
-  def cached_country(options = {})
-    options.merge!(expires_in: 6.hours)
-    Rails.cache.fetch({mode: :country, country: self.flag}, options) do
-      self.country
-    end
-  end
 
   belongs_to :country, primary_key: :flag, foreign_key: :flag
   belongs_to :clan, primary_key: :clanId, foreign_key: :clan
@@ -126,17 +143,4 @@ round(sum(kills)/sum(deaths),2) as kpd
     end
   end
 
-  def self.cached_minimum(column, options = {})
-    options.merge!(expires: 15.minutes)
-    Rails.cache.fetch({mode: :players_min, column: column}, options) do
-      self.minimum(column)
-    end
-  end
-
-  def self.cached_maximum(column, options = {})
-    options.merge!(expires: 15.minutes)
-    Rails.cache.fetch({mode: :players_max, column: column}, options) do
-      self.maximum(column)
-    end
-  end
 end
