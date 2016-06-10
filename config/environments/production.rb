@@ -81,6 +81,7 @@ Rails.application.configure do
   config.lograge.enabled = true
   # config.cache_store = :mem_cache_store
   config.cache_store = :redis_store, 'redis://redis:6379/0/cache', { expires_in: 90.minutes }
+  config.semaphore = {host: 'redis', port: '6379', db: 3, expiration: 60}
   config.react.variant = :production
   config.google_analytics_key =  ENV['GOOGLE_ANALYTICS_KEY']
 end

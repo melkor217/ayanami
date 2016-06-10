@@ -72,3 +72,4 @@ gem 'passenger'
 
 gem 'omniauth-steam'
 gem 'trashed'
+gem 'redis-semaphore'

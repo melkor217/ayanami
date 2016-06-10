@@ -227,6 +227,8 @@ GEM
       redis-actionpack (~> 5.0.0.pre)
       redis-activesupport (~> 5.0.0.pre)
       redis-store (~> 1.2.0.pre)
+    redis-semaphore (0.3.1)
+      redis
     redis-store (1.2.0.pre)
       redis (>= 2.2)
     ref (2.0.0)
@@ -307,6 +309,7 @@ DEPENDENCIES
   react-bootstrap-rails
   react-rails
   redis-rails (~> 5.0.0.pre)
+  redis-semaphore
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   sidekiq!
