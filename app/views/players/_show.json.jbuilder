@@ -13,3 +13,10 @@ json.skill do
   json.last_change player.last_skill_change
 end
 json.steamUrl SteamId.steam_profile_url(uniqueid.uniqueId).to_s
+
+clan = player.cached_clan
+json.clan do
+  json.name clan.name
+  json.clanId clan.clanId
+  json.path clan_url(clan)
+end

@@ -24,6 +24,13 @@ class Player < ActiveRecord::Base
   scope :uniorder, -> (sort, order) { order("#{sort} #{order}") }
   scope :with_kpd, -> { select('*, round((kills / deaths),2) as kpd') }
 
+  def cached_clan(options = {})
+    options.merge!(expires_in: 10.minutes)
+    Rails.cache.fetch({mode: :player_clan, playerId: self.playerId}, options) do
+      clan
+    end
+  end
+
   def cached_unique_id(options = {})
     options.merge!(expires_in: 10.minutes)
     Rails.cache.fetch({mode: :player_uid, playerId: self.playerId}, options) do
