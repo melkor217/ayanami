@@ -4,7 +4,12 @@ class ClansController < ApplicationController
 
   def index
     param! :order, String, in: %w(asc desc), transform: :downcase, default: 'desc'
-    param! :sort, String, in: Player.sort_allowed_by_country?, default: Player.sort_default_by_country
+    param! :sort, String, in: %w{name homepage game hidden mapregion skill kills headshots deaths members activity}, default: 'skill'
+    query = Player.by_team.uniorder(params[:sort], params[:order])
+    if params[:search]
+      query = query.country_search(params[:search])
+    end
+    @clans = query
   end
 
   def show

@@ -15,6 +15,8 @@ WeaponTable = React.createClass
   getDefaultProps: ->
     url: null
     sum: 0
+    options:
+      sizePerPage: 50
   weaponNameFormatter: (cell, row) ->
     a
       href: row.path
@@ -26,36 +28,40 @@ WeaponTable = React.createClass
         row.name
       ]
   render: ->
-    React.createElement(BootstrapTable, data: @state.response.rows, hover: true, children: [
-      React.createElement(TableHeaderColumn,
-        {
-          dataField: 'name'
-          key: 'name'
-          isKey: true
-          dataFormat: @weaponNameFormatter
-          dataSortable: true
-          dataSort: true
-        }
-        'Weapon')
-      React.createElement(TableHeaderColumn, {
-          dataField: 'kills'
-          key: 'kills'
-          dataSort: true
-        }
-        'Kills')
-      React.createElement(TableHeaderColumn, {
-          dataField: 'headshots'
-          key: 'headshots'
-          dataSort: true
-        }
-        'Headshots')
-      React.createElement(TableHeaderColumn, {
-          dataField: 'modifier'
-          key: 'modifier'
-          dataSort: true
-        }
-        'Modifier')
-    ])
+    React.createElement(BootstrapTable,
+      data: @state.response.rows,
+      options: {defaultSortName: 'kills', defaultSortOrder: 'desc'}
+      hover: true,
+      children: [
+        React.createElement(TableHeaderColumn,
+          {
+            dataField: 'name'
+            key: 'name'
+            isKey: true
+            dataFormat: @weaponNameFormatter
+            dataSortable: true
+            dataSort: true
+          }
+          'Weapon')
+        React.createElement(TableHeaderColumn, {
+            dataField: 'kills'
+            key: 'kills'
+            dataSort: true
+          }
+          'Kills')
+        React.createElement(TableHeaderColumn, {
+            dataField: 'headshots'
+            key: 'headshots'
+            dataSort: true
+          }
+          'Headshots')
+        React.createElement(TableHeaderColumn, {
+            dataField: 'modifier'
+            key: 'modifier'
+            dataSort: true
+          }
+          'Modifier')
+      ])
 
 
 module.exports.WeaponTable = WeaponTable

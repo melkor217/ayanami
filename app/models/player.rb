@@ -72,13 +72,19 @@ round(sum(kills)/sum(deaths),2) as kpd
 ').where(hideranking: 0).where.not(flag: '').group(:flag)
   }
   scope :by_team, -> { select('min(clan) as clan,
-count(*) as players_total,
+count(*) as members,
 round(avg(connection_time)) as connection_time,
 round(avg(activity),2) as activity,
 round(avg(skill),2) as skill,
 round(avg(kills),2) as kills,
+round(avg(deaths),2) as deaths,
+round(avg(headshots),2) as headshots,
 round(sum(kills)/sum(deaths),2) as kpd,
 hlstats_Clans.tag as tag,
+hlstats_Clans.name as name,
+hlstats_Clans.homepage as homepage,
+hlstats_Clans.mapregion as mapregion,
+hlstats_Clans.clanId as clanId,
 hlstats_Clans.game as game,
 hlstats_Clans.hidden as hidden
 ').where(hideranking: 0).where.not(clan: 0).group(:clan).joins(:team)

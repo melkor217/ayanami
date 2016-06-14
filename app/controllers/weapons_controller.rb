@@ -7,7 +7,7 @@ class WeaponsController < ApplicationController
     param! :order, String, in: %w(asc desc), transform: :downcase, default: "desc"
     param! :sort, String, in: Weapon.sort_allowed?, default: Weapon.sort_default
     param! :search, String, default: nil
-    param! :limit, Integer, in: (10..100), default: 25
+    param! :limit, Integer, in: (10..100), default: 100
     param! :game_game, String, default: Rails.configuration.default_game
     param! :page, Integer, default: 1
     param! :offset, Integer, default: (params[:page]-1)*params[:limit]
