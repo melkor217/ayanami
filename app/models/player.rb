@@ -24,10 +24,10 @@ class Player < ActiveRecord::Base
   scope :uniorder, -> (sort, order) { order("#{sort} #{order}") }
   scope :with_kpd, -> { select('*, round((kills / deaths),2) as kpd') }
 
-  def cached_clan(options = {})
+  def cached_team(options = {})
     options.merge!(expires_in: 10.minutes)
     Rails.cache.fetch({mode: :player_clan, playerId: self.playerId}, options) do
-      clan
+      team
     end
   end
 
@@ -69,13 +69,26 @@ round(avg(activity),2) as avg_activity,
 round(avg(skill),2) as avg_skill,
 round(avg(kills),2) as avg_kills,
 round(sum(kills)/sum(deaths),2) as kpd
-').where(hideranking: 0).where.not(flag: '').group(:flag) }
+').where(hideranking: 0).where.not(flag: '').group(:flag)
+  }
+  scope :by_team, -> { select('min(clan) as clan,
+count(*) as players_total,
+round(avg(connection_time)) as connection_time,
+round(avg(activity),2) as activity,
+round(avg(skill),2) as skill,
+round(avg(kills),2) as kills,
+round(sum(kills)/sum(deaths),2) as kpd,
+hlstats_Clans.tag as tag,
+hlstats_Clans.game as game,
+hlstats_Clans.hidden as hidden
+').where(hideranking: 0).where.not(clan: 0).group(:clan).joins(:team)
+  }
   scope :name_search, ->(name) { where('lastName LIKE :query', query: "%#{name}%") }
   scope :country_search, ->(name) { where('country LIKE :query or flag LIKE :query', query: "%#{name}%") }
 
 
   belongs_to :country, primary_key: :flag, foreign_key: :flag
-  belongs_to :clan, primary_key: :clanId, foreign_key: :clan
+  belongs_to :team, primary_key: :clanId, foreign_key: :clan
 
   has_many :unique_ids, primary_key: :playerId, foreign_key: :playerId
   has_many :frag, foreign_key: :killerId, primary_key: :playerId
@@ -120,9 +133,11 @@ round(sum(kills)/sum(deaths),2) as kpd
       k.first
       # {"ak47"=>[[["ak47", false], 1], [["ak47", true], 2]], "aug"=>[[["aug", false], 1], [["aug", true], 5]] }
     end
+    logger.warn frags
     weapons = []
+    return weapons if not frags.count
     frags.each do |k, v|
-      weapon = Weapon.readonly.find_by(code: k, game: 'csgo')
+      weapon = Weapon.readonly.find_by!(code: k, game: 'csgo')
       weapon.kills = 0
       weapon.headshots = 0
       v.each do |r|

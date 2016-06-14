@@ -14,7 +14,7 @@ json.skill do
 end
 json.steamUrl SteamId.steam_profile_url(uniqueid.uniqueId).to_s
 
-if (clan = player.cached_clan)
+if (clan = player.cached_team)
   json.clan do
     json.name clan.name
     json.clanId clan.clanId

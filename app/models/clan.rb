@@ -1,6 +1,14 @@
 class Clan < ApplicationRecord
+  # Please use Team class instead of this
   self.table_name = "hlstats_Clans" # MySQL table name
 
-  has_many :players, foreign_key: :clan, primary_key: :clanId
-  #accepts_nested_attributes_for :players
+  def self.sort_allowed?
+    # Fields that are allowed for sorting
+    return %w{name homepage game hidden mapregion skill kills headshots deaths members}
+  end
+
+  def self.sort_default
+    # Default sorting field
+    return 'skill'
+  end
 end
