@@ -3,17 +3,14 @@
 <% if @player %>
     <%= react_component '_.PlayerHeader', {url: player_path(@player, format: :json)} %>
 <% end %>
-
+<div class="container">
 <table id="table" class="fixed"
        data-toggle="table"
        data-show-refresh="true"
-       data-show-toggle="true"
-       data-show-columns="true"
        data-flat="true"
        data-pagination="true"
        data-side-pagination="server"
        data-url="<%= frags_path(format: :json, player_id: params[:player_id], game_game: params[:game_game]) %>"
-       data-search="true"
        data-row-style="fragStyle"
        data-page-list="[10, 25, 50, 100]"
        data-search-text="<%= params[:search] %>"
@@ -27,7 +24,7 @@
   </tr>
   </thead>
 </table>
-
+</div>
 <br/>
 <%= link_to 'Back', :back %>
 

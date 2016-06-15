@@ -4,7 +4,7 @@ class ClansController < ApplicationController
 
   def index
     param! :order, String, in: %w(asc desc), transform: :downcase, default: 'desc'
-    param! :sort, String, in: %w{name homepage game hidden mapregion skill kills headshots deaths members activity}, default: 'skill'
+    param! :sort, String, in: %w{name homepage game hidden mapregion skill kills headshots deaths members activity tag}, default: 'skill'
     param! :limit, Integer, in: (10..100), default: 25
     param! :page, Integer, default: 1
     param! :offset, Integer, default: (params[:page]-1)*params[:limit]

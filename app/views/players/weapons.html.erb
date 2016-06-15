@@ -1,3 +1,5 @@
 <%= react_component '_.PlayerHeader', {url: player_path(@player, format: :json)} %>
+<div class="container">
 <%= react_component '_.WeaponTable', {url: weapons_player_path(@player, format: :json)} %>
+</div>
 
