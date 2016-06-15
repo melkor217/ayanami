@@ -5,3 +5,4 @@ module.exports.PlayerHeader = require('commonjs/player').PlayerHeader
 
 module.exports.ServerList = require('commonjs/server').ServerList
 module.exports.WeaponTable = require('commonjs/weapon').WeaponTable
+module.exports.ClanTable = require('commonjs/clan').ClanTable
