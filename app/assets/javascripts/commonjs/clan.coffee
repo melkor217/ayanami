@@ -6,24 +6,28 @@ ClanTable = React.createClass
 
   getData: ->
     if @props.url
-      console.log @state.page
       full_url = @props.url
       full_url += "?offset=#{(@state.page - 1) * @state.size_per_page}"
       full_url += "&limit=#{@state.size_per_page}"
       full_url += "&sort=#{@state.sort_name}"
       full_url += "&order=#{@state.sort_order}"
-      console.log full_url
+      full_url += "&members=#{@props.members}"
       @serverRequest = $.get full_url, (data) =>
         @setState response: data
 
   onPageChange: (page, size_per_page) ->
+    new_uri = updateQueryStringParameter(updateQueryStringParameter(window.location.href, 'page', page), 'limit', size_per_page)
+    history.pushState { url: new_uri }, 'title', new_uri
     @setState page: page, size_per_page: size_per_page
 
   onSizePerPageList: (size_per_page) ->
+    new_uri = updateQueryStringParameter(window.location.href, 'limit', size_per_page)
+    history.pushState { url: new_uri }, 'title', new_uri
     @setState size_per_page: size_per_page
 
   onSortChange: (sort_name, sort_order) ->
-    console.log sort_name
+    new_uri = updateQueryStringParameter(updateQueryStringParameter(window.location.href, 'sort', sort_name), 'order', sort_order)
+    history.pushState { url: new_uri }, 'title', new_uri
     @setState sort_name: sort_name, sort_order: sort_order
 
   componentDidUpdate: (prevProps, prevState) ->
@@ -38,9 +42,10 @@ ClanTable = React.createClass
       rows: []
       total: 0
     page: 1
-    size_per_page: 25
-    sort_name: 'skill'
-    sort_order: 'desc'
+    members: 3
+    size_per_page: @props.size_per_page
+    sort_name: @props.sort
+    sort_order: @props.order
 
   render: ->
     React.createElement(BootstrapTable,

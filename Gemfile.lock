@@ -118,6 +118,10 @@ GEM
       activerecord (>= 4.0.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    hairtrigger (0.2.17)
+      activerecord (>= 2.3)
+      ruby2ruby (~> 2.0)
+      ruby_parser (~> 3.7)
     hashie (3.4.4)
     i18n (0.7.0)
     jbuilder (2.5.0)
@@ -233,6 +237,11 @@ GEM
       redis (>= 2.2)
     ref (2.0.0)
     ruby-openid (2.7.0)
+    ruby2ruby (2.3.0)
+      ruby_parser (~> 3.1)
+      sexp_processor (~> 4.0)
+    ruby_parser (3.8.2)
+      sexp_processor (~> 4.1)
     rufus-scheduler (3.1.10)
     sass (3.4.22)
     sass-rails (5.0.4)
@@ -244,6 +253,7 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    sexp_processor (4.7.0)
     sidekiq-scheduler (2.0.7)
       multi_json (~> 1)
       redis (~> 3)
@@ -296,6 +306,7 @@ DEPENDENCIES
   coffee-rails!
   composite_primary_keys!
   friendly_id
+  hairtrigger
   jbuilder (~> 2.0)
   jquery-rails
   kaminari!

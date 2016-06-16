@@ -2,6 +2,43 @@ class Player < ActiveRecord::Base
 
   self.table_name = "hlstats_Players" # MySQL table name
 
+  trigger.after(:update).of(:clan, :hideranking) do
+   '
+    BEGIN
+      IF NEW.hideranking <> OLD.hideranking THEN
+        IF NEW.hideranking = 0  THEN
+          UPDATE hlstats_Clans SET members = members + 1 where clanId = OLD.clan;
+        END IF;
+        IF OLD.hideranking = 0  THEN
+          UPDATE hlstats_Clans SET members = members - 1 where clanId = OLD.clan;
+        END IF;
+      END IF;
+      IF NEW.clan <> OLD.clan THEN
+        IF NEW.clan <> 0  THEN
+          UPDATE hlstats_Clans SET members = members + 1 where clanId = NEW.clan;
+        END IF;
+        IF OLD.clan <> 0 THEN
+          UPDATE hlstats_Clans SET members = members - 1 where clanId = OLD.clan;
+        END IF;
+      END IF;
+    END;'
+  end
+  trigger.after(:insert) do
+    '
+    BEGIN
+      IF NEW.clan <> 0 and NEW.hideranking = 0 THEN
+        UPDATE hlstats_Clans SET members = members + 1 where clanId = NEW.clan;
+      END IF;
+    END;'
+  end
+  trigger.after(:delete) do
+    '
+    BEGIN
+      IF OLD.clan <> 0 and OLD.hideranking = 0 THEN
+        UPDATE hlstats_Clans SET members = members - 1 where clanId = OLD.clan;
+      END IF;
+    END;'
+  end
 
   def self.sort_allowed?
     # Fields that are allowed for sorting
@@ -71,7 +108,7 @@ round(avg(kills),2) as avg_kills,
 round(sum(kills)/sum(deaths),2) as kpd
 ').where(hideranking: 0).where.not(flag: '').group(:flag)
   }
-  scope :by_team, -> { select('min(clan) as clan,
+  scope :by_team, -> (member_limit = 3) { select("min(clan) as clan,
 count(*) as members,
 avg(connection_time) as connection_time,
 avg(activity) as activity,
@@ -87,7 +124,7 @@ hlstats_Clans.mapregion as mapregion,
 hlstats_Clans.clanId as clanId,
 hlstats_Clans.game as game,
 hlstats_Clans.hidden as hidden
-').where(hideranking: 0).where.not(clan: 0).group(:clan).joins(:team)
+").where(hideranking: 0).where.not(clan: 0).group(:clan).joins(:team).having('members >= ?', member_limit.to_i)
   }
   scope :name_search, ->(name) { where('lastName LIKE :query', query: "%#{name}%") }
   scope :country_search, ->(name) { where('country LIKE :query or flag LIKE :query', query: "%#{name}%") }

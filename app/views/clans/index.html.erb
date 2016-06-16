@@ -1,3 +1,8 @@
 <div class="container">
-<%= react_component '_.ClanTable', {url: clans_path(format: :json)} %>
+  <%= react_component '_.ClanTable', {url: clans_path(format: :json),
+                                      members: params[:members],
+                                      sort: params[:sort],
+                                      order: params[:order],
+                                      page: params[:page],
+                                      size_per_page: params[:limit]} %>
 </div>

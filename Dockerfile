@@ -1,5 +1,7 @@
 FROM debian:sid
 
+CMD passenger start
+
 RUN apt-get update && apt-get install -y git ruby bundler libcurl4-openssl-dev libssl-dev zlib1g-dev libmysqlclient-dev wget curl npm nodejs-legacy procps
 RUN rm -rfv /var/lib/apt/lists/*
 
@@ -18,7 +20,6 @@ RUN passenger-install-nginx-module --auto
 COPY ./package.json .
 RUN npm install
 
-CMD passenger start
 
 COPY . /ayanami
 

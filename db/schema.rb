@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160607005551) do
+ActiveRecord::Schema.define(version: 20160616012914) do
 
   create_table "geoLiteCity_Blocks", id: false, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
     t.bigint "startIpNum", default: 0, null: false, unsigned: true
@@ -64,14 +64,20 @@ ActiveRecord::Schema.define(version: 20160607005551) do
   end
 
   create_table "hlstats_Clans", primary_key: "clanId", unsigned: true, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
-    t.string  "tag",       limit: 64,  default: "", null: false
-    t.string  "name",      limit: 128, default: "", null: false
-    t.string  "homepage",  limit: 64,  default: "", null: false
-    t.string  "game",      limit: 32,  default: "", null: false
-    t.integer "hidden",    limit: 1,   default: 0,  null: false, unsigned: true
-    t.string  "mapregion", limit: 128, default: "", null: false
+    t.string   "tag",                   limit: 64,  default: "", null: false
+    t.string   "name",                  limit: 128, default: "", null: false
+    t.string   "homepage",              limit: 64,  default: "", null: false
+    t.string   "game",                  limit: 32,  default: "", null: false
+    t.integer  "hidden",                limit: 1,   default: 0,  null: false, unsigned: true
+    t.string   "mapregion",             limit: 128, default: "", null: false
+    t.integer  "members",                           default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "members_calculated_at"
     t.index ["game", "tag"], name: "tag", unique: true, using: :btree
     t.index ["game"], name: "game", using: :btree
+    t.index ["members"], name: "index_hlstats_Clans_on_members", using: :btree
+    t.index ["members_calculated_at"], name: "index_hlstats_Clans_on_members_calculated_at", using: :btree
   end
 
   create_table "hlstats_Countries", primary_key: "flag", id: :string, limit: 16, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
@@ -701,5 +707,65 @@ ActiveRecord::Schema.define(version: 20160607005551) do
     t.index ["groupURL"], name: "index_steam_groups_on_groupURL", using: :btree
     t.index ["memberCount"], name: "index_steam_groups_on_memberCount", using: :btree
   end
+
+  # WARNING: generating adapter-specific definition for hlstats_players_after_delete_row_tr due to a mismatch.
+  # either there's a bug in hairtrigger or you've messed up your migrations and/or db :-/
+  execute(<<-TRIGGERSQL)
+CREATE DEFINER = 'csgods'@'localhost' TRIGGER hlstats_players_after_delete_row_tr AFTER DELETE ON `hlstats_Players`
+FOR EACH ROW
+BEGIN
+    
+        BEGIN
+          IF OLD.clan <> 0 and OLD.hideranking = 0 THEN
+            UPDATE hlstats_Clans SET members = members - 1 where clanId = OLD.clan;
+          END IF;
+        END;
+END
+  TRIGGERSQL
+
+  # WARNING: generating adapter-specific definition for hlstats_players_after_insert_row_tr due to a mismatch.
+  # either there's a bug in hairtrigger or you've messed up your migrations and/or db :-/
+  execute(<<-TRIGGERSQL)
+CREATE DEFINER = 'csgods'@'localhost' TRIGGER hlstats_players_after_insert_row_tr AFTER INSERT ON `hlstats_Players`
+FOR EACH ROW
+BEGIN
+    
+        BEGIN
+          IF NEW.clan <> 0 and NEW.hideranking = 0 THEN
+            UPDATE hlstats_Clans SET members = members + 1 where clanId = NEW.clan;
+          END IF;
+        END;
+END
+  TRIGGERSQL
+
+  # WARNING: generating adapter-specific definition for hlstats_players_after_update_of_clan_hideranking_row_tr due to a mismatch.
+  # either there's a bug in hairtrigger or you've messed up your migrations and/or db :-/
+  execute(<<-TRIGGERSQL)
+CREATE DEFINER = 'csgods'@'localhost' TRIGGER hlstats_players_after_update_of_clan_hideranking_row_tr AFTER UPDATE ON `hlstats_Players`
+FOR EACH ROW
+BEGIN
+    IF NEW.clan <> OLD.clan OR (NEW.clan IS NULL) <> (OLD.clan IS NULL) OR NEW.hideranking <> OLD.hideranking OR (NEW.hideranking IS NULL) <> (OLD.hideranking IS NULL) THEN
+        
+            BEGIN
+              IF NEW.hideranking <> OLD.hideranking THEN
+                IF NEW.hideranking = 0  THEN
+                  UPDATE hlstats_Clans SET members = members + 1 where clanId = OLD.clan;
+                END IF;
+                IF OLD.hideranking = 0  THEN
+                  UPDATE hlstats_Clans SET members = members - 1 where clanId = OLD.clan;
+                END IF;
+              END IF;
+              IF NEW.clan <> OLD.clan THEN
+                IF NEW.clan <> 0  THEN
+                  UPDATE hlstats_Clans SET members = members + 1 where clanId = NEW.clan;
+                END IF;
+                IF OLD.clan <> 0 THEN
+                  UPDATE hlstats_Clans SET members = members - 1 where clanId = OLD.clan;
+                END IF;
+              END IF;
+            END;
+    END IF;
+END
+  TRIGGERSQL
 
 end

@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+
 SKILL_RATIO_CAP = 1
 SKILL_MAX_CHANGE = 25
 SKILL_MIN_CHANGE = 2
@@ -127,6 +128,7 @@ end
 152.times do
   sample_games.each do |game|
     player = Player.create do |player|
+      player.clan = 0
       player.game = game
       player.lastName = (RandomWord.adjs.next.to_s + ' ' + RandomWord.nouns.next.to_s).titleize[0..63]
       player.activity = rand (0..100)
@@ -138,7 +140,7 @@ end
       player.country = c
       player.last_skill_change = rand(-130..130)
       if rand(0..100) > 80
-        player.clan = Clan.where(game: game).sample
+        player.clan = Clan.where(game: game).sample.clanId
       end
     end
     UniqueId.create(player: player, uniqueId: player.playerId+999999, game: game)
@@ -164,8 +166,12 @@ sample_games.each do |game_str|
         max_players: 15)
   end
 end
-Player.all.each do |player|
-  rand(0..30).times do
+
+pcount = Player.all.count
+
+Player.all.each_with_index do |player, index|
+  puts "Processing kills: #{index}/#{pcount}"
+  rand(0..15).times do
     random_player = Player.where.not(playerId: player.playerId).sample
     rand(1..5).times do
       server = Server.where(game: random_player.game).sample

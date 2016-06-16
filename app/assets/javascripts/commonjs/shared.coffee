@@ -47,7 +47,7 @@ ProgressBar = React.createClass
               ]
           ]
       ]
-      
+
 module.exports.ProgressBar = ProgressBar
 module.exports.Ranking = Ranking
 module.exports.Skill = Skill
