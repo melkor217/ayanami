@@ -11,9 +11,13 @@ class PlayersController < ApplicationController
     param! :offset, Integer, default: (params[:page]-1)*params[:limit]
 
 
+    puts params
     if request.format.json?
-      if params[:countryId]
-        query = Country.find(params[:countryId]).players.where(hideranking: 0)
+      puts params
+      if params[:country_countryId]
+        query = Country.find(params[:country_countryId]).players.where(hideranking: 0)
+      elsif params[:clan_clanId]
+        query = Team.find(params[:clan_clanId]).players.where(hideranking: 0)
       else
         query = Player.where(hideranking: 0)
       end

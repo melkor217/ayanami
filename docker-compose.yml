@@ -43,6 +43,7 @@ services:
     ports:
       - "127.0.0.1:3457:80"
   graphite:
+    restart: unless-stopped
     image: hopsoft/graphite-statsd
     ports:
       - "127.0.0.1:33456:80"

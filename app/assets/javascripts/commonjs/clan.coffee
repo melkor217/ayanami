@@ -47,6 +47,9 @@ ClanTable = React.createClass
     sort_name: @props.sort
     sort_order: @props.order
 
+  tagNameFormatter: (cell, row) ->
+    React.DOM.a {href: row.path}, row.tag
+
   render: ->
     React.createElement(BootstrapTable,
       data: @state.response.rows
@@ -68,6 +71,7 @@ ClanTable = React.createClass
         React.createElement(TableHeaderColumn, {
             dataField: 'tag'
             key: 'tag'
+            dataFormat: @tagNameFormatter
             dataSort: true
             isKey: true
           }

@@ -18,6 +18,6 @@ if (clan = player.cached_team)
   json.clan do
     json.name clan.name
     json.clanId clan.clanId
-    json.path clan_url(clan)
+    json.path clan_players_url(clan)
   end
 end

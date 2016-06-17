@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160616012914) do
+ActiveRecord::Schema.define(version: 20160616123559) do
 
   create_table "geoLiteCity_Blocks", id: false, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
     t.bigint "startIpNum", default: 0, null: false, unsigned: true
@@ -499,6 +499,7 @@ ActiveRecord::Schema.define(version: 20160616012914) do
     t.integer "createdate",                    default: 0,    null: false
     t.integer "mmrank"
     t.index ["clan", "playerId"], name: "playerclan", using: :btree
+    t.index ["flag"], name: "index_hlstats_Players_on_flag", using: :btree
     t.index ["game"], name: "game", using: :btree
     t.index ["hideranking"], name: "hideranking", using: :btree
     t.index ["kills"], name: "kills", using: :btree

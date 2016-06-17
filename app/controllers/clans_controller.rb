@@ -22,11 +22,11 @@ class ClansController < ApplicationController
   end
 
   def show
-    param! :clanId, Integer
   end
 
 
   def set_clan
-    @clan = Team.find(params[:clanId])
+    param! :clanId, Integer
+    @clan = Player.where(clan: params[:clanId]).by_team(1).first
   end
 end

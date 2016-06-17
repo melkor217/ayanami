@@ -14,7 +14,7 @@ PlayerHeader = React.createClass
   getInitialState: ->
     player: {}
   render: ->
-    {a, div, img, ul, li} = React.DOM
+    {a, div, img, ul, li, span} = React.DOM
     div
       className: "container-fluid"
       children: [
@@ -30,8 +30,13 @@ PlayerHeader = React.createClass
                   src: @state.player.avatarIcon
                   width: 30
                   height: 30
-                React.DOM.h2 {style: {display: 'inline', marginLeft: '0.3em', verticalAlign: 'middle'}},
-                    @state.player.lastName
+                React.DOM.h2
+                  style: {display: 'inline', marginLeft: '0.3em', verticalAlign: 'middle'}
+                  children: [
+                    if @state.player.clan
+                      React.DOM.mark style: {margin: '0em 0.2em'}, "#{@state.player.clan.name}"
+                    span null, @state.player.lastName
+                  ]
                 if @state.player.steamUrl and @state.player.steamIcon
                   a {href: @state.player.steamUrl, className: "btn-link"},
                     img
@@ -144,6 +149,12 @@ Player = React.createClass
                   tr null,
                     td null, "Ranking"
                     td null, React.createElement(Ranking, current: @state.player.ranking, total: @props.total)
+                  if @state.player.clan
+                    tr null,
+                      td null, "Clan"
+                      td null,
+                        a {href: @state.player.clan.path, className: "btn-link"},
+                          "#{@state.player.clan.name}"
                   if @state.player.country
                     tr null,
                         td null, "Country"

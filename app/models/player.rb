@@ -108,15 +108,14 @@ round(avg(kills),2) as avg_kills,
 round(sum(kills)/sum(deaths),2) as kpd
 ').where(hideranking: 0).where.not(flag: '').group(:flag)
   }
-  scope :by_team, -> (member_limit = 3) { select("min(clan) as clan,
-count(*) as members,
-avg(connection_time) as connection_time,
+  scope :by_team, -> (member_limit = 3) { select("avg(connection_time) as connection_time,
 avg(activity) as activity,
 avg(skill) as skill,
 avg(kills) as kills,
 avg(deaths) as deaths,
 avg(last_skill_change) as last_skill_change,
 avg(headshots) as headshots,
+hlstats_Clans.members as members,
 hlstats_Clans.tag as tag,
 hlstats_Clans.name as name,
 hlstats_Clans.homepage as homepage,

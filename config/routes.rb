@@ -13,8 +13,12 @@ Rails.application.routes.draw do
   resources :weapons, param: :code
   resources :frags
   resources :servers
-  resources :clans, param: :clanId
-  resources :countries, param: :countryId
+  resources :clans, param: :clanId do
+    resources :players
+  end
+  resources :countries, param: :countryId do
+    resources :players
+  end
   resources :players do
     member do
       get :killstats
