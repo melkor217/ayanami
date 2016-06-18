@@ -8,7 +8,7 @@ services:
       - mysql
       - graphite
     command: >
-                 bash -lc "./wait-for-it.sh -t 300 redis:6379; ./wait-for-it.sh -t 300 mysql:3306;
+                 bash -lc "./wait-for-it.sh -t 0 redis:6379; ./wait-for-it.sh -t 0 mysql:3306;
                  rake db:check || rake db:create db:structure:load;
                  rake db:migrate;
                  rails runner 'HeatWeaponCacheJob.perform_later';
@@ -42,6 +42,13 @@ services:
     build: noxus
     ports:
       - "127.0.0.1:3457:80"
+  sourcebans:
+    env_file: ./secrets.env
+    links:
+      - mysql
+    build: sourcebans
+    ports:
+      - "127.0.0.1:3460:80"
   graphite:
     restart: unless-stopped
     image: hopsoft/graphite-statsd
@@ -49,6 +56,17 @@ services:
       - "127.0.0.1:33456:80"
     volumes:
       - graphite-data:/opt/graphite/storage
+  lb:
+    restart: unless-stopped
+    image: 'dockercloud/haproxy:latest'
+    links:
+      - ayanami
+    environment:
+      TCP_PORTS: 3000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "127.0.0.1:3459:80"
 
 volumes:
   graphite-data:

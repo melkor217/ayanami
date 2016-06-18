@@ -1,3 +1,6 @@
 [submodule "noxus"]
 	path = noxus
 	url = https://github.com/melkor217/noxus.git
+[submodule "sourcebans"]
+	path = sourcebans
+	url = https://github.com/melkor217/SourceBans-Fork.git
