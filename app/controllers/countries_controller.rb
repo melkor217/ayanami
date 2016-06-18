@@ -7,12 +7,13 @@ class CountriesController < ApplicationController
     param! :order, String, in: %w(asc desc), transform: :downcase, default: 'desc'
     param! :sort, String, in: Player.sort_allowed_by_country?, default: Player.sort_default_by_country
     param! :search, String, default: nil
-    #@countries = Player.by_country.order(params[:sort] => params[:order])
-    query = Player.by_country.uniorder(params[:sort], params[:order])
-    if params[:search]
-      query = query.country_search(params[:search])
+    if request.format.json?
+      query = Player.by_country.uniorder(params[:sort], params[:order])
+      if params[:search]
+        query = query.country_search(params[:search])
+      end
+      @countries = query
     end
-    @countries = query
   end
 
   # GET /countries/1
