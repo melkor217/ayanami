@@ -43,6 +43,7 @@ services:
     ports:
       - "127.0.0.1:3457:80"
   sourcebans:
+    restart: unless-stopped
     env_file: ./secrets.env
     links:
       - mysql
