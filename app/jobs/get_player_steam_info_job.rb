@@ -3,24 +3,26 @@ class GetPlayerSteamInfoJob < ApplicationJob
     logger.warn options.to_s
     uniqueid = UniqueId.find_by!(options)
     # Do something later
-    if uniqueid and (uri = SteamId.steam_profile_url(uniqueid.uniqueId, format: :xml))
+    if uniqueid
       s = Redis::Semaphore.new(:steam, Rails.application.config.semaphore)
       s.lock
       begin
-        doc = Nokogiri::XML(Net::HTTP.get(uri))
-        logger.debug("Getting info for group #{uri.to_s}")
-        raise IOError, 'Incorrect XML :(' if doc.xpath('//profile/steamID64').text.to_i == 0
+        if uri = SteamId.steam_profile_url(uniqueid.uniqueId, format: :xml)
+          doc = Nokogiri::XML(Net::HTTP.get(uri))
+          logger.debug("Getting info for player #{uri.to_s}")
+          raise IOError, 'Incorrect XML :(' if doc.xpath('//profile/steamID64').text.to_i == 0
 
-        uniqueid.avatarFull = doc.xpath('//profile/avatarFull').text
-        uniqueid.avatarMedium = doc.xpath('//profile/avatarMedium').text
-        uniqueid.avatarIcon = doc.xpath('//profile/avatarIcon').text
-        uniqueid.vacBanned = doc.xpath('//profile/vacBanned').text
-        uniqueid.memberSince = doc.xpath('//profile/memberSince').text
-        uniqueid.isLimitedAccount = doc.xpath('//profile/isLimitedAccount').text
-        uniqueid.location = doc.xpath('//profile/location').text
-        uniqueid.customURL = doc.xpath('//profile/customURL').text
-        uniqueid.realname = doc.xpath('//profile/realname').text
-        uniqueid.personaname = doc.xpath('//profile/steamID').text
+          uniqueid.avatarFull = doc.xpath('//profile/avatarFull').text
+          uniqueid.avatarMedium = doc.xpath('//profile/avatarMedium').text
+          uniqueid.avatarIcon = doc.xpath('//profile/avatarIcon').text
+          uniqueid.vacBanned = doc.xpath('//profile/vacBanned').text
+          uniqueid.memberSince = doc.xpath('//profile/memberSince').text
+          uniqueid.isLimitedAccount = doc.xpath('//profile/isLimitedAccount').text
+          uniqueid.location = doc.xpath('//profile/location').text
+          uniqueid.customURL = doc.xpath('//profile/customURL').text
+          uniqueid.realname = doc.xpath('//profile/realname').text
+          uniqueid.personaname = doc.xpath('//profile/steamID').text
+        end
 
         uniqueid.steamUpdated = Time.now
         uniqueid.save
