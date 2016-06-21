@@ -36,8 +36,8 @@ class PlayersController < ApplicationController
   def show
     @total = Player.total
     @skill_limits = {
-        min: Player.where(hideranking: 0).cached_minimum(:skill),
-        max: Player.where(hideranking: 0).cached_maximum(:skill)
+        min: Player.all.cached_minimum(:skill),
+        max: Player.all.cached_maximum(:skill)
     }
   end
 
