@@ -134,6 +134,7 @@ hlstats_Clans.hidden as hidden
 
   has_many :unique_ids, primary_key: :playerId, foreign_key: :playerId
   has_many :frag, foreign_key: :killerId, primary_key: :playerId
+  has_many :chat, foreign_key: :playerId, primary_key: :playerId
 
   def frag(game = nil)
     if game

@@ -16,6 +16,17 @@ DEFAULT_SKILL = 1000
 
 sample_games = %w(csgo tf)
 
+def do_chat(player, message, message_mode, event_time)
+  Chat.create do |chat|
+    chat.player = player
+    chat.message = message
+    chat.message_mode = message_mode
+    chat.eventTime = event_time
+    chat.map = 'de_dust2'
+    chat.serverId = Server.all.sample.serverId
+  end
+end
+
 def killer_skill_change(killer, victim, weapon)
   return if not killer.skill or not victim.skill
   # From hlstats.pl, 17.05.2016
@@ -104,15 +115,26 @@ def do_kill(killer, victim, weapon, server)
     weapon.headshots += 1
   end
   weapon.save
-
+  event_time = rand(1.year.ago..Time.now)
   Frag.create(serverId: server.serverId,
               map: 'de_dust2',
               killerId: killer.playerId,
               victimId: victim.playerId,
               weapon: weapon.code,
-              eventTime: rand(1.year.ago..Time.now),
+              eventTime: event_time,
               headshot: headshot)
-
+  if rand(0..100) > 95
+    do_chat(victim, 'cyka', 0, event_time)
+  end
+  if rand(0..100) > 95
+    do_chat(victim, 'reported', 0, event_time)
+  end
+  if rand(0..100) > 95
+    do_chat(killer, 'commend me', 1, event_time)
+  end
+  if rand(0..100) > 95
+    do_chat(killer, 'ez', 0, event_time)
+  end
 end
 
 

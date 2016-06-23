@@ -1,6 +1,7 @@
 
 Rails.application.routes.draw do
 
+  resources :chats
   post '/auth/:provider/callback', to: 'session#create'
 
   require 'sidekiq/web'
