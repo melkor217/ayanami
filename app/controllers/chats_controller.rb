@@ -9,7 +9,11 @@ class ChatsController < ApplicationController
     param! :offset, Integer, default: (params[:page]-1)*params[:limit]
     param! :game_game, String, default: Rails.configuration.default_game
 
-    @chats = Chat.all
+    if request.format.json?
+      query = Chat.all
+      @messages = query.order(id: :desc).limit(params[:limit]).offset(params[:offset])
+      @total = query.count
+    end
   end
 
   # GET /chats/1
@@ -19,8 +23,8 @@ class ChatsController < ApplicationController
 
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_chat
-      @chat = Chat.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_chat
+    @chat = Chat.find(params[:id])
+  end
 end
