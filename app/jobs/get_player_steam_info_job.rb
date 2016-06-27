@@ -6,17 +6,20 @@ class GetPlayerSteamInfoJob < ApplicationJob
     if uniqueid
       s = Redis::Semaphore.new(:steam, Rails.application.config.semaphore)
       logger.debug("#{@job_id} Locking: start")
-      s.lock(60)
+      s.lock || raise('Semaphore timeout')
       logger.debug("#{@job_id} Locking: done")
       begin
         if uri = SteamId.steam_profile_url(uniqueid.uniqueId, format: :xml)
           logger.debug("#{@job_id} Getting info for player #{uri.to_s}")
-          body = Net::HTTP.start(uri.host, uri.port, read_timeout: 15) do |http|
-            request = http.request(Net::HTTP::Get.new(uri))
-            (request.kind_of? Net::HTTPSuccess) ? request.body : nil
+          $statsd.time 'SteamAPI.response_time.steam_profile' do
+            @body = Net::HTTP.start(uri.host, uri.port, read_timeout: 15) do |http|
+              request = http.request(Net::HTTP::Get.new(uri))
+              $statsd.increment "SteamAPI.response_code.#{request.code.to_s}"
+              (request.kind_of? Net::HTTPSuccess) ? request.body : nil
+            end
           end
           logger.debug("#{@job_id} Done")
-          doc = Nokogiri::XML(body)
+          doc = Nokogiri::XML(@body)
           raise IOError, 'Incorrect XML :(' if doc.xpath('//profile/steamID64').text.to_i == 0
 
           uniqueid.avatarFull = doc.xpath('//profile/avatarFull').text
