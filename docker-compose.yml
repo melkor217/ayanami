@@ -70,9 +70,6 @@ services:
       - "127.0.0.1:3459:80"
 
 volumes:
-  graphite-data:
-    external: false
-  redis-data:
-    external: false
-  mysql-data:
-    external: false
+  graphite-data: {}
+  redis-data: {}
+  mysql-data: {}

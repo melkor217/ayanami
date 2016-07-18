@@ -1,6 +1,6 @@
 FROM debian:sid
 
-CMD passenger start
+CMD ["passenger", "start"]
 
 RUN apt-get update && apt-get install -y git ruby bundler libcurl4-openssl-dev libssl-dev zlib1g-dev libmysqlclient-dev wget curl npm nodejs-legacy procps
 RUN rm -rfv /var/lib/apt/lists/*

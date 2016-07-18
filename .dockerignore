@@ -19,3 +19,7 @@ tmp
 .rake_tasks~
 public/assets/
 node_moudules
+Dockerfile
+docker-compose.yml
+noxus
+sourcebans
