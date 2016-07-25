@@ -1,0 +1,7 @@
+<div class="container">
+  <%= react_component '_.ChatTable', {url: chats_path(format: :json),
+                                      sort: params[:sort],
+                                      order: params[:order],
+                                      page: params[:page],
+                                      size_per_page: params[:limit]} %>
+</div>
