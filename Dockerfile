@@ -2,7 +2,10 @@ FROM debian:sid
 
 CMD ["passenger", "start"]
 
-RUN apt-get update && apt-get install -y git ruby bundler libcurl4-openssl-dev libssl-dev zlib1g-dev libmysqlclient-dev wget curl npm nodejs-legacy procps
+RUN apt-get update && apt-get install -y git ruby bundler \
+libcurl4-openssl-dev libssl-dev zlib1g-dev libmysqlclient-dev wget curl npm nodejs-legacy procps \
+htop mc iotop
+
 RUN rm -rfv /var/lib/apt/lists/*
 
 RUN mkdir /ayanami
