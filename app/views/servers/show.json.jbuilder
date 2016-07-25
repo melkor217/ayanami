@@ -1,1 +1,1 @@
-json.partial! 'servers/show', server: @server
+json.partial! 'servers/verbose', server: @server

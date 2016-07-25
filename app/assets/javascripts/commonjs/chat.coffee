@@ -45,12 +45,19 @@ ChatTable = React.createClass
       children: [
         if cell.avatarIcon
           img {src: cell.avatarIcon, width: '30px', height: '30px'}
+        if cell.avatarIcon
+          " "
         if cell.clan
           small {},
             mark {},
               cell.clan.name
+        if cell.clan
+          " "
         cell.lastName
       ]
+
+  serverNameFormatter: (cell, row) ->
+    cell.name
 
   render: ->
     console.log("123123")
@@ -85,6 +92,22 @@ ChatTable = React.createClass
             key: 'message'
           }
           'Message')
+        React.createElement(TableHeaderColumn, {
+            dataField: 'eventTime'
+            key: 'eventTime'
+          }
+          'Time')
+        React.createElement(TableHeaderColumn, {
+            dataField: 'map'
+            key: 'map'
+          }
+          'Map')
+        React.createElement(TableHeaderColumn, {
+            dataField: 'server'
+            dataFormat: @serverNameFormatter
+            key: 'server'
+          }
+          'Server')
       ]
     )
 
