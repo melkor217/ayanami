@@ -7,8 +7,14 @@ class CountriesController < ApplicationController
     param! :order, String, in: %w(asc desc), transform: :downcase, default: 'desc'
     param! :sort, String, in: Player.sort_allowed_by_country?, default: Player.sort_default_by_country
     param! :search, String, default: nil
+    param! :with_inactive, Integer, default: 0
     if request.format.json?
-      query = Player.by_country.uniorder(params[:sort], params[:order])
+      if params[:with_inactive] == 1
+        query = Player.all
+      else
+        query = Player.where(hideranking: 0)
+      end
+      query = query.by_country.uniorder(params[:sort], params[:order])
       if params[:search]
         query = query.country_search(params[:search])
       end

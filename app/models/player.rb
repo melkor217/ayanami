@@ -3,7 +3,7 @@ class Player < ActiveRecord::Base
   self.table_name = "hlstats_Players" # MySQL table name
 
   trigger.after(:update).of(:clan, :hideranking) do
-   '
+    '
     BEGIN
       IF NEW.hideranking <> OLD.hideranking THEN
         IF NEW.hideranking = 0  THEN
@@ -98,15 +98,16 @@ class Player < ActiveRecord::Base
 
   # Stewpid query, but i don't really wanna change legacy scheme
   # any_value for compat with  ONLY_FULL_GROUP_BY mode
-  scope :by_country, -> { select('flag,
-min(country) as country,
+  scope :by_country, -> {
+    select('any_value(flag) as flag,
+any_value(country) as country,
 count(*) as players_total,
 round(avg(connection_time)) as avg_connection_time,
 round(avg(activity),2) as avg_activity,
 round(avg(skill),2) as avg_skill,
 round(avg(kills),2) as avg_kills,
 round(sum(kills)/sum(deaths),2) as kpd
-').where(hideranking: 0).where.not(flag: '').group(:flag)
+').where.not(flag: '').group(:flag)
   }
   scope :by_team, -> (member_limit = 3) { select("avg(connection_time) as connection_time,
 avg(activity) as activity,

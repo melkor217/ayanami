@@ -9,7 +9,7 @@
        data-show-toggle="true"
        data-show-columns="true"
        data-flat="true"
-       data-url="<%= countries_path(format: :json) %>"
+       data-url="<%= countries_path(format: :json, with_inactive: params[:with_inactive]) %>"
        data-pagination="true"
        data-side-pagination="client"
        data-search="true"
