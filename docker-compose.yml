@@ -2,6 +2,20 @@ version: '2'
 
 services:
   ayanami:
+    build: .
+    env_file: ./secrets.env
+    links:
+      - redis
+      - mysql
+      - graphite
+    command: >
+                 bash -lc "./wait-for-it.sh -t 0 redis:6379; ./wait-for-it.sh -t 0 mysql:3306;
+                 passenger start"
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3456:3000"
+  workers:
+    build: .
     env_file: ./secrets.env
     links:
       - redis
@@ -12,12 +26,7 @@ services:
                  rake db:check || rake db:create db:structure:load;
                  rake db:migrate;
                  rails runner 'HeatWeaponCacheJob.perform_later';
-                 bundle exec sidekiq -d -C config/sidekiq.yml;
-                 passenger start"
-    restart: unless-stopped
-    build: .
-    ports:
-      - "127.0.0.1:3456:3000"
+                 bundle exec sidekiq -C config/sidekiq.yml"
   mysql:
     env_file: ./secrets.env
     image: mysql
@@ -25,7 +34,7 @@ services:
     command: mysqld
     restart: unless-stopped
     ports:
-      - "127.0.0.1:13306:3306"
+      - "0.0.0.0:13306:3306"
     volumes:
       - /srv/ayanami/mysql:/var/lib/mysql
   redis:
@@ -57,9 +66,20 @@ services:
       - "127.0.0.1:33456:80"
     volumes:
       - graphite-data:/opt/graphite/storage
+  stats:
+    build: ./docker-docker-stats-statsd/
+    privileged: true
+    environment:
+      STATSD_HOST: graphite
+      STATSD_PORT: 8125
+      STATSD_PREFIX: docker.
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    links:
+      - graphite
   lb:
     restart: unless-stopped
-    image: 'dockercloud/haproxy:latest'
+    image: dockercloud/haproxy:latest
     links:
       - ayanami
     environment:

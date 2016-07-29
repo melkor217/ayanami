@@ -4,3 +4,6 @@
 [submodule "sourcebans"]
 	path = sourcebans
 	url = https://github.com/melkor217/SourceBans-Fork.git
+[submodule "docker-docker-stats-statsd"]
+	path = docker-docker-stats-statsd
+	url = https://github.com/davidgiesberg/docker-docker-stats-statsd.git
