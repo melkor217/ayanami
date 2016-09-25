@@ -17,7 +17,7 @@ COPY ./Gemfile.lock .
 ENV RAILS_ENV production
 ENV RAILS_PUBLIC_FILE_SERVER true
 
-RUN bundle install
+RUN bundle install --without development
 RUN passenger-install-nginx-module --auto
 
 COPY ./package.json .

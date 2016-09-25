@@ -4,9 +4,7 @@ json.extract! player, :playerId, :lastName, :kills, :deaths, :headshots, :activi
 json.url player_path(player, format: :json)
 json.path player_url(player)
 json.pathname player_path(player)
-if player[:kpd]
-  json.extract! player, :kpd
-end
+json.extract!(player, :kpd) if player[:kpd]
 json.avatarIcon avatar_url(uniqueid.avatar_icon)
 json.skill do
   json.points player.skill
@@ -21,3 +19,9 @@ if (clan = player.cached_team)
     json.path clan_players_url(clan)
   end
 end
+if (country = player.cached_country)
+  json.country do
+    json.partial! 'countries/show', country: country
+  end
+end
+

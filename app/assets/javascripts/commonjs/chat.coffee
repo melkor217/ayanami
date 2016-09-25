@@ -1,5 +1,4 @@
 {img, span, a, small, mark} = React.DOM
-{playerNameFormatter} = require('commonjs/shared')
 ReactBSTable = require('react-bootstrap-table')
 BootstrapTable = ReactBSTable.BootstrapTable
 TableHeaderColumn = ReactBSTable.TableHeaderColumn
@@ -40,6 +39,7 @@ ChatTable = React.createClass
     size_per_page: @props.size_per_page
 
   playerNameFormatter: (cell, row) ->
+
     a
       href: cell.pathname
       children: [
@@ -65,6 +65,7 @@ ChatTable = React.createClass
     console.log @state.response
     React.createElement(BootstrapTable,
       data: @state.response.rows
+      condensed: true
       remote: true
       pagination: true
       fetchInfo: {dataTotalSize: @state.response.total}
@@ -84,26 +85,31 @@ ChatTable = React.createClass
             dataField: 'player'
             dataFormat: @playerNameFormatter
             key: 'player'
+            width: 200
             isKey: true
           }
           'Player')
         React.createElement(TableHeaderColumn, {
             dataField: 'message'
             key: 'message'
+            width: 600
           }
           'Message')
         React.createElement(TableHeaderColumn, {
             dataField: 'eventTime'
             key: 'eventTime'
+            width: 150
           }
           'Time')
         React.createElement(TableHeaderColumn, {
             dataField: 'map'
             key: 'map'
+            width: 150
           }
           'Map')
         React.createElement(TableHeaderColumn, {
             dataField: 'server'
+            width: 300
             dataFormat: @serverNameFormatter
             key: 'server'
           }

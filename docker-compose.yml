@@ -3,6 +3,7 @@ version: '2'
 services:
   ayanami:
     build: .
+    image: ayanami
     env_file: ./secrets.env
     links:
       - redis
@@ -17,6 +18,7 @@ services:
   workers:
     restart: unless-stopped
     build: .
+    image: ayanami
     env_file: ./secrets.env
     links:
       - redis
@@ -58,12 +60,21 @@ services:
     links:
       - mysql
     build: noxus
+    image: noxus
     command: >
                 bash -lc "envsubst < ./hlxce/scripts/hlstats.conf.docker-env > ./hlxce/scripts/hlstats.conf;
                 cd ./hlxce/scripts/;
                 ./hlstats.pl --configfile=hlstats.conf --port=27500;"
-#    ports:
-#      - "0.0.0.0:27500:27500/udp"
+    ports:
+      - "0.0.0.0:27501:27500/udp"
+  noxus-cron:
+    restart: unless-stopped
+    env_file: ./secrets.env
+    links:
+      - mysql
+    build: noxus
+    image: noxus
+    command: bash -lc "cron && tail -f /var/log/cron.log"
   sourcebans:
     restart: unless-stopped
     env_file: ./secrets.env

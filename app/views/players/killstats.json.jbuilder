@@ -1,6 +1,6 @@
 json.rows do
-  json.array!(@killstats) do |playerId, stats|
-    player = Player.find(playerId)
+  json.array!(@killstats) do |player_id, stats|
+    player = Player.find(player_id)
     json.kills stats[:kills]
     json.deaths stats[:deaths]
     json.kpd stats[:kpd]

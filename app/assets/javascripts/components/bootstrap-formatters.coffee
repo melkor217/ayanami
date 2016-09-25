@@ -33,7 +33,17 @@
   '<a class="btn-link" href="' + row.path + '">' + row.country + '</a>'
 
 @flagFormatter = (value, row, index) ->
-  '<a class="btn-link" href="' + row.path + '"><img src="' + row.icon + '" width="32" height="32" alt="' + value + '"/>(' + value + ')</a>'
+  if value.icon and value.path
+    icon = value.icon
+    path = value.path
+    name = ''
+    name_str = ''
+  else
+    icon = row.icon
+    path = row.path
+    name = value
+    name_str = '(' + name + ')'
+  ret = '<a class="btn-link" href="' + path + '"><img src="' + icon + '" width="32" height="32" alt="' + name + '"/>' + name_str + '</a>'
 
 @serverFormatter = (value, row, index) ->
   '<a class="btn-link" href="' + row.server.path + '">' + row.server.name + '</a>'

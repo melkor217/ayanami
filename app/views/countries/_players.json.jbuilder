@@ -5,4 +5,4 @@ json.extract! players, :flag, :players_total,
 json.country country.name
 json.url country_path(country, format: :json)
 json.path country_path(country)
-json.icon asset_path('flags-iso/shiny/32/'+players.flag+'.png')
+json.icon asset_path('flags-iso/shiny/32/' + players.flag + '.png')

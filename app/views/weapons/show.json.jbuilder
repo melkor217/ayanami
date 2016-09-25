@@ -1,4 +1,3 @@
-#json.extract! @weapon, :name, :modifier, :kills, :headshots, :game
 json.params params
 json.rows do
   json.array!(@frags) do |k|
