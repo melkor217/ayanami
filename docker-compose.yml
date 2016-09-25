@@ -15,6 +15,7 @@ services:
     ports:
       - "127.0.0.1:3456:3000"
   workers:
+    restart: unless-stopped
     build: .
     env_file: ./secrets.env
     links:
@@ -43,7 +44,7 @@ services:
     image: redis
     restart: unless-stopped
     command: redis-server --save 60 1000
-  noxus:
+  noxus-web:
     restart: unless-stopped
     env_file: ./secrets.env
     links:
@@ -51,6 +52,18 @@ services:
     build: noxus
     ports:
       - "127.0.0.1:3457:80"
+  noxus-daemon:
+    restart: unless-stopped
+    env_file: ./secrets.env
+    links:
+      - mysql
+    build: noxus
+    command: >
+                bash -lc "envsubst < ./hlxce/scripts/hlstats.conf.docker-env > ./hlxce/scripts/hlstats.conf;
+                cd ./hlxce/scripts/;
+                ./hlstats.pl --configfile=hlstats.conf --port=27500;"
+#    ports:
+#      - "0.0.0.0:27500:27500/udp"
   sourcebans:
     restart: unless-stopped
     env_file: ./secrets.env
@@ -67,6 +80,7 @@ services:
     volumes:
       - graphite-data:/opt/graphite/storage
   stats:
+    restart: unless-stopped
     build: ./docker-docker-stats-statsd/
     privileged: true
     environment:
