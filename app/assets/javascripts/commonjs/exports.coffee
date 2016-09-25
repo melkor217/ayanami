@@ -1,4 +1,5 @@
 module.exports.VKWidget = require('commonjs/vk').VKWidget
+module.exports.FBWidget = require('commonjs/fb').FBWidget
 
 module.exports.Player = require('commonjs/player').Player
 module.exports.PlayerHeader = require('commonjs/player').PlayerHeader

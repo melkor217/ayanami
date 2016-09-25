@@ -16,6 +16,8 @@
   <%= render 'layouts/google' %>
 </head>
 <body>
+
+<%= render 'layouts/fb_stuff' %>
 <%= render 'layouts/navbar' %>
 
 <%= yield %>
@@ -25,7 +27,8 @@
 <footer class="footer navbar" style="text-align: center">
   <span><%= link_to 'Source code', 'https://github.com/melkor217/ayanami', :class => "btn-link" %></span>
   <span style="display: inline-block">
-    <%= react_component '_.VKWidget', elementId: 'vk_footer_like', path: root_url, title: 'Ayanami: less ugly UI for HLstatsX:CE', type: 'full', track: false %>
+    <%# react_component '_.FBWidget', path: root_url %>
+    <%# react_component '_.VKWidget', elementId: 'vk_footer_like', path: root_url, title: 'Ayanami: less ugly UI for HLstatsX:CE', type: 'full', track: false %>
   </span>
 </footer>
 

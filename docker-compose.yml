@@ -74,7 +74,10 @@ services:
       - mysql
     build: noxus
     image: noxus
-    command: bash -lc "cron && tail -f /var/log/cron.log"
+    command: >
+                bash -lc "envsubst < ./hlxce/scripts/hlstats.conf.docker-env > ./hlxce/scripts/hlstats.conf;
+                cd ./hlxce/scripts/;
+                cron && tail -f /var/log/cron.log;"
   sourcebans:
     restart: unless-stopped
     env_file: ./secrets.env
