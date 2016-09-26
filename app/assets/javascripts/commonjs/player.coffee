@@ -87,6 +87,18 @@ PlayerHeader = React.createClass
                             href: @state.player.weaponsPath
                             'Weapons'
                         ]
+                    if @state.player.chatsPath
+                      li
+                        className:
+                          if @state.player.chatsPath == window.location.pathname
+                            'active'
+                          else
+                            ''
+                        children: [
+                          a
+                            href: @state.player.chatsPath
+                            'Chat'
+                        ]
                     if @state.player.fragsPath
                       li
                         className:

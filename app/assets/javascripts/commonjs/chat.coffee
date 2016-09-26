@@ -8,7 +8,7 @@ ChatTable = React.createClass
   getData: ->
     if @props.url
       full_url = @props.url
-      full_url += "?offset=#{(@state.page - 1) * @state.size_per_page}"
+      full_url += "&offset=#{(@state.page - 1) * @state.size_per_page}"
       full_url += "&limit=#{@state.size_per_page}"
       console.log full_url
       @serverRequest = $.get full_url, (data) =>
@@ -85,31 +85,31 @@ ChatTable = React.createClass
             dataField: 'player'
             dataFormat: @playerNameFormatter
             key: 'player'
-            width: 200
+            width: '200px'
             isKey: true
           }
           'Player')
         React.createElement(TableHeaderColumn, {
             dataField: 'message'
             key: 'message'
-            width: 600
+            width: '600px'
           }
           'Message')
         React.createElement(TableHeaderColumn, {
             dataField: 'eventTime'
             key: 'eventTime'
-            width: 150
+            width: '150px'
           }
           'Time')
         React.createElement(TableHeaderColumn, {
             dataField: 'map'
             key: 'map'
-            width: 150
+            width: '150px'
           }
           'Map')
         React.createElement(TableHeaderColumn, {
             dataField: 'server'
-            width: 300
+            width: '300px'
             dataFormat: @serverNameFormatter
             key: 'server'
           }

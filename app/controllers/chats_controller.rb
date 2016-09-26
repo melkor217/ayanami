@@ -8,9 +8,17 @@ class ChatsController < ApplicationController
     param! :page, Integer, default: 1
     param! :offset, Integer, default: (params[:page]-1)*params[:limit]
     param! :game_game, String, default: Rails.configuration.default_game
+    param! :player_id, Integer, default: nil
+
+    if params[:player_id]
+      @player = Player.find(params[:player_id])
+    end
 
     if request.format.json?
       query = Chat.all
+      if params[:player_id]
+        query = query.where(player: params[:player_id])
+      end
       @messages = query.order(id: :desc).limit(params[:limit]).offset(params[:offset])
       @total = query.count
     end

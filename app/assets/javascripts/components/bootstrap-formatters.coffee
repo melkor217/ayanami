@@ -33,7 +33,7 @@
   '<a class="btn-link" href="' + row.path + '">' + row.country + '</a>'
 
 @flagFormatter = (value, row, index) ->
-  if value.icon and value.path
+  if value and value.icon and value.path
     icon = value.icon
     path = value.path
     name = ''

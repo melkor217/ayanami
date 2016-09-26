@@ -1,5 +1,8 @@
-  <%= react_component '_.ChatTable', {url: chats_path(format: :json),
-                                      sort: params[:sort],
-                                      order: params[:order],
-                                      page: params[:page],
-                                      size_per_page: params[:limit]} %>
+<% if @player %>
+    <%= react_component '_.PlayerHeader', {url: player_path(@player, format: :json)} %>
+<% end %>
+<%= react_component '_.ChatTable', {url: chats_path(format: :json, player_id: params[:player_id], game_game: params[:game_game]),
+                                    sort: params[:sort],
+                                    order: params[:order],
+                                    page: params[:page],
+                                    size_per_page: params[:limit]} %>

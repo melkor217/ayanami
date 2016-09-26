@@ -24,9 +24,9 @@ Rails.application.routes.draw do
     member do
       get :killstats
       get :weapons
-      get :chats
     end
     resources :frags
+    resources :chats
   end
 
   resources :random
