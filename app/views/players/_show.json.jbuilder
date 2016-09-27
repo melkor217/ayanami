@@ -1,6 +1,7 @@
 uniqueid = player.cached_unique_id
 
-json.extract! player, :playerId, :lastName, :kills, :deaths, :headshots, :activity, :connection_time, :ranking
+json.extract! player, :playerId, :lastName, :kills, :deaths, :headshots,
+              :activity, :connection_time, :ranking
 json.url player_path(player, format: :json)
 json.path player_url(player)
 json.pathname player_path(player)
@@ -24,4 +25,3 @@ if (country = player.cached_country)
     json.partial! 'countries/show', country: country
   end
 end
-
