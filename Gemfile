@@ -8,7 +8,8 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', git: 'git://github.com/rails/coffee-rails'
+#gem 'coffee-rails', git: 'https://github.com/rails/coffee-rails'
+gem 'coffee-rails', '~> 4.2.1'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
@@ -22,10 +23,11 @@ gem 'autoprefixer-rails'
 
 #gem 'kaminari' # Paginator
 # http://stackoverflow.com/questions/34413971/rails-5-0-0-beta1-generating-an-url-from-non-sanitized-request-parameters-is-i
-gem 'kaminari', :git => "git://github.com/amatsuda/kaminari.git", :branch => 'master'
+#gem 'kaminari', git: "https://github.com/amatsuda/kaminari.git", :branch => 'master'
+gem 'kaminari', '~> 0.17.0'
 gem 'bootstrap-table-rails'
 
-gem 'rails_param', :git => "git://github.com/nicolasblanco/rails_param.git" # Better param validators
+gem 'rails_param', git:  "https://github.com/nicolasblanco/rails_param.git" # Better param validators
 
 
 gem 'lograge'
@@ -55,12 +57,12 @@ end
 gem 'redis-rails', '~> 5.0.0.pre'
 
 gem 'sidekiq-scheduler', '~> 2.0'
-gem 'sidekiq', :git => 'git://github.com/mperham/sidekiq'
+gem 'sidekiq', git: 'https://github.com/mperham/sidekiq.git'
 gem 'sidekiq-unique-jobs'
-gem 'sinatra', :git => 'git://github.com/sinatra/sinatra.git'
+gem 'sinatra', git: 'https://github.com/sinatra/sinatra.git'
 
 # We need composite primary keys to keep compatibility
-gem 'composite_primary_keys', :git => 'git://github.com/composite-primary-keys/composite_primary_keys.git'
+gem 'composite_primary_keys', '~> 9.0.4'
 gem 'react-rails'
 gem 'react-bootstrap-rails'
 gem 'browserify-rails'
