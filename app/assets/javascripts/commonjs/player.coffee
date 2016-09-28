@@ -187,6 +187,9 @@ Player = React.createClass
                   tr null,
                     td null, "K/D"
                     td null, Math.round(100 * @state.player.kills / Math.max(@state.player.deaths,1)) / 100
+                  tr null,
+                    td null, "Latency (ping)"
+                    td null, "#{@state.player.avgLatency} ms"
                   if @state.player.activity
                     tr null,
                       td null, "Activity"
