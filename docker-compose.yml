@@ -93,6 +93,7 @@ services:
       - "127.0.0.1:33456:80"
     volumes:
       - graphite-data:/opt/graphite/storage
+      - graphite-logs:/var/log/graphite
   stats:
     restart: unless-stopped
     build: ./docker-docker-stats-statsd/
@@ -119,5 +120,6 @@ services:
 
 volumes:
   graphite-data: {}
+  graphite-logs: {}
   redis-data: {}
   mysql-data: {}
