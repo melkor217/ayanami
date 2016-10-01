@@ -17,6 +17,7 @@ COPY ./Gemfile.lock .
 ENV RAILS_ENV production
 ENV RAILS_PUBLIC_FILE_SERVER true
 
+RUN gem install bundler
 RUN bundle install --without development
 RUN passenger-install-nginx-module --auto
 
@@ -27,4 +28,3 @@ RUN npm install
 COPY . /ayanami
 
 RUN rake assets:precompile
-
