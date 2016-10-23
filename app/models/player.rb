@@ -182,16 +182,18 @@ hlstats_Clans.hidden as hidden
     weapons = []
     return weapons if not frags.count
     frags.each do |k, v|
-      weapon = Weapon.readonly.find_by!(code: k, game: 'csgo')
-      weapon.kills = 0
-      weapon.headshots = 0
-      v.each do |r|
-        weapon.kills += r.last
-        if r.first.last == true
-          weapon.headshots += r.last
+      weapon = Weapon.readonly.find_by(code: k, game: 'csgo')
+      if weapon
+        weapon.kills = 0
+        weapon.headshots = 0
+        v.each do |r|
+          weapon.kills += r.last
+          if r.first.last == true
+            weapon.headshots += r.last
+          end
         end
+        weapons.append weapon
       end
-      weapons.append weapon
     end
     return weapons
   end
