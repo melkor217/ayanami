@@ -45,7 +45,7 @@ services:
       - redis-data:/data
     image: redis
     restart: unless-stopped
-    command: redis-server --save 60 1000
+    command: redis-server --appendonly yes
   noxus-web:
     restart: unless-stopped
     env_file: ./secrets.env
