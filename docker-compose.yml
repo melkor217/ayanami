@@ -60,7 +60,6 @@ services:
     links:
       - mysql
     build: noxus
-    image: noxus
     command: >
                 bash -lc "envsubst < ./hlxce/scripts/hlstats.conf.docker-env > ./hlxce/scripts/hlstats.conf;
                 cd ./hlxce/scripts/;
@@ -73,7 +72,6 @@ services:
     links:
       - mysql
     build: noxus
-    image: noxus
     command: >
                 bash -lc "envsubst < ./hlxce/scripts/hlstats.conf.docker-env > ./hlxce/scripts/hlstats.conf;
                 cd ./hlxce/scripts/;
